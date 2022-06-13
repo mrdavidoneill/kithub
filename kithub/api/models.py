@@ -1,6 +1,16 @@
 from django.db import models
 
 
+class KitType(models.Model):
+    """Kit Type Model
+    Defines attributes of a DIY Kit type"""
+
+    kind = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
 class Kit(models.Model):
     """Kit Model
     Defines attributes of a DIY Kit"""
@@ -14,11 +24,24 @@ class Kit(models.Model):
         return self.name
 
 
-class KitType(models.Model):
-    """Kit Type Model
-    Defines attributes of a DIY Kit type"""
+class BagType(models.Model):
+    """Bag Type Model
+    Defines attributes of a Bag type"""
 
     kind = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
+class Bag(models.Model):
+    """Bag Model
+    Defines attributes of a Bag"""
+
+    name = models.CharField(max_length=255, default="", blank=True)
+    quantity = models.PositiveIntegerField(default=0)  # 0 to 2147483647
+    complete = models.BooleanField(default=False)
+    kind = models.ForeignKey(BagType, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -35,24 +58,13 @@ class KitContents(models.Model):
         return f"{self.bag.name} in {self.kit.name}"
 
 
-class Bag(models.Model):
-    """Bag Model
-    Defines attributes of a Bag"""
+class Part(models.Model):
+    """Part Model
+    Defines attributes of a Part"""
 
-    name = models.CharField(max_length=255, default="", blank=True)
+    name = models.CharField(max_length=255)
+    description = models.CharField(max_length=255)
     quantity = models.PositiveIntegerField(default=0)  # 0 to 2147483647
-    complete = models.BooleanField(default=False)
-    kind = models.ForeignKey(BagType, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
-
-
-class BagType(models.Model):
-    """Bag Type Model
-    Defines attributes of a Bag type"""
-
-    kind = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
@@ -67,18 +79,6 @@ class BagContents(models.Model):
 
     def __str__(self):
         return f"{self.part.name} in {self.bag.name}"
-
-
-class Part(models.Model):
-    """Part Model
-    Defines attributes of a Part"""
-
-    name = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
-    quantity = models.PositiveIntegerField(default=0)  # 0 to 2147483647
-
-    def __str__(self):
-        return self.name
 
 
 class Purchase(models.Model):
