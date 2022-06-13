@@ -31,3 +31,23 @@ class KitViewSet(viewsets.ModelViewSet):
 class KitTypeViewSet(viewsets.ModelViewSet):
     queryset = KitType.objects.all()
     serializer_class = KitTypeSerializer
+
+
+class BagViewSet(viewsets.ModelViewSet):
+    queryset = Bag.objects.all()
+    serializer_class = BagSerializer
+
+
+class BagTypeViewSet(viewsets.ModelViewSet):
+    queryset = BagType.objects.all()
+    serializer_class = BagTypeSerializer
+
+
+class PartViewSet(viewsets.ModelViewSet):
+    queryset = Part.objects.all()
+    serializer_class = PartSerializer
+
+
+class PurchaseViewSet(viewsets.ModelViewSet):
+    queryset = Purchase.objects.all()
+    serializer_class = PurchaseSerializer

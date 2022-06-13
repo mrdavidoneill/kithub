@@ -25,3 +25,27 @@ class KitTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = KitType
         fields = "__all__"
+
+
+class BagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bag
+        fields = "__all__"
+
+
+class BagTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BagType
+        fields = "__all__"
+
+
+class PartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Part
+        fields = "__all__"
+
+
+class PurchaseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Purchase
+        fields = "__all__"
