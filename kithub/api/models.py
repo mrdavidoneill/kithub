@@ -5,10 +5,10 @@ class Kit(models.Model):
     """Kit Model
     Defines attributes of a DIY Kit"""
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, default="", blank=True)
     quantity = models.PositiveIntegerField(default=0)  # 0 to 2147483647
     complete = models.BooleanField(default=False)
-    kind = models.ForeignKey(KitType, on_delete=models.CASCADE, default=None)
+    kind = models.ForeignKey(KitType, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -39,10 +39,10 @@ class Bag(models.Model):
     """Bag Model
     Defines attributes of a Bag"""
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, default="", blank=True)
     quantity = models.PositiveIntegerField(default=0)  # 0 to 2147483647
     complete = models.BooleanField(default=False)
-    kind = models.ForeignKey(BagType, on_delete=models.CASCADE, default=None)
+    kind = models.ForeignKey(BagType, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -74,6 +74,7 @@ class Part(models.Model):
     Defines attributes of a Part"""
 
     name = models.CharField(max_length=255)
+    description = models.CharField(max_length=255)
     quantity = models.PositiveIntegerField(default=0)  # 0 to 2147483647
 
     def __str__(self):
@@ -88,9 +89,7 @@ class Purchase(models.Model):
     shop = models.CharField(max_length=255)
     shop_part_no = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=5)
-    part = models.ForeignKey(
-        Part, on_delete=models.CASCADE, default=None, blank=True, null=True
-    )
+    part = models.ForeignKey(Part, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
