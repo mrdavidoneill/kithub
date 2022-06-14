@@ -57,3 +57,9 @@ class PurchaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Purchase
         fields = "__all__"
+
+
+class BagIngredientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BagIngredient
+        fields = "__all__"

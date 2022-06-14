@@ -175,6 +175,21 @@ def create_bag(kind=None):
     return Bag.objects.create(**kwargs)
 
 
+def create_bagingredient(name=None, bagtype=None, part=None):
+    """Return a random bag of passed kind, or newly created kind"""
+    if not bagtype:
+        bagtype = create_bagtype()
+    if not part:
+        part = create_part()
+    kwargs = {
+        "name": "s",
+        "bagtype": bagtype,
+        "part": part,
+        "quantity": random_quantity(),
+    }
+    return BagIngredient.objects.create(**kwargs)
+
+
 def create_part(kind=None):
     """Return a random part"""
     kwargs = {
@@ -213,6 +228,24 @@ def create_bag_payload(kind=None):
         "quantity": random_quantity(),
         "complete": random_boolean(),
         "kind": kind.pk,
+    }
+    return payload
+
+
+def create_bagingredient_payload(kind=None, part=None):
+    """Return a random bag ingredient payload of passed kind, or newly created Kind
+    For passed part, or newly created Part"""
+
+    if kind is None:
+        kind = create_bagtype()
+    if part is None:
+        part = create_part()
+
+    payload = {
+        "name": random_kind()[:4],
+        "bagtype": kind.pk,
+        "part": part.pk,
+        "quantity": random_quantity(1, 10),
     }
     return payload
 
