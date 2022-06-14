@@ -16,6 +16,10 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class KitSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(
+        trim_whitespace=False, max_length=255, allow_blank=True
+    )
+
     class Meta:
         model = Kit
         fields = "__all__"
@@ -28,6 +32,10 @@ class KitTypeSerializer(serializers.ModelSerializer):
 
 
 class BagSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(
+        trim_whitespace=False, max_length=255, allow_blank=True
+    )
+
     class Meta:
         model = Bag
         fields = "__all__"
