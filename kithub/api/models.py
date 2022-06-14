@@ -1,4 +1,6 @@
 from django.db import models
+import string
+from random import randint
 
 
 class KitType(models.Model):
@@ -64,7 +66,7 @@ class KitIngredient(models.Model):
         unique_together = [["name", "kittype"]]
 
     def __str__(self):
-        return f"{self.name} in {self.bagtype.kind}"
+        return f"{self.name}: {self.bagtype} x {self.quantity} in {self.kittype.kind}"
 
 
 class Part(models.Model):
@@ -110,3 +112,135 @@ class Purchase(models.Model):
 
     def __str__(self):
         return f"{self.date}: {self.part.name} x {self.quantity} @ {self.price} GBP"
+
+
+def create_parts(num=2):
+    for i in range(num):
+        part = Part.objects.create(
+            name=f"PART{i + 1}",
+            description=f"A part description for PART{i + 1}",
+            quantity=100,
+        )
+
+
+def create_bagtypes(num=2):
+    for i in range(num):
+        bagtype = BagType.objects.create(kind=f"BAGTYPE{i + 1}")
+
+
+def create_bagingredients(
+    bagtype,
+    num=2,
+):
+    parts = Part.objects.all()
+    for i in range(num):
+        bagtype_obj = BagType.objects.get(pk=bagtype)
+        BagIngredient.objects.create(
+            name=string.ascii_letters[i].upper(),
+            bagtype=bagtype_obj,
+            part=parts[i],
+            quantity=randint(1, 50),
+        )
+
+
+def create_bags(kind, quantity=100, complete=False, name=None):
+
+    ingredients = BagIngredient.objects.filter(bagtype=kind)
+
+    kind = BagType.objects.get(pk=kind)
+
+    if name is None:
+        name = " " * len(ingredients)
+
+    Bag.objects.create(kind=kind, quantity=quantity, complete=complete, name=name)
+
+
+def create_kitingredients(
+    kittype,
+    num=2,
+):
+    bagtypes = BagType.objects.all()
+    for i in range(num):
+        kittype_obj = KitType.objects.get(pk=kittype)
+        KitIngredient.objects.create(
+            name=string.ascii_letters[i].upper(),
+            kittype=kittype_obj,
+            bagtype=bagtypes[i],
+            quantity=randint(1, 50),
+        )
+
+
+def create_kittypes(num=2):
+    for i in range(num):
+        kittype = KitType.objects.create(kind=f"KITTYPE{i + 1}")
+
+
+def delete_parts():
+    print(f"Deleting parts:", end="")
+    response = Part.objects.all().delete()
+    print(f"{response} deleted")
+
+
+def delete_bags():
+    print(f"Deleting bags:", end="")
+    response = Bag.objects.all().delete()
+    print(f"{response} deleted")
+
+
+def delete_bagtypes():
+    print(f"Deleting bagtypes:", end="")
+    response = BagType.objects.all().delete()
+    print(f"{response} deleted")
+
+
+def delete_kits():
+    print(f"Deleting kits:", end="")
+    response = Kit.objects.all().delete()
+    print(f"{response} deleted")
+
+
+def delete_kittypes():
+    print(f"Deleting kittypes:", end="")
+    response = KitType.objects.all().delete()
+    print(f"{response} deleted")
+
+
+def delete_bagingredients():
+    print(f"Deleting bagingredients:", end="")
+    response = BagIngredient.objects.all().delete()
+    print(f"{response} deleted")
+
+
+def delete_kitingredients():
+    print(f"Deleting kitingredients:", end="")
+    response = KitIngredient.objects.all().delete()
+    print(f"{response} deleted")
+
+
+def delete_purchases():
+    print(f"Deleting purchases:", end="")
+    response = Purchase.objects.all().delete()
+    print(f"{response} deleted")
+
+
+def delete_everything():
+    delete_bagingredients()
+    delete_kitingredients()
+    delete_purchases()
+    delete_parts()
+    delete_bagtypes()
+    delete_kittypes()
+    delete_bags()
+    delete_kits()
+
+
+def create_kits(kind, quantity=100, complete=False, name=None):
+
+    ingredients = KitIngredient.objects.filter(kittype=kind)
+
+    kind = KitType.objects.get(pk=kind)
+
+    if name is None:
+        name = " " * len(ingredients)
+
+    Kit.objects.create(kind=kind, quantity=quantity, complete=complete, name=name)
