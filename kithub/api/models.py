@@ -62,7 +62,7 @@ class KitIngredient(models.Model):
         unique_together = [["name", "kittype"]]
 
     def __str__(self):
-        return f"{name} in {self.bagtype.kind}"
+        return f"{self.name} in {self.bagtype.kind}"
 
 
 class Part(models.Model):
