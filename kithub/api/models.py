@@ -92,7 +92,7 @@ class BagIngredient(models.Model):
         unique_together = [["name", "bagtype"]]
 
     def __str__(self):
-        return f"{name} in {self.bagtype.kind}"
+        return f"{self.name} in {self.bagtype.kind}"
 
 
 class Purchase(models.Model):
