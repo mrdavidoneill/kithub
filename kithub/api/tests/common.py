@@ -1,7 +1,7 @@
 import json, string
 import decimal
 from datetime import date, datetime, timedelta
-from random import choice, randint
+from random import choice, randint, shuffle
 from ..serializers import UserSerializer
 from ..models import *
 from django.urls import reverse
@@ -175,33 +175,37 @@ def create_bag(kind=None):
     return Bag.objects.create(**kwargs)
 
 
-def create_bagingredient(name=None, bagtype=None, part=None):
+def create_bagingredient(name=None, bagtype=None, part=None, quantity=None):
     """Return a random bag of passed kind, or newly created kind"""
     if not bagtype:
         bagtype = create_bagtype()
     if not part:
         part = create_part()
+    if not quantity:
+        quantity = random_quantity()
     kwargs = {
         "name": random_kind()[:4],
         "bagtype": bagtype,
         "part": part,
-        "quantity": random_quantity(),
+        "quantity": quantity,
     }
     return BagIngredient.objects.create(**kwargs)
 
 
-def create_kitingredient(name=None, kittype=None, bagtype=None):
+def create_kitingredient(name=None, kittype=None, bagtype=None, quantity=None):
     """Return a random kit ingredient of passed kittype, or newly created KitType,
     with a passed bagtype, or newly created BagType"""
     if not bagtype:
         bagtype = create_bagtype()
     if not kittype:
         kittype = create_kittype()
+    if not quantity:
+        quantity = random_quantity()
     kwargs = {
         "name": random_kind()[:4],
         "bagtype": bagtype,
         "kittype": kittype,
-        "quantity": random_quantity(),
+        "quantity": quantity,
     }
     return KitIngredient.objects.create(**kwargs)
 
@@ -338,6 +342,76 @@ def create_purchase_payload(part=None):
         "part": part.pk,
     }
     return payload
+
+
+def create_parts(num=100):
+    for i in range(num):
+        create_part()
+
+
+def create_bagtypes(num=50):
+    for i in range(num):
+        create_bagtype()
+
+
+def create_kittypes(num=10):
+    for i in range(num):
+        create_kittype()
+
+
+def create_bagtype_ingredients(bagtype):
+    parts = Part.objects.all()
+    parts = list(parts)
+    shuffle(parts)  # Inline shuffle
+    num_of_parts = randint(5, 12)
+    # Place num_of_parts if not exceeding stocked parts
+    for i, part in enumerate(parts):
+        if i > num_of_parts:
+            break
+        create_bagingredient(
+            name=string.ascii_letters[i].upper(),
+            bagtype=bagtype,
+            part=part,
+            quantity=randint(1, 10),
+        )
+
+
+def create_all_bagtype_ingredients():
+    bagtypes = BagType.objects.all()
+    for bagtype in bagtypes:
+        create_bagtype_ingredients(bagtype)
+
+
+def create_kittype_ingredients(kittype):
+    bagtypes = BagType.objects.all()
+    bagtypes = list(bagtypes)
+    shuffle(bagtypes)  # Inline shuffle
+    num_of_bagtypes = randint(5, 12)
+    # Place num_of_bagtypes if not exceeding stocked bagtypes
+    for i, bagtype in enumerate(bagtypes):
+        if i > num_of_bagtypes:
+            break
+        create_kitingredient(
+            name=string.ascii_letters[i].upper(),
+            kittype=kittype,
+            bagtype=bagtype,
+            quantity=randint(1, 10),
+        )
+
+
+def create_all_kittype_ingredients():
+    kittypes = KitType.objects.all()
+    for kittype in kittypes:
+        create_kittype_ingredients(kittype)
+
+
+def create_fresh_world():
+    delete_everything()
+    create_parts()
+    create_bagtypes()
+    create_kittypes()
+    create_all_bagtype_ingredients()
+    create_all_kittype_ingredients()
 
 
 ###########################
