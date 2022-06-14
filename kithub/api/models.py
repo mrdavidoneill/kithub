@@ -55,7 +55,9 @@ class KitIngredient(models.Model):
     kittype = models.ForeignKey(
         KitType, related_name="ingredients", on_delete=models.CASCADE
     )
-    bag = models.ForeignKey(Bag, related_name="needed", on_delete=models.CASCADE)
+    bagtype = models.ForeignKey(
+        BagType, related_name="needed", on_delete=models.CASCADE
+    )
     quantity = models.PositiveIntegerField()  # 0 to 2147483647
 
     class Meta:
