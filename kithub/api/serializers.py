@@ -63,3 +63,9 @@ class BagIngredientSerializer(serializers.ModelSerializer):
     class Meta:
         model = BagIngredient
         fields = "__all__"
+
+
+class KitIngredientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = KitIngredient
+        fields = "__all__"

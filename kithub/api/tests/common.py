@@ -182,12 +182,28 @@ def create_bagingredient(name=None, bagtype=None, part=None):
     if not part:
         part = create_part()
     kwargs = {
-        "name": "s",
+        "name": random_kind()[:4],
         "bagtype": bagtype,
         "part": part,
         "quantity": random_quantity(),
     }
     return BagIngredient.objects.create(**kwargs)
+
+
+def create_kitingredient(name=None, kittype=None, bagtype=None):
+    """Return a random kit ingredient of passed kittype, or newly created KitType,
+    with a passed bagtype, or newly created BagType"""
+    if not bagtype:
+        bagtype = create_bagtype()
+    if not kittype:
+        kittype = create_kittype()
+    kwargs = {
+        "name": random_kind()[:4],
+        "bagtype": bagtype,
+        "kittype": kittype,
+        "quantity": random_quantity(),
+    }
+    return KitIngredient.objects.create(**kwargs)
 
 
 def create_part(kind=None):
@@ -245,6 +261,24 @@ def create_bagingredient_payload(kind=None, part=None):
         "name": random_kind()[:4],
         "bagtype": kind.pk,
         "part": part.pk,
+        "quantity": random_quantity(1, 10),
+    }
+    return payload
+
+
+def create_kitingredient_payload(kind=None, bagtype=None):
+    """Return a random kit ingredient payload of passed kind, or newly created Kind
+    For passed bagtype, or newly created BagType"""
+
+    if kind is None:
+        kind = create_kittype()
+    if bagtype is None:
+        bagtype = create_bagtype()
+
+    payload = {
+        "name": random_kind()[:4],
+        "kittype": kind.pk,
+        "bagtype": bagtype.pk,
         "quantity": random_quantity(1, 10),
     }
     return payload

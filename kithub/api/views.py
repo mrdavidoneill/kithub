@@ -56,3 +56,8 @@ class PurchaseViewSet(viewsets.ModelViewSet):
 class BagIngredientViewSet(viewsets.ModelViewSet):
     queryset = BagIngredient.objects.all()
     serializer_class = BagIngredientSerializer
+
+
+class KitIngredientViewSet(viewsets.ModelViewSet):
+    queryset = KitIngredient.objects.all()
+    serializer_class = KitIngredientSerializer
