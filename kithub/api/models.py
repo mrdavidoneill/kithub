@@ -5,10 +5,10 @@ class KitType(models.Model):
     """Kit Type Model
     Defines attributes of a DIY Kit type"""
 
-    kind = models.CharField(max_length=255)
+    kind = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
-        return self.name
+        return self.kind
 
 
 class Kit(models.Model):
@@ -28,10 +28,10 @@ class BagType(models.Model):
     """Bag Type Model
     Defines attributes of a Bag type"""
 
-    kind = models.CharField(max_length=255)
+    kind = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
-        return self.name
+        return self.kind
 
 
 class Bag(models.Model):
@@ -47,15 +47,22 @@ class Bag(models.Model):
         return self.name
 
 
-class KitContents(models.Model):
-    """Kit Contents Model
-    Represents a Bag placed in a Kit"""
+class KitIngredient(models.Model):
+    """Kit Ingredient Model
+    Represents a Bag to be placed in a Kit"""
 
-    kit = models.ForeignKey(Kit, on_delete=models.CASCADE)
-    bag = models.ForeignKey(Bag, on_delete=models.CASCADE)
+    name = models.CharField(max_length=4)
+    kittype = models.ForeignKey(
+        KitType, related_name="ingredients", on_delete=models.CASCADE
+    )
+    bag = models.ForeignKey(Bag, related_name="needed", on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()  # 0 to 2147483647
+
+    class Meta:
+        unique_together = [["name", "kittype"]]
 
     def __str__(self):
-        return f"{self.bag.name} in {self.kit.name}"
+        return f"{name} in {self.bagtype.kind}"
 
 
 class Part(models.Model):
@@ -70,15 +77,22 @@ class Part(models.Model):
         return self.name
 
 
-class BagContents(models.Model):
-    """Bag Contents Model
-    Represents a Part placed in a Bag"""
+class BagIngredient(models.Model):
+    """Bag Ingredient Model
+    Represents a Part to be placed in a Bag"""
 
-    bag = models.ForeignKey(Bag, on_delete=models.CASCADE)
-    part = models.ForeignKey(Part, on_delete=models.CASCADE)
+    name = models.CharField(max_length=4)
+    bagtype = models.ForeignKey(
+        BagType, related_name="ingredients", on_delete=models.CASCADE
+    )
+    part = models.ForeignKey(Part, related_name="needed", on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()  # 0 to 2147483647
+
+    class Meta:
+        unique_together = [["name", "bagtype"]]
 
     def __str__(self):
-        return f"{self.part.name} in {self.bag.name}"
+        return f"{name} in {self.bagtype.kind}"
 
 
 class Purchase(models.Model):
@@ -89,7 +103,8 @@ class Purchase(models.Model):
     shop = models.CharField(max_length=255)
     shop_part_no = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=5)
+    quantity = models.PositiveIntegerField(default=0)  # 0 to 2147483647
     part = models.ForeignKey(Part, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return f"{self.date}: {self.part.name} x {self.quantity} @ {self.price} GBP"
