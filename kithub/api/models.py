@@ -98,7 +98,7 @@ class Part(models.Model):
         self.save()
 
     def __str__(self):
-        return self.name
+        return f"{self.name } {self.quantity} pcs"
 
 
 class BagIngredient(models.Model):
