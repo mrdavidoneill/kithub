@@ -136,3 +136,33 @@ def all_potentialbags(request):
 @api_view(["GET"])
 def potentialbags(request, bagtype):
     return Response([potential_bags_of_bagtype(bagtype)])
+
+
+def parts_to_buy_for_bagtype(bagtype, quantity):
+    """Calculates which parts are needed in which quantities to fulfil passed quantity of bagtype"""
+    # Store quantity required for each needed part
+    parts_to_buy = {}
+    # Get all parts that are needed for bagtype
+    parts_needed = Part.objects.filter(needed__bagtype=bagtype)
+    # Iterate through each needed part
+    for part in parts_needed:
+        required_quantity = (
+            BagIngredient.objects.filter(bagtype=bagtype, part=part).first().quantity
+            * quantity
+        )
+        # Calculate how short the stocked quantity is (pos if short, neg if OK)
+        quantity_difference = required_quantity - part.quantity
+        # If not enough parts to fulfil request
+        if (quantity_difference) > 0:
+            # Store how many parts are short for quantity requested
+            parts_to_buy[part.name] = quantity_difference
+
+    return {
+        "bagtypeID": bagtype,
+        "parts_to_buy": parts_to_buy,
+    }
+
+
+@api_view(["GET"])
+def partstobuyforbag(request, bagtype, quantity):
+    return Response(parts_to_buy_for_bagtype(bagtype, quantity))
