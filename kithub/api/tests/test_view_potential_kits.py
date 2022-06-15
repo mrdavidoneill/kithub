@@ -23,64 +23,173 @@ class GetAllPotentialKits(TestCase):
 
         # Create stock
 
-        # Create parts
+        # Create 10 parts with 10 quantity of each
         self.parts = []
-        for i in range(2):
+        for i in range(10):
             self.parts.append(
                 Part.objects.create(
                     name=f"part{i}",
                     description=f"description for part{i}",
-                    quantity=i * 10,
+                    quantity=10,
                 )
             )
-        # Create bagtypes
+        # Create 3 bagtypes
         self.bagtypes = []
-        for i in range(2):
+        for i in range(3):
             self.bagtypes.append(BagType.objects.create(kind=f"bagtype{i}"))
 
-        # Create bagtypes
+        # Create 3 kittypes
         self.kittypes = []
-        for i in range(2):
+        for i in range(3):
             self.kittypes.append(KitType.objects.create(kind=f"kittype{i}"))
 
-        # Create bagingredients
+        # Create bagingredients for bagtype0
+        # 1 of each part
         self.bagingredients = []
-        for index, bagtype in enumerate(self.bagtypes):
-            for i, part in enumerate(self.parts[index:]):
-                self.bagingredients.append(
-                    BagIngredient.objects.create(
-                        name=string.ascii_letters[i].upper(),
-                        bagtype=bagtype,
-                        part=part,
-                        quantity=index + 1,
-                    )
+        for i, part in enumerate(self.parts):
+            self.bagingredients.append(
+                BagIngredient.objects.create(
+                    name=string.ascii_letters[i].upper(),
+                    bagtype=self.bagtypes[0],
+                    part=part,
+                    quantity=1,
                 )
+            )
+
+        # Create bagingredients for bagtype1
+        # 2 of each part
+        self.bagingredients = []
+        for i, part in enumerate(self.parts):
+            self.bagingredients.append(
+                BagIngredient.objects.create(
+                    name=string.ascii_letters[i].upper(),
+                    bagtype=self.bagtypes[1],
+                    part=part,
+                    quantity=2,
+                )
+            )
+
+        # Create bagingredients for bagtype2
+        # 1 of first two parts
+        self.bagingredients = []
+        for i, part in enumerate(self.parts[:2]):
+            self.bagingredients.append(
+                BagIngredient.objects.create(
+                    name=string.ascii_letters[i].upper(),
+                    bagtype=self.bagtypes[2],
+                    part=part,
+                    quantity=2,
+                )
+            )
 
         self.kitingredients = []
 
-        # Create kitingredients
+        # Create kitingredients for kittype0
+        # 1 of each bagtype
         self.kitingredients = []
-        for index, kittype in enumerate(self.kittypes):
-            for i, bagtype in enumerate(self.bagtypes[index:]):
-                self.kitingredients.append(
-                    KitIngredient.objects.create(
-                        name=string.ascii_letters[i].upper(),
-                        kittype=kittype,
-                        bagtype=bagtype,
-                        quantity=index + 1,
-                    )
+        for i, bagtype in enumerate(self.bagtypes):
+            self.kitingredients.append(
+                KitIngredient.objects.create(
+                    name=string.ascii_letters[i].upper(),
+                    kittype=self.kittypes[0],
+                    bagtype=bagtype,
+                    quantity=1,
                 )
+            )
+
+        # Create kitingredients for kittype1
+        # 2 of each bagtype
+        self.kitingredients = []
+        for i, bagtype in enumerate(self.bagtypes):
+            self.kitingredients.append(
+                KitIngredient.objects.create(
+                    name=string.ascii_letters[i].upper(),
+                    kittype=self.kittypes[1],
+                    bagtype=bagtype,
+                    quantity=2,
+                )
+            )
+
+        # Create kitingredients for kittype2
+        # 1 of first two parts
+        self.kitingredients = []
+        for i, bagtype in enumerate(self.bagtypes[:2]):
+            self.kitingredients.append(
+                KitIngredient.objects.create(
+                    name=string.ascii_letters[i].upper(),
+                    kittype=self.kittypes[2],
+                    bagtype=bagtype,
+                    quantity=1,
+                )
+            )
+
+        # Create 10 complete bags of each bagtype
         self.bags = []
+        for i, bagtype in enumerate(self.bagtypes):
+            # Get complete name
+            parts_needed = Part.objects.filter(needed__bagtype=bagtype)
+            name = string.ascii_letters[: len(parts_needed)].upper()
+            self.bags.append(
+                Bag.objects.create(
+                    name=name,
+                    quantity=10,
+                    complete=True,
+                    kind=bagtype,
+                )
+            )
+
         self.kits = []
 
-    def test_get_potentialkits_with_no_bags(self):
+        print(self.bags)
+
+    def test_get_potentialkits_decrementing_bag0(self):
 
         response = self.client.get(reverse(self.route))
         print(response.data)
-        self.assertEqual(response.data[0]["potential_kits"], 0)
+        self.assertEqual(response.data[0]["potential_kits"], 10)
+        self.assertEqual(response.data[1]["potential_kits"], 5)
+        self.assertEqual(response.data[2]["potential_kits"], 10)
 
-    def test_get_potentialkits_with_single_bags(self):
+        # Decrease bag0 by 1
+        self.bags[0].decrement()
 
         response = self.client.get(reverse(self.route))
         print(response.data)
-        self.assertEqual(response.data[0]["potential_kits"], 1)
+        self.assertEqual(response.data[0]["potential_kits"], 9)
+        self.assertEqual(response.data[1]["potential_kits"], 4)
+        self.assertEqual(response.data[2]["potential_kits"], 9)
+
+        # Increase bag0 by 1
+        self.bags[0].increment()
+
+        response = self.client.get(reverse(self.route))
+        print(response.data)
+        self.assertEqual(response.data[0]["potential_kits"], 10)
+        self.assertEqual(response.data[1]["potential_kits"], 5)
+        self.assertEqual(response.data[2]["potential_kits"], 10)
+
+    def test_get_potentialkits_decrementing_bag2(self):
+        BAG_ID = 2
+        response = self.client.get(reverse(self.route))
+        print(response.data)
+        self.assertEqual(response.data[0]["potential_kits"], 10)
+        self.assertEqual(response.data[1]["potential_kits"], 5)
+        self.assertEqual(response.data[2]["potential_kits"], 10)
+
+        # Decrease bag0 by 2
+        self.bags[BAG_ID].decrement(2)
+
+        response = self.client.get(reverse(self.route))
+        print(response.data)
+        self.assertEqual(response.data[0]["potential_kits"], 8)
+        self.assertEqual(response.data[1]["potential_kits"], 4)
+        self.assertEqual(response.data[2]["potential_kits"], 10)
+
+        # Increase bag0 by 1
+        self.bags[BAG_ID].increment(2)
+
+        response = self.client.get(reverse(self.route))
+        print(response.data)
+        self.assertEqual(response.data[0]["potential_kits"], 10)
+        self.assertEqual(response.data[1]["potential_kits"], 5)
+        self.assertEqual(response.data[2]["potential_kits"], 10)
