@@ -13,7 +13,7 @@ urlpatterns = [
     path("potentialkits/<int:kittype>/", views.potentialkits),
     path("potentialkits/", views.all_potentialkits, name="allpotentialkits"),
     path("potentialbags/<int:bagtype>", views.potentialbags),
-    path("potentialbags/", views.all_potentialbags),
+    path("potentialbags/", views.all_potentialbags, name="allpotentialbags"),
     # path("partstobuyforkit/", views.partstobuyforkit),
     # path("partstobuyforbag/", views.partstobuyforbag),
     # path("unfinishedbag/<int:bag>", views.unfinishedbag),
