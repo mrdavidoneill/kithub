@@ -45,8 +45,18 @@ class Bag(models.Model):
     complete = models.BooleanField(default=False)
     kind = models.ForeignKey(BagType, on_delete=models.CASCADE)
 
+    def decrement(self, quantity=1):
+        """Decrease quantity by quantity passed, or 1"""
+        self.quantity -= quantity
+        self.save()
+
+    def increment(self, quantity=1):
+        """Increase quantity by quantity passed, or 1"""
+        self.quantity += quantity
+        self.save()
+
     def __str__(self):
-        return self.name
+        return f"{self.kind} - {self.name} x {self.quantity}"
 
 
 class KitIngredient(models.Model):
@@ -76,6 +86,16 @@ class Part(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     quantity = models.PositiveIntegerField(default=0)  # 0 to 2147483647
+
+    def decrement(self, quantity=1):
+        """Decrease quantity by quantity passed, or 1"""
+        self.quantity -= quantity
+        self.save()
+
+    def increment(self, quantity=1):
+        """Increase quantity by quantity passed, or 1"""
+        self.quantity += quantity
+        self.save()
 
     def __str__(self):
         return self.name
