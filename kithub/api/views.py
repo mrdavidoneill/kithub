@@ -56,7 +56,7 @@ def potential_kits_of_kittype(kittype):
     # Iterate through each needed bag
     for bagtype in bagtypes_needed:
         # Get all bags currently in stock
-        in_stock = Bag.objects.filter(kind=bagtype, complete=False)
+        in_stock = Bag.objects.filter(kind=bagtype, complete=True)
 
         # Gather all and count quantities
         in_stock_quantity = 0
