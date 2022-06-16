@@ -1,14 +1,14 @@
-<testsuite name="features.createpart.Create Part" tests="5" errors="0" failures="0" skipped="0" time="0.071286" timestamp="2022-06-16T22:17:02.544732" hostname="legion-linux"><testcase classname="features.createpart.Create Part" name="Part create without quantity" status="passed" time="0.020812"><system-out>
+<testsuite name="features.createpart.Create Part" tests="5" errors="0" failures="0" skipped="0" time="0.058259" timestamp="2022-06-16T22:33:35.910024" hostname="legion-linux"><testcase classname="features.createpart.Create Part" name="Part create without quantity" status="passed" time="0.013939"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Part create without quantity
-    Given a set of specific parts ... passed in 0.015s
+    Given a set of specific parts ... passed in 0.010s
       | name  | description  | quantity |
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
       | partC | descriptionC | 0        |
-    And I read all "part" ... passed in 0.003s
-    When I create a "part" called "partD" ... passed in 0.003s
+    And I read all "part" ... passed in 0.002s
+    When I create a "part" called "partD" ... passed in 0.002s
     Then I should see the "name" is "partD" ... passed in 0.000s
     And I should see the "quantity" is number "0" ... passed in 0.000s
 
@@ -20,11 +20,11 @@ Captured stdout:
 {'id': 4, 'name': 'partD', 'description': 'A description of partD', 'quantity': 0}
 
 ]]>
-</system-out></testcase><testcase classname="features.createpart.Create Part" name="Parts read" status="passed" time="0.012657"><system-out>
+</system-out></testcase><testcase classname="features.createpart.Create Part" name="Parts read" status="passed" time="0.009839"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Parts read
-    Given a set of specific parts ... passed in 0.007s
+    Given a set of specific parts ... passed in 0.005s
       | name  | description  | quantity |
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
@@ -46,11 +46,11 @@ Captured stdout:
 [OrderedDict([('id', 5), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)]), OrderedDict([('id', 6), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 7), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
 
 ]]>
-</system-out></testcase><testcase classname="features.createpart.Create Part" name="Single part read" status="passed" time="0.010926"><system-out>
+</system-out></testcase><testcase classname="features.createpart.Create Part" name="Single part read" status="passed" time="0.009627"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Single part read
-    Given a set of specific parts ... passed in 0.007s
+    Given a set of specific parts ... passed in 0.006s
       | name  | description  | quantity |
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
@@ -68,11 +68,11 @@ Captured stdout:
 {'id': 8, 'name': 'partA', 'description': 'descriptionA', 'quantity': 10}
 
 ]]>
-</system-out></testcase><testcase classname="features.createpart.Create Part" name="Single part update" status="passed" time="0.012628"><system-out>
+</system-out></testcase><testcase classname="features.createpart.Create Part" name="Single part update" status="passed" time="0.012579"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Single part update
-    Given a set of specific parts ... passed in 0.008s
+    Given a set of specific parts ... passed in 0.006s
       | name  | description  | quantity |
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
@@ -84,6 +84,10 @@ Captured stdout:
     Then I should see the "name" is "partE" ... passed in 0.000s
     And I should see the "quantity" is number "9" ... passed in 0.000s
     And I should see the "description" is "descriptionE" ... passed in 0.000s
+    When I read all "part" ... passed in 0.002s
+    Then the first part should have "name" equal to "partE" ... passed in 0.000s
+    And the first part should have "quantity" equal to number "9" ... passed in 0.000s
+    And the first part should have "description" equal to "descriptionE" ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
@@ -92,9 +96,12 @@ Captured stdout:
 {'id': 11, 'name': 'partE', 'description': 'descriptionE', 'quantity': 9}
 {'id': 11, 'name': 'partE', 'description': 'descriptionE', 'quantity': 9}
 {'id': 11, 'name': 'partE', 'description': 'descriptionE', 'quantity': 9}
+[OrderedDict([('id', 11), ('name', 'partE'), ('description', 'descriptionE'), ('quantity', 9)]), OrderedDict([('id', 12), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 13), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
+[OrderedDict([('id', 11), ('name', 'partE'), ('description', 'descriptionE'), ('quantity', 9)]), OrderedDict([('id', 12), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 13), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
+[OrderedDict([('id', 11), ('name', 'partE'), ('description', 'descriptionE'), ('quantity', 9)]), OrderedDict([('id', 12), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 13), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
 
 ]]>
-</system-out></testcase><testcase classname="features.createpart.Create Part" name="Single part delete" status="passed" time="0.014263"><system-out>
+</system-out></testcase><testcase classname="features.createpart.Create Part" name="Single part delete" status="passed" time="0.012275"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Single part delete
@@ -106,7 +113,7 @@ Captured stdout:
     And I read all "part" ... passed in 0.002s
     When I delete the first "part" ... passed in 0.003s
     Then the status code should be "204" ... passed in 0.000s
-    When I read all "part" ... passed in 0.002s
+    When I read all "part" ... passed in 0.001s
     Then the first part should have "name" equal to "partB" ... passed in 0.000s
 
 @scenario.end

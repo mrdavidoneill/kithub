@@ -34,7 +34,12 @@ Feature: Create Part
          
         Then I should see the "name" is "partE"
         And I should see the "quantity" is number "9"        
-        And I should see the "description" is "descriptionE"  
+        And I should see the "description" is "descriptionE"
+        When I read all "part"
+        Then the first part should have "name" equal to "partE"
+        And the first part should have "quantity" equal to number "9"  
+        And the first part should have "description" equal to "descriptionE"  
+
 
     Scenario: Single part delete
         When I delete the first "part"
