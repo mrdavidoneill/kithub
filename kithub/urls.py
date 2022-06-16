@@ -9,7 +9,7 @@ urlpatterns = [
     path("", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("dividebag/", views.dividebag, name="dividebag"),
-    # path("dividekit/", views.dividekit),
+    path("dividekit/", views.dividekit, name="dividekit"),
     path("potentialkits/<int:kittype>/", views.potentialkits),
     path("potentialkits/", views.all_potentialkits, name="allpotentialkits"),
     path("potentialbags/<int:bagtype>", views.potentialbags),
