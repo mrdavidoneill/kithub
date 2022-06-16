@@ -293,6 +293,39 @@ def all_unfinishedbags(request):
     return Response(response)
 
 
+def divide_bags(bag, quantity):
+    """Duplicates bag and divides on quantity"""
+    bag = Bag.objects.get(pk=bag)
+    new_bag = Bag.objects.create(
+        kind=bag.kind, name=bag.name, quantity=quantity, complete=bag.complete
+    )
+    bag.decrement(quantity)
+    return [
+        {
+            "id": bag.pk,
+            "name": bag.name,
+            "quantity": bag.quantity,
+            "complete": bag.complete,
+            "kind": bag.kind.pk,
+        },
+        {
+            "id": new_bag.pk,
+            "name": new_bag.name,
+            "quantity": new_bag.quantity,
+            "complete": new_bag.complete,
+            "kind": new_bag.kind.pk,
+        },
+    ]
+
+
+@api_view(["PUT"])
+def dividebag(request):
+    quantity = request.data["quantity"]
+    bag = request.data["bag"]
+
+    return Response(divide_bags(bag, int(quantity)))
+
+
 # def bags_to_prepare_for_kittype(kittype, quantity):
 #     """Calculates which bags are needed in which quantities to fulfil passed quantity of kittype"""
 #     # Store quantity required for each needed bag
