@@ -8,9 +8,9 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 from rest_framework import status
 
-from ..models import *
-from ..serializers import *
-from . import common
+from kithub.api.models import *
+from kithub.api.serializers import *
+from kithub.api.tests import common
 
 
 class GetAllPotentialKits(TestCase):
@@ -18,7 +18,7 @@ class GetAllPotentialKits(TestCase):
 
     def setUp(self):
 
-        self.route = "allpotentialbags"
+        self.route = "dividekit"
         self.client = APIClient()
 
         # Create stock
@@ -138,58 +138,41 @@ class GetAllPotentialKits(TestCase):
                 )
             )
 
+        # Create 10 complete kits of each kittype
         self.kits = []
+        for i, kittype in enumerate(self.kittypes):
+            # Get complete name
+            bagtypes_needed = BagType.objects.filter(needed__kittype=kittype)
+            name = string.ascii_letters[: len(bagtypes_needed)].upper()
+            self.kits.append(
+                Kit.objects.create(
+                    name=name,
+                    quantity=10,
+                    complete=True,
+                    kind=kittype,
+                )
+            )
 
-        print(self.bags)
-
-    def test_get_potentialbags_decrementing_part0(self):
+    def test_dividekit_kit0_quantity_1(self):
         PART_ID = 0
-        response = self.client.get(reverse(self.route))
+        quantity = 1
+        original_quantity = self.kits[0].quantity
+        response = self.client.put(
+            reverse(self.route), {"kit": self.kits[0].pk, "quantity": 1}
+        )
         print(response.data)
-        self.assertEqual(response.data[0]["potential_bags"], 10)
-        self.assertEqual(response.data[1]["potential_bags"], 5)
-        self.assertEqual(response.data[2]["potential_bags"], 10)
+        self.assertNotEqual(response.data[0]["id"], response.data[1]["id"])
+        self.assertEqual(response.data[0]["name"], response.data[1]["name"])
+        self.assertEqual(response.data[0]["kind"], response.data[1]["kind"])
+        self.assertEqual(response.data[0]["quantity"], original_quantity - quantity)
+        self.assertEqual(response.data[1]["quantity"], quantity)
 
-        # Decrease bag0 by 1
-        self.parts[PART_ID].decrement()
+        # Test models in DB
+        old_kit = Kit.objects.get(pk=response.data[0]["id"])
+        new_kit = Kit.objects.get(pk=response.data[1]["id"])
 
-        response = self.client.get(reverse(self.route))
-        print(response.data)
-        self.assertEqual(response.data[0]["potential_bags"], 9)
-        self.assertEqual(response.data[1]["potential_bags"], 4)
-        self.assertEqual(response.data[2]["potential_bags"], 9)
-
-        # Increase bag0 by 1
-        self.parts[PART_ID].increment()
-
-        response = self.client.get(reverse(self.route))
-        print(response.data)
-        self.assertEqual(response.data[0]["potential_bags"], 10)
-        self.assertEqual(response.data[1]["potential_bags"], 5)
-        self.assertEqual(response.data[2]["potential_bags"], 10)
-
-    def test_get_potentialbags_decrementing_part2(self):
-        PART_ID = 2
-        response = self.client.get(reverse(self.route))
-        print(response.data)
-        self.assertEqual(response.data[0]["potential_bags"], 10)
-        self.assertEqual(response.data[1]["potential_bags"], 5)
-        self.assertEqual(response.data[2]["potential_bags"], 10)
-
-        # Decrease bag0 by 2
-        self.parts[PART_ID].decrement(2)
-
-        response = self.client.get(reverse(self.route))
-        print(response.data)
-        self.assertEqual(response.data[0]["potential_bags"], 8)
-        self.assertEqual(response.data[1]["potential_bags"], 4)
-        self.assertEqual(response.data[2]["potential_bags"], 10)
-
-        # Increase bag0 by 1
-        self.parts[PART_ID].increment(2)
-
-        response = self.client.get(reverse(self.route))
-        print(response.data)
-        self.assertEqual(response.data[0]["potential_bags"], 10)
-        self.assertEqual(response.data[1]["potential_bags"], 5)
-        self.assertEqual(response.data[2]["potential_bags"], 10)
+        self.assertEqual(old_kit.name, new_kit.name)
+        self.assertEqual(old_kit.kind, new_kit.kind)
+        self.assertEqual(old_kit.complete, new_kit.complete)
+        self.assertEqual(old_kit.quantity, original_quantity - quantity)
+        self.assertEqual(new_kit.quantity, quantity)

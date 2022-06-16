@@ -8,9 +8,9 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 from rest_framework import status
 
-from ..models import *
-from ..serializers import *
-from . import common
+from kithub.api.models import *
+from kithub.api.serializers import *
+from kithub.api.tests import common
 
 
 class GetAllPotentialKits(TestCase):
@@ -18,7 +18,7 @@ class GetAllPotentialKits(TestCase):
 
     def setUp(self):
 
-        self.route = "unfinishedbag"
+        self.route = "allunfinishedbags"
         self.client = APIClient()
 
         # Create stock
@@ -141,47 +141,56 @@ class GetAllPotentialKits(TestCase):
         self.kits = []
 
     def test_get_parts_to_buy_for_10_bagtype0_with_nothing_in_bags_10_parts(self):
-        BAGTYPE_ID = 0
         for part in self.parts:
             part.increment(10)
-        response = self.client.get(
-            reverse(self.route, args=(self.bagtypes[BAGTYPE_ID].pk,))
-        )
+        response = self.client.get(reverse(self.route))
         print(f"response.data: {response.data}")
         expected_to_buy = {}
         expected_to_finish = {part.name: 10 for part in self.parts}
-        self.assertEqual(response.data["parts_to_buy"], expected_to_buy)
-        self.assertEqual(response.data["parts_to_finish"], expected_to_finish)
+        self.assertEqual(response.data[0]["parts_to_buy"], expected_to_buy)
+        self.assertEqual(response.data[0]["parts_to_finish"], expected_to_finish)
+
+    def test_get_parts_to_buy_for_10_bagtype1_with_nothing_in_bags_5_parts(self):
+        for part in self.parts:
+            part.increment(5)
+        response = self.client.get(reverse(self.route))
+        print(f"response.data: {response.data}")
+        expected_to_buy = {part.name: 15 for part in self.parts}
+        expected_to_finish = {part.name: 20 for part in self.parts}
+        self.assertEqual(response.data[1]["parts_to_buy"], expected_to_buy)
+        self.assertEqual(response.data[1]["parts_to_finish"], expected_to_finish)
+
+    def test_get_parts_to_buy_for_10_bagtype2_with_nothing_in_bags_9_parts(self):
+        for part in self.parts:
+            part.increment(9)
+        response = self.client.get(reverse(self.route))
+        print(f"response.data: {response.data}")
+        expected_to_buy = {part.name: 1 for part in self.parts[:2]}
+        expected_to_finish = {part.name: 10 for part in self.parts[:2]}
+        self.assertEqual(response.data[2]["parts_to_buy"], expected_to_buy)
+        self.assertEqual(response.data[2]["parts_to_finish"], expected_to_finish)
 
     def test_get_parts_to_buy_for_10_bagtype0_with_nothing_in_bags_no_parts(self):
-        BAGTYPE_ID = 0
-        response = self.client.get(
-            reverse(self.route, args=(self.bagtypes[BAGTYPE_ID].pk,))
-        )
+        response = self.client.get(reverse(self.route))
         print(f"response.data: {response.data}")
         expected_to_buy = {part.name: 10 for part in self.parts}
         expected_to_finish = {part.name: 10 for part in self.parts}
-        self.assertEqual(response.data["parts_to_buy"], expected_to_buy)
-        self.assertEqual(response.data["parts_to_finish"], expected_to_finish)
+        self.assertEqual(response.data[0]["parts_to_buy"], expected_to_buy)
+        self.assertEqual(response.data[0]["parts_to_finish"], expected_to_finish)
 
     def test_get_parts_to_buy_for_10_bagtype0_with_partA_in_bags_no_parts(self):
         self.bags[0].add_part("A")
-        BAGTYPE_ID = 0
-        response = self.client.get(
-            reverse(self.route, args=(self.bagtypes[BAGTYPE_ID].pk,))
-        )
+        response = self.client.get(reverse(self.route))
         print(f"response.data: {response.data}")
         expected_to_buy = {part.name: 10 for part in self.parts[1:]}
         expected_to_finish = {part.name: 10 for part in self.parts[1:]}
-        self.assertEqual(response.data["parts_to_buy"], expected_to_buy)
-        self.assertEqual(response.data["parts_to_finish"], expected_to_finish)
+        self.assertEqual(response.data[0]["parts_to_buy"], expected_to_buy)
+        self.assertEqual(response.data[0]["parts_to_finish"], expected_to_finish)
 
         self.bags[0].remove_part("A")
-        response = self.client.get(
-            reverse(self.route, args=(self.bagtypes[BAGTYPE_ID].pk,))
-        )
+        response = self.client.get(reverse(self.route))
         print(f"response.data: {response.data}")
         expected_to_buy = {part.name: 10 for part in self.parts}
         expected_to_finish = {part.name: 10 for part in self.parts}
-        self.assertEqual(response.data["parts_to_buy"], expected_to_buy)
-        self.assertEqual(response.data["parts_to_finish"], expected_to_finish)
+        self.assertEqual(response.data[0]["parts_to_buy"], expected_to_buy)
+        self.assertEqual(response.data[0]["parts_to_finish"], expected_to_finish)

@@ -8,9 +8,9 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 from rest_framework import status
 
-from ..models import *
-from ..serializers import *
-from . import common
+from kithub.api.models import *
+from kithub.api.serializers import *
+from kithub.api.tests import common
 
 
 class GetAllPotentialKits(TestCase):

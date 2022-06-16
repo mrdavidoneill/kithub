@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from rest_framework.test import APIClient
 
-from . import common
+from kithub.api.tests import common
 
 ITEM_COUNT = 2
 

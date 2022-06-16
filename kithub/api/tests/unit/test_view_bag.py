@@ -1,6 +1,7 @@
-from . import common, template_test_view
-from ..models import Bag
-from ..serializers import BagSerializer
+from kithub.api.tests import common
+from kithub.api.tests.unit import template_test_view
+from kithub.api.models import Bag
+from kithub.api.serializers import BagSerializer
 
 #######################################################
 #              Change for each new model              #

@@ -2,8 +2,8 @@ import json, string
 import decimal
 from datetime import date, datetime, timedelta
 from random import choice, randint, shuffle
-from ..serializers import UserSerializer
-from ..models import *
+from kithub.api.serializers import UserSerializer
+from kithub.api.models import *
 from django.urls import reverse
 from django.core.serializers import serialize
 from django.core.serializers.json import DjangoJSONEncoder

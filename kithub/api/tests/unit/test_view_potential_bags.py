@@ -8,9 +8,9 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 from rest_framework import status
 
-from ..models import *
-from ..serializers import *
-from . import common
+from kithub.api.models import *
+from kithub.api.serializers import *
+from kithub.api.tests import common
 
 
 class GetAllPotentialKits(TestCase):
@@ -18,7 +18,7 @@ class GetAllPotentialKits(TestCase):
 
     def setUp(self):
 
-        self.route = "allpotentialkits"
+        self.route = "allpotentialbags"
         self.client = APIClient()
 
         # Create stock
@@ -78,7 +78,7 @@ class GetAllPotentialKits(TestCase):
                     name=string.ascii_letters[i].upper(),
                     bagtype=self.bagtypes[2],
                     part=part,
-                    quantity=2,
+                    quantity=1,
                 )
             )
 
@@ -142,54 +142,54 @@ class GetAllPotentialKits(TestCase):
 
         print(self.bags)
 
-    def test_get_potentialkits_decrementing_bag0(self):
-
+    def test_get_potentialbags_decrementing_part0(self):
+        PART_ID = 0
         response = self.client.get(reverse(self.route))
         print(response.data)
-        self.assertEqual(response.data[0]["potential_kits"], 10)
-        self.assertEqual(response.data[1]["potential_kits"], 5)
-        self.assertEqual(response.data[2]["potential_kits"], 10)
+        self.assertEqual(response.data[0]["potential_bags"], 10)
+        self.assertEqual(response.data[1]["potential_bags"], 5)
+        self.assertEqual(response.data[2]["potential_bags"], 10)
 
         # Decrease bag0 by 1
-        self.bags[0].decrement()
+        self.parts[PART_ID].decrement()
 
         response = self.client.get(reverse(self.route))
         print(response.data)
-        self.assertEqual(response.data[0]["potential_kits"], 9)
-        self.assertEqual(response.data[1]["potential_kits"], 4)
-        self.assertEqual(response.data[2]["potential_kits"], 9)
+        self.assertEqual(response.data[0]["potential_bags"], 9)
+        self.assertEqual(response.data[1]["potential_bags"], 4)
+        self.assertEqual(response.data[2]["potential_bags"], 9)
 
         # Increase bag0 by 1
-        self.bags[0].increment()
+        self.parts[PART_ID].increment()
 
         response = self.client.get(reverse(self.route))
         print(response.data)
-        self.assertEqual(response.data[0]["potential_kits"], 10)
-        self.assertEqual(response.data[1]["potential_kits"], 5)
-        self.assertEqual(response.data[2]["potential_kits"], 10)
+        self.assertEqual(response.data[0]["potential_bags"], 10)
+        self.assertEqual(response.data[1]["potential_bags"], 5)
+        self.assertEqual(response.data[2]["potential_bags"], 10)
 
-    def test_get_potentialkits_decrementing_bag2(self):
-        BAG_ID = 2
+    def test_get_potentialbags_decrementing_part2(self):
+        PART_ID = 2
         response = self.client.get(reverse(self.route))
         print(response.data)
-        self.assertEqual(response.data[0]["potential_kits"], 10)
-        self.assertEqual(response.data[1]["potential_kits"], 5)
-        self.assertEqual(response.data[2]["potential_kits"], 10)
+        self.assertEqual(response.data[0]["potential_bags"], 10)
+        self.assertEqual(response.data[1]["potential_bags"], 5)
+        self.assertEqual(response.data[2]["potential_bags"], 10)
 
         # Decrease bag0 by 2
-        self.bags[BAG_ID].decrement(2)
+        self.parts[PART_ID].decrement(2)
 
         response = self.client.get(reverse(self.route))
         print(response.data)
-        self.assertEqual(response.data[0]["potential_kits"], 8)
-        self.assertEqual(response.data[1]["potential_kits"], 4)
-        self.assertEqual(response.data[2]["potential_kits"], 10)
+        self.assertEqual(response.data[0]["potential_bags"], 8)
+        self.assertEqual(response.data[1]["potential_bags"], 4)
+        self.assertEqual(response.data[2]["potential_bags"], 10)
 
         # Increase bag0 by 1
-        self.bags[BAG_ID].increment(2)
+        self.parts[PART_ID].increment(2)
 
         response = self.client.get(reverse(self.route))
         print(response.data)
-        self.assertEqual(response.data[0]["potential_kits"], 10)
-        self.assertEqual(response.data[1]["potential_kits"], 5)
-        self.assertEqual(response.data[2]["potential_kits"], 10)
+        self.assertEqual(response.data[0]["potential_bags"], 10)
+        self.assertEqual(response.data[1]["potential_bags"], 5)
+        self.assertEqual(response.data[2]["potential_bags"], 10)

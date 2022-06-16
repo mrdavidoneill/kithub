@@ -1,20 +1,21 @@
-from . import common, template_test_view
-from ..models import BagType
-from ..serializers import BagTypeSerializer
+from kithub.api.tests import common
+from kithub.api.tests.unit import template_test_view
+from kithub.api.models import BagIngredient
+from kithub.api.serializers import BagIngredientSerializer
 
 #######################################################
 #              Change for each new model              #
 #######################################################
 
-ROUTE_LIST = "bagtype-list"
-ROUTE_DETAIL = "bagtype-detail"
-MODEL = BagType
-SERIALIZER = BagTypeSerializer
+ROUTE_LIST = "bagingredient-list"
+ROUTE_DETAIL = "bagingredient-detail"
+MODEL = BagIngredient
+SERIALIZER = BagIngredientSerializer
 
-PAYLOAD = common.create_bagtype_payload
+PAYLOAD = common.create_bagingredient_payload
 
 
-CREATE_ITEM = common.create_bagtype
+CREATE_ITEM = common.create_bagingredient
 
 #######################################################
 #               Same for each model               #

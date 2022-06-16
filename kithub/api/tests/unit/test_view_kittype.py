@@ -1,20 +1,21 @@
-from . import common, template_test_view
-from ..models import Kit
-from ..serializers import KitSerializer
+from kithub.api.tests import common
+from kithub.api.tests.unit import template_test_view
+from kithub.api.models import KitType
+from kithub.api.serializers import KitTypeSerializer
 
 #######################################################
 #              Change for each new model              #
 #######################################################
 
-ROUTE_LIST = "kit-list"
-ROUTE_DETAIL = "kit-detail"
-MODEL = Kit
-SERIALIZER = KitSerializer
+ROUTE_LIST = "kittype-list"
+ROUTE_DETAIL = "kittype-detail"
+MODEL = KitType
+SERIALIZER = KitTypeSerializer
 
-PAYLOAD = common.create_kit_payload
+PAYLOAD = common.create_kittype_payload
 
 
-CREATE_ITEM = common.create_kit
+CREATE_ITEM = common.create_kittype
 
 #######################################################
 #               Same for each model               #

@@ -1,20 +1,21 @@
-from . import common, template_test_view
-from ..models import Purchase
-from ..serializers import PurchaseSerializer
+from kithub.api.tests import common
+from kithub.api.tests.unit import template_test_view
+from kithub.api.models import KitIngredient
+from kithub.api.serializers import KitIngredientSerializer
 
 #######################################################
 #              Change for each new model              #
 #######################################################
 
-ROUTE_LIST = "purchase-list"
-ROUTE_DETAIL = "purchase-detail"
-MODEL = Purchase
-SERIALIZER = PurchaseSerializer
+ROUTE_LIST = "kitingredient-list"
+ROUTE_DETAIL = "kitingredient-detail"
+MODEL = KitIngredient
+SERIALIZER = KitIngredientSerializer
 
-PAYLOAD = common.create_purchase_payload
+PAYLOAD = common.create_kitingredient_payload
 
 
-CREATE_ITEM = common.create_purchase
+CREATE_ITEM = common.create_kitingredient
 
 #######################################################
 #               Same for each model               #

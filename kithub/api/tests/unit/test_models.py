@@ -1,6 +1,6 @@
 import datetime
 from django.test import TestCase
-from .common import *
+from kithub.api.tests.common import *
 
 
 class KitTest(TestCase):
