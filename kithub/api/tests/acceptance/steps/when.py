@@ -1,5 +1,7 @@
+import json
 from behave import when
 from django.urls import reverse
+from django.core.serializers.json import DjangoJSONEncoder
 
 
 @when('I run "python manage.py behave"')
@@ -18,9 +20,11 @@ def create_model(context, model, name):
     )
 
 
-@when('I read a "{model}" called "{name}"')
-def read_model(context, model, name):
-    context.response = context.test.client.get(reverse(f"{model}-detail", args=(1,)))
+@when('I read the first "{model}"')
+def read_first_model(context, model):
+    context.response = context.test.client.get(
+        reverse(f"{model}-detail", args=(context.response.data[0]["id"],))
+    )
 
 
 @when('I read all "{model}"')
@@ -37,3 +41,32 @@ def read_model(context, model, name):
             "description": f"A description of {name}",
         },
     )
+
+
+@when("I update the first part as follows")
+def update_part(context):
+    for row in context.table:
+        data = {
+            "name": row["name"],
+            "description": row["description"],
+            "quantity": row["quantity"],
+        }
+        context.response = context.test.client.put(
+            reverse(
+                "part-detail",
+                kwargs={
+                    "pk": context.response.data[0]["id"],
+                },
+            ),
+            data=json.dumps(data, cls=DjangoJSONEncoder),
+            content_type="application/json",
+        )
+
+
+@when('I delete the first "{model}"')
+def delete_first_model(context, model):
+    context.response = context.test.client.delete(
+        reverse(f"{model}-detail", args=(context.response.data[0]["id"],))
+    )
+    print(context.response)
+    print(context.response.data)

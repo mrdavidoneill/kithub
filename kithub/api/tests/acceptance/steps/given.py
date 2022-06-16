@@ -29,3 +29,8 @@ def create_set_of_parts(context):
                 "quantity": row["quantity"],
             },
         )
+
+
+@given('I read all "{model}"')
+def read_models(context, model):
+    context.response = context.test.client.get(reverse(f"{model}-list"))
