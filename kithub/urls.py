@@ -8,7 +8,7 @@ from .api import views
 urlpatterns = [
     path("", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
-    # path("dividebag/", views.dividebag),
+    path("dividebag/", views.dividebag, name="dividebag"),
     # path("dividekit/", views.dividekit),
     path("potentialkits/<int:kittype>/", views.potentialkits),
     path("potentialkits/", views.all_potentialkits, name="allpotentialkits"),
