@@ -14,7 +14,11 @@ urlpatterns = [
     path("potentialkits/", views.all_potentialkits, name="allpotentialkits"),
     path("potentialbags/<int:bagtype>", views.potentialbags),
     path("potentialbags/", views.all_potentialbags, name="allpotentialbags"),
-    # path("partstobuyforkit/", views.partstobuyforkit),
+    path(
+        "partstobuyforkit/<int:kittype>/<int:quantity>",
+        views.partstobuyforkit,
+        name="partstobuyforkit",
+    ),
     path(
         "partstobuyforbag/<int:bagtype>/<int:quantity>",
         views.partstobuyforbag,

@@ -166,3 +166,100 @@ def parts_to_buy_for_bagtype(bagtype, quantity):
 @api_view(["GET"])
 def partstobuyforbag(request, bagtype, quantity):
     return Response(parts_to_buy_for_bagtype(bagtype, quantity))
+
+
+def parts_to_buy_for_kittype(kittype, quantity):
+    """Calculates which parts are needed in which quantities to fulfil passed quantity of kittype"""
+    # Store quantity required for each needed part
+    parts_to_buy = {}
+
+    # # Get all stocked parts that are needed for kittype
+    # parts_stocked = Part.objects.filter(needed__bagtype__needed=kittype)
+
+    # Get KitIngredients for kittype
+    kit_ingredients = KitIngredient.objects.select_related("bagtype").filter(
+        kittype=kittype
+    )
+    # Get bagtype needed and quantity
+    for kit_ingredient in kit_ingredients:
+        bagtype = kit_ingredient.bagtype
+        num_of_bags_needed = kit_ingredient.quantity
+        parts_in_bagtype = Part.objects.filter(needed__bagtype=bagtype)
+
+        for part in parts_in_bagtype:
+            quantity_in_stock = part.quantity
+            required_quantity = (
+                BagIngredient.objects.filter(bagtype=bagtype, part=part)
+                .first()
+                .quantity
+                * quantity
+            )
+            quantity_to_buy = num_of_bags_needed * required_quantity - quantity_in_stock
+
+            # If already needing to buy stock, increment amount
+            if part.name in parts_to_buy:
+                parts_to_buy[part.name] += num_of_bags_needed * required_quantity
+            # If not enough parts to fulfil request
+            else:
+                parts_to_buy[part.name] = quantity_to_buy
+    # @TODO make more efficient.  ie. use 2 dicts, storing in_stock and to_buy,
+    # decrement in_stock until not enough, then move to to_buy
+    # Remove unneeded parts
+    for part in list(parts_to_buy.keys()):
+        if parts_to_buy[part] <= 0:
+            del parts_to_buy[part]
+
+    print(parts_to_buy)
+
+    # # Iterate through each needed part
+    # for part in parts_needed:
+    #     required_quantity = (
+    #         BagIngredient.objects.filter(kittype=kittype, part=part).first().quantity
+    #         * quantity
+    #     )
+    #     # Calculate how short the stocked quantity is (pos if short, neg if OK)
+    #     quantity_difference = required_quantity - part.quantity
+    #     # If not enough parts to fulfil request
+    #     if (quantity_difference) > 0:
+    #         # Store how many parts are short for quantity requested
+    #         parts_to_buy[part.name] = quantity_difference
+
+    return {
+        "kittypeID": kittype,
+        "parts_to_buy": parts_to_buy,
+    }
+
+
+@api_view(["GET"])
+def partstobuyforkit(request, kittype, quantity):
+    return Response(parts_to_buy_for_kittype(kittype, quantity))
+
+
+# def bags_to_prepare_for_kittype(kittype, quantity):
+#     """Calculates which bags are needed in which quantities to fulfil passed quantity of kittype"""
+#     # Store quantity required for each needed bag
+#     bags_to_prepare = {}
+#     # Get all bags that are needed for kittype
+#     bags_needed = Part.objects.filter(needed__kittype=kittype)
+#     # Iterate through each needed bag
+#     for bag in bags_needed:
+#         required_quantity = (
+#             BagIngredient.objects.filter(kittype=kittype, bag=bag).first().quantity
+#             * quantity
+#         )
+#         # Calculate how short the stocked quantity is (pos if short, neg if OK)
+#         quantity_difference = required_quantity - bag.quantity
+#         # If not enough bags to fulfil request
+#         if (quantity_difference) > 0:
+#             # Store how many bags are short for quantity requested
+#             bags_to_prepare[bag.name] = quantity_difference
+
+#     return {
+#         "kittypeID": kittype,
+#         "bags_to_prepare": bags_to_prepare,
+#     }
+
+
+# @api_view(["GET"])
+# def bagstoprepareforkit(request, kittype, quantity):
+#     return Response(bags_to_prepare_for_kittype(kittype, quantity))
