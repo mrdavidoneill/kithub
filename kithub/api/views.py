@@ -322,8 +322,39 @@ def divide_bags(bag, quantity):
 def dividebag(request):
     quantity = request.data["quantity"]
     bag = request.data["bag"]
-
     return Response(divide_bags(bag, int(quantity)))
+
+
+def divide_kits(kit, quantity):
+    """Duplicates kit and divides on quantity"""
+    kit = Kit.objects.get(pk=kit)
+    new_kit = Kit.objects.create(
+        kind=kit.kind, name=kit.name, quantity=quantity, complete=kit.complete
+    )
+    kit.decrement(quantity)
+    return [
+        {
+            "id": kit.pk,
+            "name": kit.name,
+            "quantity": kit.quantity,
+            "complete": kit.complete,
+            "kind": kit.kind.pk,
+        },
+        {
+            "id": new_kit.pk,
+            "name": new_kit.name,
+            "quantity": new_kit.quantity,
+            "complete": new_kit.complete,
+            "kind": new_kit.kind.pk,
+        },
+    ]
+
+
+@api_view(["PUT"])
+def dividekit(request):
+    quantity = request.data["quantity"]
+    kit = request.data["kit"]
+    return Response(divide_kits(kit, int(quantity)))
 
 
 # def bags_to_prepare_for_kittype(kittype, quantity):
