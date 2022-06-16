@@ -55,6 +55,24 @@ class Bag(models.Model):
         self.quantity += quantity
         self.save()
 
+    def add_part(self, part_letter):
+        """Add part into bag, by changing bag name"""
+        index = string.ascii_letters.index(part_letter.lower())
+        new_bag_name = list(self.name)
+        new_bag_name[index] = part_letter
+        new_bag_name = "".join(new_bag_name)
+        self.name = new_bag_name
+        self.save()
+
+    def remove_part(self, part_letter):
+        """Remove part into bag, by changing bag name"""
+        index = self.name.lower().index(part_letter.lower())
+        new_bag_name = list(self.name)
+        new_bag_name[index] = " "
+        new_bag_name = "".join(new_bag_name)
+        self.name = new_bag_name
+        self.save()
+
     def __str__(self):
         return f"{self.kind} - {self.name} x {self.quantity}"
 
