@@ -24,6 +24,6 @@ urlpatterns = [
         views.partstobuyforbag,
         name="partstobuyforbag",
     ),
-    # path("unfinishedbag/<int:bag>", views.unfinishedbag),
-    # path("unfinishedbag/", views.all_unfinishedbags),
+    path("unfinishedbag/<int:bagtype>", views.unfinishedbag, name="unfinishedbag"),
+    path("unfinishedbag/", views.all_unfinishedbags, name="allunfinishedbags"),
 ]
