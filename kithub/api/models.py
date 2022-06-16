@@ -22,6 +22,16 @@ class Kit(models.Model):
     complete = models.BooleanField(default=False)
     kind = models.ForeignKey(KitType, on_delete=models.CASCADE)
 
+    def decrement(self, quantity=1):
+        """Decrease quantity by quantity passed, or 1"""
+        self.quantity -= quantity
+        self.save()
+
+    def increment(self, quantity=1):
+        """Increase quantity by quantity passed, or 1"""
+        self.quantity += quantity
+        self.save()
+
     def __str__(self):
         return self.name
 
