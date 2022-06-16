@@ -1,0 +1,43 @@
+<testsuite name="features.createpart.Create Part" tests="2" errors="0" failures="0" skipped="0" time="0.030076" timestamp="2022-06-16T21:25:17.844712" hostname="legion-linux"><testcase classname="features.createpart.Create Part" name="Part create without quantity" status="passed" time="0.020657"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Part create without quantity
+    Given a set of specific parts ... passed in 0.018s
+      | name  | description  | quantity |
+      | partA | descriptionA | 10       |
+      | partB | descriptionB | 0        |
+      | partC | descriptionC | 0        |
+    When I create a "part" called "partD" ... passed in 0.002s
+    Then I should see the "name" is "partD" ... passed in 0.000s
+    And I should see the "quantity" is number "0" ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+{'id': 4, 'name': 'partD', 'description': 'A description of partD', 'quantity': 0}
+{'id': 4, 'name': 'partD', 'description': 'A description of partD', 'quantity': 0}
+
+]]>
+</system-out></testcase><testcase classname="features.createpart.Create Part" name="Parts read" status="passed" time="0.009418"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Parts read
+    Given a set of specific parts ... passed in 0.007s
+      | name  | description  | quantity |
+      | partA | descriptionA | 10       |
+      | partB | descriptionB | 0        |
+      | partC | descriptionC | 0        |
+    When I read all "part" ... passed in 0.002s
+    Then the first part should have "name" equal to "partA" ... passed in 0.000s
+    And the first part should have "quantity" equal to number "10" ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+[OrderedDict([('id', 5), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)]), OrderedDict([('id', 6), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 7), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
+[OrderedDict([('id', 5), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)]), OrderedDict([('id', 6), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 7), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
+
+]]>
+</system-out></testcase></testsuite>
