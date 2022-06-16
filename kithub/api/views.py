@@ -168,6 +168,13 @@ def partstobuyforbag(request, bagtype, quantity):
     return Response(parts_to_buy_for_bagtype(bagtype, quantity))
 
 
+def remove_no_quantity_parts(parts):
+    """Remove parts with quantities less than 1"""
+    for part in list(parts.keys()):
+        if parts[part] <= 0:
+            del parts[part]
+
+
 def parts_to_buy_for_kittype(kittype, quantity):
     """Calculates which parts are needed in which quantities to fulfil passed quantity of kittype"""
     # Store quantity required for each needed part
@@ -202,27 +209,11 @@ def parts_to_buy_for_kittype(kittype, quantity):
             # If not enough parts to fulfil request
             else:
                 parts_to_buy[part.name] = quantity_to_buy
-    # @TODO make more efficient.  ie. use 2 dicts, storing in_stock and to_buy,
-    # decrement in_stock until not enough, then move to to_buy
+
+    # @TODO Make more efficient, ie. 2 dicts, instock and tobuy,
+    #       decrement instock and add into tobuy only when negative
     # Remove unneeded parts
-    for part in list(parts_to_buy.keys()):
-        if parts_to_buy[part] <= 0:
-            del parts_to_buy[part]
-
-    print(parts_to_buy)
-
-    # # Iterate through each needed part
-    # for part in parts_needed:
-    #     required_quantity = (
-    #         BagIngredient.objects.filter(kittype=kittype, part=part).first().quantity
-    #         * quantity
-    #     )
-    #     # Calculate how short the stocked quantity is (pos if short, neg if OK)
-    #     quantity_difference = required_quantity - part.quantity
-    #     # If not enough parts to fulfil request
-    #     if (quantity_difference) > 0:
-    #         # Store how many parts are short for quantity requested
-    #         parts_to_buy[part.name] = quantity_difference
+    remove_no_quantity_parts(parts_to_buy)
 
     return {
         "kittypeID": kittype,
@@ -233,6 +224,73 @@ def parts_to_buy_for_kittype(kittype, quantity):
 @api_view(["GET"])
 def partstobuyforkit(request, kittype, quantity):
     return Response(parts_to_buy_for_kittype(kittype, quantity))
+
+
+def get_unfinished_bags(bagtype=None):
+    """Calculates which parts are needed in which quantities to fulfil passed quantity of kittype"""
+    # Store quantity required for each needed part
+    parts_to_buy = {}
+    parts_to_finish = {}
+
+    # Get all unfinished_bags
+    if bagtype is None:
+        unfinished_bags = Bag.objects.select_related("kind").filter(complete=False)
+    # Get unfinished_bags for bagtype
+    else:
+        unfinished_bags = Bag.objects.select_related("kind").filter(
+            complete=False, kind=bagtype
+        )
+    # Get each bagtype needed
+    for unfinished_bag in unfinished_bags:
+        bagtype = unfinished_bag.kind
+        # Get parts already in bag
+        for i, contents_name in enumerate(unfinished_bag.name):
+            ingredient_name = string.ascii_letters[i].upper()
+            # If part not in bag already
+            if contents_name != ingredient_name:
+                part = Part.objects.filter(
+                    needed__name=ingredient_name, needed__bagtype=bagtype
+                ).first()
+
+                quantity_in_stock = part.quantity
+                required_quantity = (
+                    BagIngredient.objects.filter(bagtype=bagtype, part=part)
+                    .first()
+                    .quantity
+                    * unfinished_bag.quantity
+                )
+                quantity_to_buy = required_quantity - quantity_in_stock
+
+                # If already needing to buy stock, increment amount
+                if part.name in parts_to_buy:
+                    parts_to_buy[part.name] += required_quantity
+                # If not enough parts to fulfil request
+                else:
+                    parts_to_buy[part.name] = quantity_to_buy
+
+                parts_to_finish[part.name] = required_quantity
+    # Remove parts with non-positive quantities to buy
+    remove_no_quantity_parts(parts_to_buy)
+    return {
+        "bagtypeID": bagtype.pk,
+        "parts_to_buy": parts_to_buy,
+        "parts_to_finish": parts_to_finish,
+    }
+
+
+@api_view(["GET"])
+def unfinishedbag(request, bagtype):
+    return Response(get_unfinished_bags(bagtype))
+
+
+@api_view(["GET"])
+def all_unfinishedbags(request):
+    response = []
+    bagtypes = BagType.objects.all()
+    for bagtype in bagtypes:
+        response.append(get_unfinished_bags(bagtype.pk))
+
+    return Response(response)
 
 
 # def bags_to_prepare_for_kittype(kittype, quantity):
