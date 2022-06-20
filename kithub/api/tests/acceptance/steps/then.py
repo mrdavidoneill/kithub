@@ -64,14 +64,14 @@ def see_numeric_key_value_of_first(context, key, value):
     context.test.assertEqual(response.data[0][key], value)
 
 
-@then('the last part should have "{key}" equal to "{value}"')
+@then('the last item should have "{key}" equal to "{value}"')
 def see_key_value_of_last(context, key, value):
     response = context.response
     print(response.data)
     context.test.assertEqual(response.data[-1][key], value)
 
 
-@then('the last part should have "{key}" equal to number "{value:Number}"')
+@then('the last item should have "{key}" equal to number "{value:Number}"')
 def see_numeric_key_value_of_last(context, key, value):
     response = context.response
     print(response.data)
