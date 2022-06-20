@@ -1,4 +1,4 @@
-<testsuite name="features.example.Running tests" tests="2" errors="0" failures="0" skipped="0" time="0.0002" timestamp="2022-06-16T22:33:36.951119" hostname="legion-linux"><testcase classname="features.example.Running tests" name="The Test" status="passed" time="0.000121"><system-out>
+<testsuite name="features.example.Running tests" tests="2" errors="0" failures="0" skipped="0" time="0.000493" timestamp="2022-06-20T09:42:38.222912" hostname="legion-linux"><testcase classname="features.example.Running tests" name="The Test" status="passed" time="0.00036"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: The Test
@@ -9,7 +9,7 @@
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="features.example.Running tests" name="Test django_ready" status="passed" time="7.9e-05"><system-out>
+</system-out></testcase><testcase classname="features.example.Running tests" name="Test django_ready" status="passed" time="0.000133"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Test django_ready
