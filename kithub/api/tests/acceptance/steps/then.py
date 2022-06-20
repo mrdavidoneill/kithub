@@ -1,5 +1,7 @@
 from behave import register_type, then
 import parse
+from django.urls import reverse
+from utils import get_item_by_key
 
 
 @parse.with_pattern(r"\d+")
@@ -88,3 +90,15 @@ def status_code_check(context, code):
 def check_part_in_partlist(context, part_name, quantity):
     parts = context.response.data["parts_to_buy"]
     context.test.assertEqual(parts[part_name], quantity)
+
+
+@then('"{item}" "{model}" should need to buy "{quantity:Number}" "{missing}"')
+def get_need_to_buy(context, item, model, quantity, missing):
+    response = context.response.data
+    models = context.test.client.get(reverse(f"{model}-list")).data
+    model_id = get_item_by_key(models, item, "kind")["id"]
+    print(f"response {response}")
+    item = get_item_by_key(response, model_id, model)
+    print(f"item {item}")
+    parts_to_buy = item["parts_to_buy"]
+    context.test.assertEqual(parts_to_buy[missing], quantity)
