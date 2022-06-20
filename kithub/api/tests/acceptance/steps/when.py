@@ -194,6 +194,14 @@ def request_potential_kits(context, kittype):
     print(context.response.data)
 
 
+@when("I request unfinished bags")
+def request_unfinished_bags(context):
+    print("HELLO")
+    context.response = context.test.client.get(reverse("allunfinishedbags"))
+    print(context.response)
+    print(context.response.data)
+
+
 @when('I create a kit type "{name}" with bags list of')
 def create_specific_kittype(context, name):
     kittype = context.test.client.post(
