@@ -34,14 +34,14 @@ def see_numeric_key_value(context, key, value):
     context.test.assertEqual(response.data[key], value)
 
 
-@then('the first part should have "{key}" equal to "{value}"')
+@then('the first item should have "{key}" equal to "{value}"')
 def see_key_value_of_first(context, key, value):
     response = context.response
     print(response.data)
     context.test.assertEqual(response.data[0][key], value)
 
 
-@then('the first part should have "{key}" equal to number "{value:Number}"')
+@then('the first item should have "{key}" equal to number "{value:Number}"')
 def see_numeric_key_value_of_first(context, key, value):
     response = context.response
     print(response.data)
