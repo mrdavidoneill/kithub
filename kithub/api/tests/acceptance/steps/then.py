@@ -82,3 +82,9 @@ def see_numeric_key_value_of_last(context, key, value):
 def status_code_check(context, code):
     response = context.response
     context.test.assertEqual(response.status_code, code)
+
+
+@then('the parts list should contain "{part_name}" with quantity "{quantity:Number}"')
+def check_part_in_partlist(context, part_name, quantity):
+    parts = context.response.data["parts_to_buy"]
+    context.test.assertEqual(parts[part_name], quantity)
