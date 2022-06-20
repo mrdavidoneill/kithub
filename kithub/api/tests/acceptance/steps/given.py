@@ -1,3 +1,4 @@
+import string
 from behave import given
 from django.urls import reverse
 from utils import get_part_by_name, get_bagtype_by_kind, get_item_by_key
@@ -78,11 +79,11 @@ def create_specific_bagtype(context, name):
 
     print(parts)
 
-    for row in context.table:
+    for index, row in enumerate(context.table):
         context.response = context.test.client.post(
             reverse("bagingredient-list"),
             {
-                "name": name,
+                "name": string.ascii_letters[index].upper(),
                 "bagtype": bagtype.data["id"],
                 "quantity": int(row["quantity"]),
                 "part": get_part_by_name(parts, row["part"])["id"],
@@ -102,11 +103,11 @@ def create_specific_kittype(context, name):
 
     print(bagtypes)
 
-    for row in context.table:
+    for index, row in enumerate(context.table):
         context.response = context.test.client.post(
             reverse("kitingredient-list"),
             {
-                "name": name,
+                "name": string.ascii_letters[index].upper(),
                 "kittype": kittype.data["id"],
                 "quantity": int(row["quantity"]),
                 "bagtype": get_item_by_key(bagtypes, row["bagtype"], key="kind")["id"],
