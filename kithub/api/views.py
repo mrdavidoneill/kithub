@@ -76,7 +76,7 @@ def potential_kits_of_kittype(kittype):
             lowest_bag_num = potential_bags[bagtype.kind]
 
     return {
-        "kittypeID": kittype,
+        "kittype": kittype,
         "potential_kits": lowest_bag_num,
         "potential_kits_by_bag": potential_bags,
     }
@@ -94,7 +94,7 @@ def all_potentialkits(request):
 
 @api_view(["GET"])
 def potentialkits(request, kittype):
-    return Response([potential_kits_of_kittype(kittype)])
+    return Response(potential_kits_of_kittype(kittype))
 
 
 def potential_bags_of_bagtype(bagtype):
@@ -135,7 +135,7 @@ def all_potentialbags(request):
 
 @api_view(["GET"])
 def potentialbags(request, bagtype):
-    return Response([potential_bags_of_bagtype(bagtype)])
+    return Response(potential_bags_of_bagtype(bagtype))
 
 
 def parts_to_buy_for_bagtype(bagtype, quantity):
@@ -216,7 +216,7 @@ def parts_to_buy_for_kittype(kittype, quantity):
     remove_no_quantity_parts(parts_to_buy)
 
     return {
-        "kittypeID": kittype,
+        "kittype": kittype,
         "parts_to_buy": parts_to_buy,
     }
 
@@ -377,7 +377,7 @@ def dividekit(request):
 #             bags_to_prepare[bag.name] = quantity_difference
 
 #     return {
-#         "kittypeID": kittype,
+#         "kittype": kittype,
 #         "bags_to_prepare": bags_to_prepare,
 #     }
 
