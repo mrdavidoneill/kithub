@@ -1,3 +1,4 @@
+@system
 Feature: Kit
     In order to prove that Kits can be:
     created, read, updated, and deleted
@@ -40,8 +41,8 @@ Feature: Kit
         When I read all "kit"
         Then the first item should have "name" equal to "A"
         And the first item should have "quantity" equal to number "10"
-        But the last part should have "name" equal to "AB"
-        And the last part should have "quantity" equal to number "10"
+        But the last item should have "name" equal to "AB"
+        And the last item should have "quantity" equal to number "10"
 
     Scenario: Single kit read
         When I read the first "kit"
