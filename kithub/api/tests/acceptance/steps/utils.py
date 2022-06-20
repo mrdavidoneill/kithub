@@ -13,3 +13,10 @@ def get_bagtype_by_kind(bagtypes, kind):
         print(bagtype)
         if bagtype["kind"] == kind:
             return bagtype
+
+
+def get_item_by_key(items, value, key):
+    for item in items:
+        print(item)
+        if item[key] == value:
+            return item
