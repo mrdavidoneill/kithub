@@ -27,8 +27,8 @@ Feature: Bag
         When I read all "bag"
         Then the first item should have "name" equal to "A"
         And the first item should have "quantity" equal to number "1"
-        But the last part should have "name" equal to "C"
-        And the last part should have "quantity" equal to number "3"
+        But the last item should have "name" equal to "C"
+        And the last item should have "quantity" equal to number "3"
 
     Scenario: Single bag read
         When I read the first "bag"
