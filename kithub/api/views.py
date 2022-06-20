@@ -117,7 +117,7 @@ def potential_bags_of_bagtype(bagtype):
             lowest_part_num = parts_potential[part.name]
 
     return {
-        "bagtypeID": bagtype,
+        "bagtype": bagtype,
         "potential_bags": lowest_part_num,
         "potential_bags_by_part": parts_potential,
     }
@@ -158,7 +158,7 @@ def parts_to_buy_for_bagtype(bagtype, quantity):
             parts_to_buy[part.name] = quantity_difference
 
     return {
-        "bagtypeID": bagtype,
+        "bagtype": bagtype,
         "parts_to_buy": parts_to_buy,
     }
 
@@ -226,25 +226,25 @@ def partstobuyforkit(request, kittype, quantity):
     return Response(parts_to_buy_for_kittype(kittype, quantity))
 
 
-def get_unfinished_bags(bagtype=None):
-    """Calculates which parts are needed in which quantities to fulfil passed quantity of kittype"""
+def get_unfinished_bags(bagtype):
+    """Calculates which parts are needed for unfinished bags of bagtype"""
     # Store quantity required for each needed part
+    bagtype = BagType.objects.get(pk=bagtype)
     parts_to_buy = {}
     parts_to_finish = {}
-
     # Get all unfinished_bags
-    if bagtype is None:
-        unfinished_bags = Bag.objects.select_related("kind").filter(complete=False)
-    # Get unfinished_bags for bagtype
-    else:
-        unfinished_bags = Bag.objects.select_related("kind").filter(
-            complete=False, kind=bagtype
-        )
+    unfinished_bags = Bag.objects.select_related("kind").filter(
+        complete=False, kind=bagtype
+    )
+    print(f"Unfinshed bags: {unfinished_bags}")
     # Get each bagtype needed
     for unfinished_bag in unfinished_bags:
-        bagtype = unfinished_bag.kind
         # Get parts already in bag
-        for i, contents_name in enumerate(unfinished_bag.name):
+        if len(unfinished_bag.name) == 0:
+            name = " " * len(BagIngredient.objects.filter(bagtype=bagtype))
+        else:
+            name = unfinished_bag.name
+        for i, contents_name in enumerate(name):
             ingredient_name = string.ascii_letters[i].upper()
             # If part not in bag already
             if contents_name != ingredient_name:
@@ -271,8 +271,9 @@ def get_unfinished_bags(bagtype=None):
                 parts_to_finish[part.name] = required_quantity
     # Remove parts with non-positive quantities to buy
     remove_no_quantity_parts(parts_to_buy)
+
     return {
-        "bagtypeID": bagtype.pk,
+        "bagtype": bagtype.pk,
         "parts_to_buy": parts_to_buy,
         "parts_to_finish": parts_to_finish,
     }
@@ -287,7 +288,9 @@ def unfinishedbag(request, bagtype):
 def all_unfinishedbags(request):
     response = []
     bagtypes = BagType.objects.all()
+    print(f"bagtypes: {bagtypes}")
     for bagtype in bagtypes:
+        print(f"This bagtype is: {bagtype}")
         response.append(get_unfinished_bags(bagtype.pk))
 
     return Response(response)
