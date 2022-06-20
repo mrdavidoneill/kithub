@@ -1,6 +1,6 @@
 from behave import given
 from django.urls import reverse
-from utils import get_part_by_name, get_bagtype_by_kind
+from utils import get_part_by_name, get_bagtype_by_kind, get_item_by_key
 
 
 @given("this step exists")
@@ -27,7 +27,7 @@ def create_set_of_parts(context):
             {
                 "name": row["name"],
                 "description": row["description"],
-                "quantity": row["quantity"],
+                "quantity": int(row["quantity"]),
             },
         )
 
@@ -44,6 +44,24 @@ def create_set_of_bags(context):
                 "quantity": int(row["quantity"]),
                 "complete": bool(row["complete"]),
                 "kind": get_bagtype_by_kind(bagtypes, row["kind"])["id"],
+            },
+        )
+
+
+@given("a set of specific kits")
+def create_set_of_kits(context):
+    kittypes = context.test.client.get(reverse("kittype-list")).data
+
+    print(f"All kitypes: {kittypes}")
+
+    for row in context.table:
+        context.response = context.test.client.post(
+            reverse("kit-list"),
+            {
+                "name": row["name"],
+                "quantity": int(row["quantity"]),
+                "complete": bool(row["complete"]),
+                "kind": get_item_by_key(kittypes, row["kind"], "kind")["id"],
             },
         )
 
@@ -66,8 +84,32 @@ def create_specific_bagtype(context, name):
             {
                 "name": name,
                 "bagtype": bagtype.data["id"],
-                "quantity": row["quantity"],
-                "part": get_part_by_name(parts, row["part"]),
+                "quantity": int(row["quantity"]),
+                "part": get_part_by_name(parts, row["part"])["id"],
+            },
+        )
+
+
+@given('a kit type "{name}" with bags list of')
+def create_specific_kittype(context, name):
+    kittype = context.test.client.post(
+        reverse("kittype-list"),
+        {"kind": name},
+    )
+    print(f"kittype.data {kittype.data}")
+
+    bagtypes = context.test.client.get(reverse("bagtype-list")).data
+
+    print(bagtypes)
+
+    for row in context.table:
+        context.response = context.test.client.post(
+            reverse("kitingredient-list"),
+            {
+                "name": name,
+                "kittype": kittype.data["id"],
+                "quantity": int(row["quantity"]),
+                "bagtype": get_item_by_key(bagtypes, row["bagtype"], key="kind")["id"],
             },
         )
 
