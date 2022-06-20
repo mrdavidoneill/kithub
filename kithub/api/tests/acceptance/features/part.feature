@@ -1,3 +1,4 @@
+@system
 Feature: Create Part
     In order to prove that Parts can be:
     created, read, updated, and deleted
@@ -19,8 +20,8 @@ Feature: Create Part
         When I read all "part"
         Then the first item should have "name" equal to "partA"
         And the first item should have "quantity" equal to number "10"
-        But the last part should have "name" equal to "partC"
-        And the last part should have "quantity" equal to number "0"
+        But the last item should have "name" equal to "partC"
+        And the last item should have "quantity" equal to number "0"
 
     Scenario: Single part read
         When I read the first "part"
