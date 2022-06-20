@@ -2,7 +2,7 @@ import json
 from behave import when
 from django.urls import reverse
 from django.core.serializers.json import DjangoJSONEncoder
-from utils import get_bagtype_by_kind
+from utils import get_bagtype_by_kind, get_item_by_key
 
 
 @when('I run "python manage.py behave"')
@@ -22,17 +22,17 @@ def create_model(context, model, name):
     context.response = context.test.client.post(reverse(f"{model}-list"), payload)
 
 
-@when('I create "{quantity}" "{model}" of "{bagtype}" kind')
-def create_model(context, quantity, model, bagtype):
+@when('I create "{quantity}" "{model}" of "{kind}" "{kindmodel}"')
+def create_model(context, quantity, model, kind, kindmodel):
 
-    bagtypes = context.test.client.get(reverse("bagtype-list")).data
+    kinds = context.test.client.get(reverse(f"{kindmodel}-list")).data
 
-    if model == "bag":
+    if model == "bag" or model == "kit":
         payload = {
             "name": "",
             "quantity": int(quantity),
             "complete": False,
-            "kind": get_bagtype_by_kind(bagtypes, bagtype)["id"],
+            "kind": get_item_by_key(kinds, kind, key="kind")["id"],
         }
     else:
         payload = {"kind": name}
@@ -52,6 +52,7 @@ def read_first_model(context, model):
 @when('I read all "{model}"')
 def read_models(context, model):
     context.response = context.test.client.get(reverse(f"{model}-list"))
+    print(f"All {model}: {context.response.data}")
 
 
 @when('I update a "{model}" called "{name}"')
@@ -71,7 +72,7 @@ def update_part(context):
         data = {
             "name": row["name"],
             "description": row["description"],
-            "quantity": row["quantity"],
+            "quantity": int(row["quantity"]),
         }
         context.response = context.test.client.put(
             reverse(
@@ -100,6 +101,30 @@ def update_bag(context):
         context.response = context.test.client.put(
             reverse(
                 "bag-detail",
+                kwargs={
+                    "pk": context.response.data[0]["id"],
+                },
+            ),
+            data=json.dumps(data, cls=DjangoJSONEncoder),
+            content_type="application/json",
+        )
+
+
+@when("I update the first kit as follows")
+def update_kit(context):
+    kittypes = context.test.client.get(reverse("kittype-list")).data
+    context.response = context.test.client.get(reverse("kit-list"))
+
+    for row in context.table:
+        data = {
+            "name": row["name"],
+            "kind": get_item_by_key(kittypes, row["kind"], "kind")["id"],
+            "complete": bool(row["complete"]),
+            "quantity": int(row["quantity"]),
+        }
+        context.response = context.test.client.put(
+            reverse(
+                "kit-detail",
                 kwargs={
                     "pk": context.response.data[0]["id"],
                 },
