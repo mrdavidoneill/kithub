@@ -20,7 +20,7 @@ Feature: Bag
             | C     | bagtype1  | 3        |            |  
 
     Scenario: Bag create with 100 quantity
-        When I create "100" "bag" of "bagtype1" kind
+        When I create "100" "bag" of "bagtype1" "bagtype"
         Then I should see the "quantity" is number "100"
     
     Scenario: Bags read
