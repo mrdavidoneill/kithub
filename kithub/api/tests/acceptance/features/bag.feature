@@ -1,3 +1,4 @@
+@system
 Feature: Bag
     In order to prove that Bags can be:
     created, read, updated, and deleted
