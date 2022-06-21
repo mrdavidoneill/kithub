@@ -156,7 +156,7 @@ class Purchase(models.Model):
     shop_part_no = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=5)
     quantity = models.PositiveIntegerField(default=0)  # 0 to 2147483647
-    part = models.ForeignKey(Part, on_delete=models.CASCADE)
+    part = models.ForeignKey(Part, related_name="purchases", on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.date}: {self.part.name} x {self.quantity} @ {self.price} GBP"
