@@ -4,11 +4,6 @@ from django.urls import reverse
 from utils import get_part_by_name, get_bagtype_by_kind, get_item_by_key
 
 
-@given("this step exists")
-def step_exists(context):
-    pass
-
-
 @given('a part called "{name}"')
 def create_part(context, name):
     context.response = context.test.client.post(

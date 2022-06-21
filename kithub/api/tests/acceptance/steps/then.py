@@ -22,16 +22,6 @@ register_type(Number=parse_number)
 register_type(Boolean=parse_bool)
 
 
-@then("I should see the behave tests run")
-def is_running(context):
-    pass
-
-
-@then("django_ready should be called")
-def django_context(context):
-    assert context.django
-
-
 @then('I should see the "{key}" is "{value}"')
 def see_key_value(context, key, value):
     response = context.response

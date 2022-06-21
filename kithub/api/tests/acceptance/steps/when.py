@@ -6,11 +6,6 @@ from django.core.serializers.json import DjangoJSONEncoder
 from utils import get_bagtype_by_kind, get_item_by_key
 
 
-@when('I run "python manage.py behave"')
-def run_command(context):
-    pass
-
-
 @when('I create a "{model}" called "{name}"')
 def create_model(context, model, name):
 
