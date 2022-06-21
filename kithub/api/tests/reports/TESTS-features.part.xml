@@ -1,8 +1,8 @@
-<testsuite name="features.part.Create Part" tests="5" errors="0" failures="0" skipped="0" time="0.091672" timestamp="2022-06-21T11:27:42.069621" hostname="legion-linux"><testcase classname="features.part.Create Part" name="Part create without quantity" status="passed" time="0.016127"><system-out>
+<testsuite name="features.part.Create Part" tests="5" errors="0" failures="0" skipped="0" time="0.105451" timestamp="2022-06-21T12:01:47.096518" hostname="legion-linux"><testcase classname="features.part.Create Part" name="Part create without quantity" status="passed" time="0.015098"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Part create without quantity
-    Given a set of specific parts ... passed in 0.009s
+    Given a set of specific parts ... passed in 0.008s
       | name  | description  | quantity |
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
@@ -20,11 +20,11 @@ Captured stdout:
 {'id': 77, 'name': 'partD', 'description': 'A description of partD', 'quantity': 0, 'purchases': []}
 
 ]]>
-</system-out></testcase><testcase classname="features.part.Create Part" name="Parts read" status="passed" time="0.016774"><system-out>
+</system-out></testcase><testcase classname="features.part.Create Part" name="Parts read" status="passed" time="0.014026"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Parts read
-    Given a set of specific parts ... passed in 0.010s
+    Given a set of specific parts ... passed in 0.007s
       | name  | description  | quantity |
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
@@ -47,17 +47,17 @@ All part: [OrderedDict([('id', 78), ('name', 'partA'), ('description', 'descript
 [OrderedDict([('id', 78), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])]), OrderedDict([('id', 79), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 80), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
 
 ]]>
-</system-out></testcase><testcase classname="features.part.Create Part" name="Single part read" status="passed" time="0.02269"><system-out>
+</system-out></testcase><testcase classname="features.part.Create Part" name="Single part read" status="passed" time="0.019227"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Single part read
-    Given a set of specific parts ... passed in 0.013s
+    Given a set of specific parts ... passed in 0.011s
       | name  | description  | quantity |
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
       | partC | descriptionC | 0        |
     And I read all "part" ... passed in 0.003s
-    When I read the first "part" ... passed in 0.006s
+    When I read the first "part" ... passed in 0.005s
     Then I should see the "name" is "partA" ... passed in 0.000s
     And I should see the "quantity" is number "10" ... passed in 0.000s
 
@@ -69,7 +69,7 @@ Captured stdout:
 {'id': 81, 'name': 'partA', 'description': 'descriptionA', 'quantity': 10, 'purchases': []}
 
 ]]>
-</system-out></testcase><testcase classname="features.part.Create Part" name="Single part update" status="passed" time="0.017311"><system-out>
+</system-out></testcase><testcase classname="features.part.Create Part" name="Single part update" status="passed" time="0.038967"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Single part update
@@ -78,7 +78,7 @@ Captured stdout:
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
       | partC | descriptionC | 0        |
-    And I read all "part" ... passed in 0.003s
+    And I read all "part" ... passed in 0.024s
     When I update the first part as follows ... passed in 0.003s
       | name  | description  | quantity |
       | partE | descriptionE | 9        |
@@ -103,7 +103,7 @@ All part: [OrderedDict([('id', 84), ('name', 'partE'), ('description', 'descript
 [OrderedDict([('id', 84), ('name', 'partE'), ('description', 'descriptionE'), ('quantity', 9), ('purchases', [])]), OrderedDict([('id', 85), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 86), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
 
 ]]>
-</system-out></testcase><testcase classname="features.part.Create Part" name="Single part delete" status="passed" time="0.018771"><system-out>
+</system-out></testcase><testcase classname="features.part.Create Part" name="Single part delete" status="passed" time="0.018133"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Single part delete
@@ -115,7 +115,7 @@ All part: [OrderedDict([('id', 84), ('name', 'partE'), ('description', 'descript
     And I read all "part" ... passed in 0.003s
     When I delete the first "part" ... passed in 0.006s
     Then the status code should be "204" ... passed in 0.000s
-    When I read all "part" ... passed in 0.002s
+    When I read all "part" ... passed in 0.003s
     Then the first item should have "name" equal to "partB" ... passed in 0.000s
 
 @scenario.end

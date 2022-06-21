@@ -1,23 +1,23 @@
-<testsuite name="features.kit.Kit" tests="5" errors="0" failures="0" skipped="0" time="0.380194" timestamp="2022-06-21T11:27:33.237691" hostname="legion-linux"><testcase classname="features.kit.Kit" name="Kit create with 100 quantity" status="passed" time="0.074329"><system-out>
+<testsuite name="features.kit.Kit" tests="5" errors="0" failures="0" skipped="0" time="0.402202" timestamp="2022-06-21T12:01:38.251719" hostname="legion-linux"><testcase classname="features.kit.Kit" name="Kit create with 100 quantity" status="passed" time="0.071363"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Kit create with 100 quantity
-    Given a set of specific parts ... passed in 0.009s
+    Given a set of specific parts ... passed in 0.007s
       | name  | description  | quantity |
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
       | partC | descriptionC | 0        |
-    Given a bag type "bagtype1" with parts list of ... passed in 0.017s
+    Given a bag type "bagtype1" with parts list of ... passed in 0.019s
       | name | part  | quantity |
       | A    | partA | 1        |
       | B    | partB | 2        |
       | C    | partC | 3        |
-    Given a bag type "bagtype2" with parts list of ... passed in 0.016s
+    Given a bag type "bagtype2" with parts list of ... passed in 0.015s
       | name | part  | quantity |
       | A    | partA | 1        |
       | B    | partB | 2        |
       | C    | partC | 3        |
-    Given a set of specific bags ... passed in 0.009s
+    Given a set of specific bags ... passed in 0.008s
       | name | kind     | quantity | complete |
       | AB   | bagtype1 | 10       | X        |
       | AB   | bagtype2 | 10       | X        |
@@ -25,7 +25,7 @@
       | name | bagtype  | quantity |
       | A    | bagtype1 | 1        |
       | B    | bagtype2 | 2        |
-    Given a set of specific kits ... passed in 0.007s
+    Given a set of specific kits ... passed in 0.006s
       | name | kind     | quantity | complete |
       | A    | kittype1 | 10       |          |
       | AB   | kittype1 | 10       | X        |
@@ -69,7 +69,7 @@ OrderedDict([('id', 1), ('kind', 'kittype1')])
 {'id': 3, 'name': '', 'quantity': 100, 'complete': False, 'kind': 1}
 
 ]]>
-</system-out></testcase><testcase classname="features.kit.Kit" name="Kits read" status="passed" time="0.068978"><system-out>
+</system-out></testcase><testcase classname="features.kit.Kit" name="Kits read" status="passed" time="0.074713"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Kits read
@@ -78,12 +78,12 @@ OrderedDict([('id', 1), ('kind', 'kittype1')])
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
       | partC | descriptionC | 0        |
-    Given a bag type "bagtype1" with parts list of ... passed in 0.016s
+    Given a bag type "bagtype1" with parts list of ... passed in 0.018s
       | name | part  | quantity |
       | A    | partA | 1        |
       | B    | partB | 2        |
       | C    | partC | 3        |
-    Given a bag type "bagtype2" with parts list of ... passed in 0.015s
+    Given a bag type "bagtype2" with parts list of ... passed in 0.019s
       | name | part  | quantity |
       | A    | partA | 1        |
       | B    | partB | 2        |
@@ -92,15 +92,15 @@ OrderedDict([('id', 1), ('kind', 'kittype1')])
       | name | kind     | quantity | complete |
       | AB   | bagtype1 | 10       | X        |
       | AB   | bagtype2 | 10       | X        |
-    Given a kit type "kittype1" with bags list of ... passed in 0.012s
+    Given a kit type "kittype1" with bags list of ... passed in 0.013s
       | name | bagtype  | quantity |
       | A    | bagtype1 | 1        |
       | B    | bagtype2 | 2        |
-    Given a set of specific kits ... passed in 0.008s
+    Given a set of specific kits ... passed in 0.006s
       | name | kind     | quantity | complete |
       | A    | kittype1 | 10       |          |
       | AB   | kittype1 | 10       | X        |
-    When I read all "kit" ... passed in 0.002s
+    When I read all "kit" ... passed in 0.003s
     Then the first item should have "name" equal to "A" ... passed in 0.000s
     And the first item should have "quantity" equal to number "10" ... passed in 0.000s
     But the last item should have "name" equal to "AB" ... passed in 0.000s
@@ -144,21 +144,21 @@ All kit: [OrderedDict([('id', 4), ('name', 'A'), ('quantity', 10), ('complete', 
 [OrderedDict([('id', 4), ('name', 'A'), ('quantity', 10), ('complete', False), ('kind', 2)]), OrderedDict([('id', 5), ('name', 'AB'), ('quantity', 10), ('complete', True), ('kind', 2)])]
 
 ]]>
-</system-out></testcase><testcase classname="features.kit.Kit" name="Single kit read" status="passed" time="0.090103"><system-out>
+</system-out></testcase><testcase classname="features.kit.Kit" name="Single kit read" status="passed" time="0.095336"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Single kit read
-    Given a set of specific parts ... passed in 0.027s
+    Given a set of specific parts ... passed in 0.028s
       | name  | description  | quantity |
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
       | partC | descriptionC | 0        |
-    Given a bag type "bagtype1" with parts list of ... passed in 0.016s
+    Given a bag type "bagtype1" with parts list of ... passed in 0.015s
       | name | part  | quantity |
       | A    | partA | 1        |
       | B    | partB | 2        |
       | C    | partC | 3        |
-    Given a bag type "bagtype2" with parts list of ... passed in 0.016s
+    Given a bag type "bagtype2" with parts list of ... passed in 0.019s
       | name | part  | quantity |
       | A    | partA | 1        |
       | B    | partB | 2        |
@@ -167,11 +167,11 @@ All kit: [OrderedDict([('id', 4), ('name', 'A'), ('quantity', 10), ('complete', 
       | name | kind     | quantity | complete |
       | AB   | bagtype1 | 10       | X        |
       | AB   | bagtype2 | 10       | X        |
-    Given a kit type "kittype1" with bags list of ... passed in 0.012s
+    Given a kit type "kittype1" with bags list of ... passed in 0.013s
       | name | bagtype  | quantity |
       | A    | bagtype1 | 1        |
       | B    | bagtype2 | 2        |
-    Given a set of specific kits ... passed in 0.006s
+    Given a set of specific kits ... passed in 0.007s
       | name | kind     | quantity | complete |
       | A    | kittype1 | 10       |          |
       | AB   | kittype1 | 10       | X        |
@@ -216,7 +216,7 @@ OrderedDict([('id', 3), ('kind', 'kittype1')])
 {'id': 6, 'name': 'A', 'quantity': 10, 'complete': False, 'kind': 3}
 
 ]]>
-</system-out></testcase><testcase classname="features.kit.Kit" name="Single kit update" status="passed" time="0.075815"><system-out>
+</system-out></testcase><testcase classname="features.kit.Kit" name="Single kit update" status="passed" time="0.079017"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Single kit update
@@ -225,12 +225,12 @@ OrderedDict([('id', 3), ('kind', 'kittype1')])
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
       | partC | descriptionC | 0        |
-    Given a bag type "bagtype1" with parts list of ... passed in 0.015s
+    Given a bag type "bagtype1" with parts list of ... passed in 0.017s
       | name | part  | quantity |
       | A    | partA | 1        |
       | B    | partB | 2        |
       | C    | partC | 3        |
-    Given a bag type "bagtype2" with parts list of ... passed in 0.015s
+    Given a bag type "bagtype2" with parts list of ... passed in 0.017s
       | name | part  | quantity |
       | A    | partA | 1        |
       | B    | partB | 2        |
@@ -239,11 +239,11 @@ OrderedDict([('id', 3), ('kind', 'kittype1')])
       | name | kind     | quantity | complete |
       | AB   | bagtype1 | 10       | X        |
       | AB   | bagtype2 | 10       | X        |
-    Given a kit type "kittype1" with bags list of ... passed in 0.015s
+    Given a kit type "kittype1" with bags list of ... passed in 0.013s
       | name | bagtype  | quantity |
       | A    | bagtype1 | 1        |
       | B    | bagtype2 | 2        |
-    Given a set of specific kits ... passed in 0.006s
+    Given a set of specific kits ... passed in 0.007s
       | name | kind     | quantity | complete |
       | A    | kittype1 | 10       |          |
       | AB   | kittype1 | 10       | X        |
@@ -297,38 +297,38 @@ All kit: [OrderedDict([('id', 8), ('name', 'AB'), ('quantity', 100), ('complete'
 [OrderedDict([('id', 8), ('name', 'AB'), ('quantity', 100), ('complete', True), ('kind', 4)]), OrderedDict([('id', 9), ('name', 'AB'), ('quantity', 10), ('complete', True), ('kind', 4)])]
 
 ]]>
-</system-out></testcase><testcase classname="features.kit.Kit" name="Single kit delete" status="passed" time="0.070969"><system-out>
+</system-out></testcase><testcase classname="features.kit.Kit" name="Single kit delete" status="passed" time="0.081773"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Single kit delete
-    Given a set of specific parts ... passed in 0.008s
+    Given a set of specific parts ... passed in 0.009s
       | name  | description  | quantity |
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
       | partC | descriptionC | 0        |
-    Given a bag type "bagtype1" with parts list of ... passed in 0.016s
+    Given a bag type "bagtype1" with parts list of ... passed in 0.017s
       | name | part  | quantity |
       | A    | partA | 1        |
       | B    | partB | 2        |
       | C    | partC | 3        |
-    Given a bag type "bagtype2" with parts list of ... passed in 0.015s
+    Given a bag type "bagtype2" with parts list of ... passed in 0.018s
       | name | part  | quantity |
       | A    | partA | 1        |
       | B    | partB | 2        |
       | C    | partC | 3        |
-    Given a set of specific bags ... passed in 0.008s
+    Given a set of specific bags ... passed in 0.010s
       | name | kind     | quantity | complete |
       | AB   | bagtype1 | 10       | X        |
       | AB   | bagtype2 | 10       | X        |
-    Given a kit type "kittype1" with bags list of ... passed in 0.012s
+    Given a kit type "kittype1" with bags list of ... passed in 0.015s
       | name | bagtype  | quantity |
       | A    | bagtype1 | 1        |
       | B    | bagtype2 | 2        |
-    Given a set of specific kits ... passed in 0.006s
+    Given a set of specific kits ... passed in 0.007s
       | name | kind     | quantity | complete |
       | A    | kittype1 | 10       |          |
       | AB   | kittype1 | 10       | X        |
-    When I delete the first "kit" ... passed in 0.004s
+    When I delete the first "kit" ... passed in 0.003s
     Then the status code should be "204" ... passed in 0.000s
     When I read all "kit" ... passed in 0.002s
     Then the first item should have "name" equal to "AB" ... passed in 0.000s
