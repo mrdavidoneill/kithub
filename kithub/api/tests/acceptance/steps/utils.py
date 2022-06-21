@@ -1,5 +1,7 @@
 from django.urls import reverse
 
+JSON_CONTENT = "application/json"
+
 
 def get_part_by_name(parts, name):
     for part in parts:

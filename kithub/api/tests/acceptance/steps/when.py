@@ -3,7 +3,7 @@ import json
 from behave import when
 from django.urls import reverse
 from django.core.serializers.json import DjangoJSONEncoder
-from utils import get_bagtype_by_kind, get_item_by_key
+from utils import JSON_CONTENT, get_bagtype_by_kind, get_item_by_key
 
 
 @when('I create a "{model}" called "{name}"')
@@ -109,7 +109,7 @@ def update_part(context):
                 },
             ),
             data=json.dumps(data, cls=DjangoJSONEncoder),
-            content_type="application/json",
+            content_type=JSON_CONTENT,
         )
 
 
@@ -133,7 +133,7 @@ def update_bag(context):
                 },
             ),
             data=json.dumps(data, cls=DjangoJSONEncoder),
-            content_type="application/json",
+            content_type=JSON_CONTENT,
         )
 
 
@@ -157,7 +157,7 @@ def update_kit(context):
                 },
             ),
             data=json.dumps(data, cls=DjangoJSONEncoder),
-            content_type="application/json",
+            content_type=JSON_CONTENT,
         )
 
 
@@ -253,7 +253,7 @@ def divide_bag(context, quantity):
     context.response = context.test.client.put(
         reverse("dividebag"),
         data=json.dumps(data, cls=DjangoJSONEncoder),
-        content_type="application/json",
+        content_type=JSON_CONTENT,
     )
 
 
@@ -264,7 +264,7 @@ def divide_kit(context, quantity):
     context.response = context.test.client.put(
         reverse("dividekit"),
         data=json.dumps(data, cls=DjangoJSONEncoder),
-        content_type="application/json",
+        content_type=JSON_CONTENT,
     )
 
 
