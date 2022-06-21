@@ -1,29 +1,34 @@
-<testsuite name="features.partspurchaser.Parts Purchaser" tests="3" errors="0" failures="0" skipped="0" time="0.146948" timestamp="2022-06-20T23:04:38.339613" hostname="legion-linux"><testcase classname="features.partspurchaser.Parts Purchaser" name="US1: As a parts purchaser, I want to see a parts inventory, so that I can see how many parts I have stocked." status="passed" time="0.043941"><system-out>
+<testsuite name="features.partspurchaser.Parts Purchaser" tests="5" errors="0" failures="0" skipped="0" time="0.416067" timestamp="2022-06-21T11:15:48.634997" hostname="legion-linux"><testcase classname="features.partspurchaser.Parts Purchaser" name="US1: As a parts purchaser, I want to see a parts inventory, so that I can see how many parts I have stocked." status="passed" time="0.078875"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: US1: As a parts purchaser, I want to see a parts inventory, so that I can see how many parts I have stocked.
-    Given a set of specific parts ... passed in 0.006s
+    Given a set of specific parts ... passed in 0.016s
       | name  | description  | quantity |
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
       | partC | descriptionC | 0        |
-    Given a bag type "bagtype1" with parts list of ... passed in 0.010s
+    Given a set of specific purchases ... passed in 0.012s
+      | date       | shop    | shop_part_no | price | quantity | part  |
+      | 2020-11-01 | RS      | RS001        | 0.99  | 100      | partA |
+      | 2021-02-02 | CPC     | C002         | 0.09  | 101      | partA |
+      | 2022-03-13 | Farnell | F000003      | 0.009 | 1        | partA |
+    Given a bag type "bagtype1" with parts list of ... passed in 0.013s
       | name | part  | quantity |
       | A    | partA | 1        |
       | B    | partB | 2        |
-    Given a bag type "bagtype2" with parts list of ... passed in 0.011s
+    Given a bag type "bagtype2" with parts list of ... passed in 0.016s
       | name | part  | quantity |
       | B    | partB | 2        |
       | C    | partC | 3        |
-    Given a set of specific bags ... passed in 0.006s
+    Given a set of specific bags ... passed in 0.007s
       | name | kind     | quantity | complete |
       | AB   | bagtype1 | 10       | X        |
       | AB   | bagtype2 | 10       | X        |
-    Given a kit type "kittype1" with bags list of ... passed in 0.009s
+    Given a kit type "kittype1" with bags list of ... passed in 0.011s
       | name | bagtype  | quantity |
       | A    | bagtype1 | 1        |
       | B    | bagtype2 | 2        |
-    When I read all "part" ... passed in 0.002s
+    When I read all "part" ... passed in 0.003s
     Then the first item should have "name" equal to "partA" ... passed in 0.000s
     And the first item should have "quantity" equal to number "10" ... passed in 0.000s
     But the last item should have "name" equal to "partC" ... passed in 0.000s
@@ -33,120 +38,52 @@
 --------------------------------------------------------------------------------
 
 Captured stdout:
-bagtype.data {'id': 40, 'kind': 'bagtype1'}
-[OrderedDict([('id', 74), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)]), OrderedDict([('id', 75), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 76), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
-OrderedDict([('id', 74), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)])
-OrderedDict([('id', 74), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)])
-OrderedDict([('id', 75), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)])
-bagtype.data {'id': 41, 'kind': 'bagtype2'}
-[OrderedDict([('id', 74), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)]), OrderedDict([('id', 75), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 76), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
-OrderedDict([('id', 74), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)])
-OrderedDict([('id', 75), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)])
-OrderedDict([('id', 74), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)])
-OrderedDict([('id', 75), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)])
-OrderedDict([('id', 76), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])
-OrderedDict([('id', 40), ('kind', 'bagtype1')])
-OrderedDict([('id', 40), ('kind', 'bagtype1')])
-OrderedDict([('id', 41), ('kind', 'bagtype2')])
-kittype.data {'id': 23, 'kind': 'kittype1'}
-[OrderedDict([('id', 40), ('kind', 'bagtype1')]), OrderedDict([('id', 41), ('kind', 'bagtype2')])]
-OrderedDict([('id', 40), ('kind', 'bagtype1')])
-OrderedDict([('id', 40), ('kind', 'bagtype1')])
-OrderedDict([('id', 41), ('kind', 'bagtype2')])
-All part: [OrderedDict([('id', 74), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)]), OrderedDict([('id', 75), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 76), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
-[OrderedDict([('id', 74), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)]), OrderedDict([('id', 75), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 76), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
-[OrderedDict([('id', 74), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)]), OrderedDict([('id', 75), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 76), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
-[OrderedDict([('id', 74), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)]), OrderedDict([('id', 75), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 76), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
-[OrderedDict([('id', 74), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)]), OrderedDict([('id', 75), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 76), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
+All parts: [OrderedDict([('id', 1), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])]), OrderedDict([('id', 2), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 3), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+OrderedDict([('id', 1), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])])
+OrderedDict([('id', 1), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])])
+OrderedDict([('id', 1), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])])
+bagtype.data {'id': 1, 'kind': 'bagtype1', 'ingredients': []}
+[OrderedDict([('id', 1), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 1), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 1)]), OrderedDict([('id', 2), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 1)]), OrderedDict([('id', 3), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 1)])])]), OrderedDict([('id', 2), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 3), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+OrderedDict([('id', 1), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 1), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 1)]), OrderedDict([('id', 2), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 1)]), OrderedDict([('id', 3), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 1)])])])
+OrderedDict([('id', 1), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 1), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 1)]), OrderedDict([('id', 2), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 1)]), OrderedDict([('id', 3), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 1)])])])
+OrderedDict([('id', 2), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])])
+bagtype.data {'id': 2, 'kind': 'bagtype2', 'ingredients': []}
+[OrderedDict([('id', 1), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 1), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 1)]), OrderedDict([('id', 2), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 1)]), OrderedDict([('id', 3), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 1)])])]), OrderedDict([('id', 2), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 3), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+OrderedDict([('id', 1), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 1), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 1)]), OrderedDict([('id', 2), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 1)]), OrderedDict([('id', 3), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 1)])])])
+OrderedDict([('id', 2), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])])
+OrderedDict([('id', 1), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 1), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 1)]), OrderedDict([('id', 2), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 1)]), OrderedDict([('id', 3), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 1)])])])
+OrderedDict([('id', 2), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])])
+OrderedDict([('id', 3), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])
+OrderedDict([('id', 1), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 1), ('name', 'A'), ('quantity', 1), ('bagtype', 1), ('part', 1)]), OrderedDict([('id', 2), ('name', 'B'), ('quantity', 2), ('bagtype', 1), ('part', 2)])])])
+OrderedDict([('id', 1), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 1), ('name', 'A'), ('quantity', 1), ('bagtype', 1), ('part', 1)]), OrderedDict([('id', 2), ('name', 'B'), ('quantity', 2), ('bagtype', 1), ('part', 2)])])])
+OrderedDict([('id', 2), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 3), ('name', 'A'), ('quantity', 2), ('bagtype', 2), ('part', 2)]), OrderedDict([('id', 4), ('name', 'B'), ('quantity', 3), ('bagtype', 2), ('part', 3)])])])
+kittype.data {'id': 1, 'kind': 'kittype1'}
+[OrderedDict([('id', 1), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 1), ('name', 'A'), ('quantity', 1), ('bagtype', 1), ('part', 1)]), OrderedDict([('id', 2), ('name', 'B'), ('quantity', 2), ('bagtype', 1), ('part', 2)])])]), OrderedDict([('id', 2), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 3), ('name', 'A'), ('quantity', 2), ('bagtype', 2), ('part', 2)]), OrderedDict([('id', 4), ('name', 'B'), ('quantity', 3), ('bagtype', 2), ('part', 3)])])])]
+OrderedDict([('id', 1), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 1), ('name', 'A'), ('quantity', 1), ('bagtype', 1), ('part', 1)]), OrderedDict([('id', 2), ('name', 'B'), ('quantity', 2), ('bagtype', 1), ('part', 2)])])])
+OrderedDict([('id', 1), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 1), ('name', 'A'), ('quantity', 1), ('bagtype', 1), ('part', 1)]), OrderedDict([('id', 2), ('name', 'B'), ('quantity', 2), ('bagtype', 1), ('part', 2)])])])
+OrderedDict([('id', 2), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 3), ('name', 'A'), ('quantity', 2), ('bagtype', 2), ('part', 2)]), OrderedDict([('id', 4), ('name', 'B'), ('quantity', 3), ('bagtype', 2), ('part', 3)])])])
+All part: [OrderedDict([('id', 1), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 1), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 1)]), OrderedDict([('id', 2), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 1)]), OrderedDict([('id', 3), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 1)])])]), OrderedDict([('id', 2), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 3), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+[OrderedDict([('id', 1), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 1), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 1)]), OrderedDict([('id', 2), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 1)]), OrderedDict([('id', 3), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 1)])])]), OrderedDict([('id', 2), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 3), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+[OrderedDict([('id', 1), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 1), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 1)]), OrderedDict([('id', 2), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 1)]), OrderedDict([('id', 3), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 1)])])]), OrderedDict([('id', 2), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 3), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+[OrderedDict([('id', 1), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 1), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 1)]), OrderedDict([('id', 2), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 1)]), OrderedDict([('id', 3), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 1)])])]), OrderedDict([('id', 2), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 3), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+[OrderedDict([('id', 1), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 1), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 1)]), OrderedDict([('id', 2), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 1)]), OrderedDict([('id', 3), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 1)])])]), OrderedDict([('id', 2), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 3), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
 
 ]]>
-</system-out></testcase><testcase classname="features.partspurchaser.Parts Purchaser" name="US2: As a parts purchaser, I want to update a parts inventory, so that I can add and remove parts." status="passed" time="0.055731"><system-out>
+</system-out></testcase><testcase classname="features.partspurchaser.Parts Purchaser" name="US2: As a parts purchaser, I want to update a parts inventory, so that I can add and remove parts." status="passed" time="0.090881"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: US2: As a parts purchaser, I want to update a parts inventory, so that I can add and remove parts.
-    Given a set of specific parts ... passed in 0.005s
+    Given a set of specific parts ... passed in 0.007s
       | name  | description  | quantity |
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
       | partC | descriptionC | 0        |
-    Given a bag type "bagtype1" with parts list of ... passed in 0.010s
-      | name | part  | quantity |
-      | A    | partA | 1        |
-      | B    | partB | 2        |
-    Given a bag type "bagtype2" with parts list of ... passed in 0.012s
-      | name | part  | quantity |
-      | B    | partB | 2        |
-      | C    | partC | 3        |
-    Given a set of specific bags ... passed in 0.006s
-      | name | kind     | quantity | complete |
-      | AB   | bagtype1 | 10       | X        |
-      | AB   | bagtype2 | 10       | X        |
-    Given a kit type "kittype1" with bags list of ... passed in 0.009s
-      | name | bagtype  | quantity |
-      | A    | bagtype1 | 1        |
-      | B    | bagtype2 | 2        |
-    When I read all "part" ... passed in 0.002s
-    When I update the first part as follows ... passed in 0.002s
-      | name  | description  | quantity |
-      | partE | descriptionE | 9        |
-    And I read all "part" ... passed in 0.001s
-    Then the first item should have "name" equal to "partE" ... passed in 0.000s
-    And the first item should have "quantity" equal to number "9" ... passed in 0.000s
-    When I create a "part" called "partD" ... passed in 0.002s
-    And I read all "part" ... passed in 0.001s
-    Then the last item should have "name" equal to "partD" ... passed in 0.000s
-    And the last item should have "quantity" equal to number "0" ... passed in 0.000s
-    When I delete the first "part" ... passed in 0.003s
-    And I read all "part" ... passed in 0.001s
-    Then the first item should have "name" equal to "partB" ... passed in 0.000s
-
-@scenario.end
---------------------------------------------------------------------------------
-
-Captured stdout:
-bagtype.data {'id': 42, 'kind': 'bagtype1'}
-[OrderedDict([('id', 77), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)]), OrderedDict([('id', 78), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 79), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
-OrderedDict([('id', 77), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)])
-OrderedDict([('id', 77), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)])
-OrderedDict([('id', 78), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)])
-bagtype.data {'id': 43, 'kind': 'bagtype2'}
-[OrderedDict([('id', 77), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)]), OrderedDict([('id', 78), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 79), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
-OrderedDict([('id', 77), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)])
-OrderedDict([('id', 78), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)])
-OrderedDict([('id', 77), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)])
-OrderedDict([('id', 78), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)])
-OrderedDict([('id', 79), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])
-OrderedDict([('id', 42), ('kind', 'bagtype1')])
-OrderedDict([('id', 42), ('kind', 'bagtype1')])
-OrderedDict([('id', 43), ('kind', 'bagtype2')])
-kittype.data {'id': 24, 'kind': 'kittype1'}
-[OrderedDict([('id', 42), ('kind', 'bagtype1')]), OrderedDict([('id', 43), ('kind', 'bagtype2')])]
-OrderedDict([('id', 42), ('kind', 'bagtype1')])
-OrderedDict([('id', 42), ('kind', 'bagtype1')])
-OrderedDict([('id', 43), ('kind', 'bagtype2')])
-All part: [OrderedDict([('id', 77), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)]), OrderedDict([('id', 78), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 79), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
-All part: [OrderedDict([('id', 77), ('name', 'partE'), ('description', 'descriptionE'), ('quantity', 9)]), OrderedDict([('id', 78), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 79), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
-[OrderedDict([('id', 77), ('name', 'partE'), ('description', 'descriptionE'), ('quantity', 9)]), OrderedDict([('id', 78), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 79), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
-[OrderedDict([('id', 77), ('name', 'partE'), ('description', 'descriptionE'), ('quantity', 9)]), OrderedDict([('id', 78), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 79), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
-All part: [OrderedDict([('id', 77), ('name', 'partE'), ('description', 'descriptionE'), ('quantity', 9)]), OrderedDict([('id', 78), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 79), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)]), OrderedDict([('id', 80), ('name', 'partD'), ('description', 'A description of partD'), ('quantity', 0)])]
-[OrderedDict([('id', 77), ('name', 'partE'), ('description', 'descriptionE'), ('quantity', 9)]), OrderedDict([('id', 78), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 79), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)]), OrderedDict([('id', 80), ('name', 'partD'), ('description', 'A description of partD'), ('quantity', 0)])]
-[OrderedDict([('id', 77), ('name', 'partE'), ('description', 'descriptionE'), ('quantity', 9)]), OrderedDict([('id', 78), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 79), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)]), OrderedDict([('id', 80), ('name', 'partD'), ('description', 'A description of partD'), ('quantity', 0)])]
-<Response status_code=204>
-None
-All part: [OrderedDict([('id', 78), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 79), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)]), OrderedDict([('id', 80), ('name', 'partD'), ('description', 'A description of partD'), ('quantity', 0)])]
-[OrderedDict([('id', 78), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 79), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)]), OrderedDict([('id', 80), ('name', 'partD'), ('description', 'A description of partD'), ('quantity', 0)])]
-
-]]>
-</system-out></testcase><testcase classname="features.partspurchaser.Parts Purchaser" name="US3: As a parts purchaser, I want to see which parts to buy to do a specified number of kits, so that I do not understock nor overstock." status="passed" time="0.047276"><system-out>
-<![CDATA[
-@scenario.begin
-  Scenario: US3: As a parts purchaser, I want to see which parts to buy to do a specified number of kits, so that I do not understock nor overstock.
-    Given a set of specific parts ... passed in 0.005s
-      | name  | description  | quantity |
-      | partA | descriptionA | 10       |
-      | partB | descriptionB | 0        |
-      | partC | descriptionC | 0        |
-    Given a bag type "bagtype1" with parts list of ... passed in 0.011s
+    Given a set of specific purchases ... passed in 0.013s
+      | date       | shop    | shop_part_no | price | quantity | part  |
+      | 2020-11-01 | RS      | RS001        | 0.99  | 100      | partA |
+      | 2021-02-02 | CPC     | C002         | 0.09  | 101      | partA |
+      | 2022-03-13 | Farnell | F000003      | 0.009 | 1        | partA |
+    Given a bag type "bagtype1" with parts list of ... passed in 0.014s
       | name | part  | quantity |
       | A    | partA | 1        |
       | B    | partB | 2        |
@@ -154,15 +91,101 @@ All part: [OrderedDict([('id', 78), ('name', 'partB'), ('description', 'descript
       | name | part  | quantity |
       | B    | partB | 2        |
       | C    | partC | 3        |
-    Given a set of specific bags ... passed in 0.006s
+    Given a set of specific bags ... passed in 0.007s
       | name | kind     | quantity | complete |
       | AB   | bagtype1 | 10       | X        |
       | AB   | bagtype2 | 10       | X        |
-    Given a kit type "kittype1" with bags list of ... passed in 0.009s
+    Given a kit type "kittype1" with bags list of ... passed in 0.010s
       | name | bagtype  | quantity |
       | A    | bagtype1 | 1        |
       | B    | bagtype2 | 2        |
-    When I request a partlist for "100" of "kittype1" ... passed in 0.006s
+    When I read all "part" ... passed in 0.004s
+    When I update the first part as follows ... passed in 0.004s
+      | name  | description  | quantity |
+      | partE | descriptionE | 9        |
+    And I read all "part" ... passed in 0.004s
+    Then the first item should have "name" equal to "partE" ... passed in 0.000s
+    And the first item should have "quantity" equal to number "9" ... passed in 0.000s
+    When I create a "part" called "partD" ... passed in 0.003s
+    And I read all "part" ... passed in 0.004s
+    Then the last item should have "name" equal to "partD" ... passed in 0.000s
+    And the last item should have "quantity" equal to number "0" ... passed in 0.000s
+    When I delete the first "part" ... passed in 0.006s
+    And I read all "part" ... passed in 0.003s
+    Then the first item should have "name" equal to "partB" ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+All parts: [OrderedDict([('id', 4), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])]), OrderedDict([('id', 5), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 6), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+OrderedDict([('id', 4), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])])
+OrderedDict([('id', 4), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])])
+OrderedDict([('id', 4), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])])
+bagtype.data {'id': 3, 'kind': 'bagtype1', 'ingredients': []}
+[OrderedDict([('id', 4), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 4), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 4)]), OrderedDict([('id', 5), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 4)]), OrderedDict([('id', 6), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 4)])])]), OrderedDict([('id', 5), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 6), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+OrderedDict([('id', 4), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 4), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 4)]), OrderedDict([('id', 5), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 4)]), OrderedDict([('id', 6), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 4)])])])
+OrderedDict([('id', 4), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 4), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 4)]), OrderedDict([('id', 5), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 4)]), OrderedDict([('id', 6), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 4)])])])
+OrderedDict([('id', 5), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])])
+bagtype.data {'id': 4, 'kind': 'bagtype2', 'ingredients': []}
+[OrderedDict([('id', 4), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 4), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 4)]), OrderedDict([('id', 5), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 4)]), OrderedDict([('id', 6), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 4)])])]), OrderedDict([('id', 5), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 6), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+OrderedDict([('id', 4), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 4), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 4)]), OrderedDict([('id', 5), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 4)]), OrderedDict([('id', 6), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 4)])])])
+OrderedDict([('id', 5), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])])
+OrderedDict([('id', 4), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 4), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 4)]), OrderedDict([('id', 5), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 4)]), OrderedDict([('id', 6), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 4)])])])
+OrderedDict([('id', 5), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])])
+OrderedDict([('id', 6), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])
+OrderedDict([('id', 3), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 5), ('name', 'A'), ('quantity', 1), ('bagtype', 3), ('part', 4)]), OrderedDict([('id', 6), ('name', 'B'), ('quantity', 2), ('bagtype', 3), ('part', 5)])])])
+OrderedDict([('id', 3), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 5), ('name', 'A'), ('quantity', 1), ('bagtype', 3), ('part', 4)]), OrderedDict([('id', 6), ('name', 'B'), ('quantity', 2), ('bagtype', 3), ('part', 5)])])])
+OrderedDict([('id', 4), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 7), ('name', 'A'), ('quantity', 2), ('bagtype', 4), ('part', 5)]), OrderedDict([('id', 8), ('name', 'B'), ('quantity', 3), ('bagtype', 4), ('part', 6)])])])
+kittype.data {'id': 2, 'kind': 'kittype1'}
+[OrderedDict([('id', 3), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 5), ('name', 'A'), ('quantity', 1), ('bagtype', 3), ('part', 4)]), OrderedDict([('id', 6), ('name', 'B'), ('quantity', 2), ('bagtype', 3), ('part', 5)])])]), OrderedDict([('id', 4), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 7), ('name', 'A'), ('quantity', 2), ('bagtype', 4), ('part', 5)]), OrderedDict([('id', 8), ('name', 'B'), ('quantity', 3), ('bagtype', 4), ('part', 6)])])])]
+OrderedDict([('id', 3), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 5), ('name', 'A'), ('quantity', 1), ('bagtype', 3), ('part', 4)]), OrderedDict([('id', 6), ('name', 'B'), ('quantity', 2), ('bagtype', 3), ('part', 5)])])])
+OrderedDict([('id', 3), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 5), ('name', 'A'), ('quantity', 1), ('bagtype', 3), ('part', 4)]), OrderedDict([('id', 6), ('name', 'B'), ('quantity', 2), ('bagtype', 3), ('part', 5)])])])
+OrderedDict([('id', 4), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 7), ('name', 'A'), ('quantity', 2), ('bagtype', 4), ('part', 5)]), OrderedDict([('id', 8), ('name', 'B'), ('quantity', 3), ('bagtype', 4), ('part', 6)])])])
+All part: [OrderedDict([('id', 4), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 4), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 4)]), OrderedDict([('id', 5), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 4)]), OrderedDict([('id', 6), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 4)])])]), OrderedDict([('id', 5), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 6), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+All part: [OrderedDict([('id', 4), ('name', 'partE'), ('description', 'descriptionE'), ('quantity', 9), ('purchases', [OrderedDict([('id', 4), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 4)]), OrderedDict([('id', 5), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 4)]), OrderedDict([('id', 6), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 4)])])]), OrderedDict([('id', 5), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 6), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+[OrderedDict([('id', 4), ('name', 'partE'), ('description', 'descriptionE'), ('quantity', 9), ('purchases', [OrderedDict([('id', 4), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 4)]), OrderedDict([('id', 5), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 4)]), OrderedDict([('id', 6), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 4)])])]), OrderedDict([('id', 5), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 6), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+[OrderedDict([('id', 4), ('name', 'partE'), ('description', 'descriptionE'), ('quantity', 9), ('purchases', [OrderedDict([('id', 4), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 4)]), OrderedDict([('id', 5), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 4)]), OrderedDict([('id', 6), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 4)])])]), OrderedDict([('id', 5), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 6), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+All part: [OrderedDict([('id', 4), ('name', 'partE'), ('description', 'descriptionE'), ('quantity', 9), ('purchases', [OrderedDict([('id', 4), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 4)]), OrderedDict([('id', 5), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 4)]), OrderedDict([('id', 6), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 4)])])]), OrderedDict([('id', 5), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 6), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 7), ('name', 'partD'), ('description', 'A description of partD'), ('quantity', 0), ('purchases', [])])]
+[OrderedDict([('id', 4), ('name', 'partE'), ('description', 'descriptionE'), ('quantity', 9), ('purchases', [OrderedDict([('id', 4), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 4)]), OrderedDict([('id', 5), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 4)]), OrderedDict([('id', 6), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 4)])])]), OrderedDict([('id', 5), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 6), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 7), ('name', 'partD'), ('description', 'A description of partD'), ('quantity', 0), ('purchases', [])])]
+[OrderedDict([('id', 4), ('name', 'partE'), ('description', 'descriptionE'), ('quantity', 9), ('purchases', [OrderedDict([('id', 4), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 4)]), OrderedDict([('id', 5), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 4)]), OrderedDict([('id', 6), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 4)])])]), OrderedDict([('id', 5), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 6), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 7), ('name', 'partD'), ('description', 'A description of partD'), ('quantity', 0), ('purchases', [])])]
+<Response status_code=204>
+None
+All part: [OrderedDict([('id', 5), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 6), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 7), ('name', 'partD'), ('description', 'A description of partD'), ('quantity', 0), ('purchases', [])])]
+[OrderedDict([('id', 5), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 6), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 7), ('name', 'partD'), ('description', 'A description of partD'), ('quantity', 0), ('purchases', [])])]
+
+]]>
+</system-out></testcase><testcase classname="features.partspurchaser.Parts Purchaser" name="US3: As a parts purchaser, I want to see which parts to buy to do a specified number of kits, so that I do not understock nor overstock." status="passed" time="0.079607"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: US3: As a parts purchaser, I want to see which parts to buy to do a specified number of kits, so that I do not understock nor overstock.
+    Given a set of specific parts ... passed in 0.007s
+      | name  | description  | quantity |
+      | partA | descriptionA | 10       |
+      | partB | descriptionB | 0        |
+      | partC | descriptionC | 0        |
+    Given a set of specific purchases ... passed in 0.012s
+      | date       | shop    | shop_part_no | price | quantity | part  |
+      | 2020-11-01 | RS      | RS001        | 0.99  | 100      | partA |
+      | 2021-02-02 | CPC     | C002         | 0.09  | 101      | partA |
+      | 2022-03-13 | Farnell | F000003      | 0.009 | 1        | partA |
+    Given a bag type "bagtype1" with parts list of ... passed in 0.017s
+      | name | part  | quantity |
+      | A    | partA | 1        |
+      | B    | partB | 2        |
+    Given a bag type "bagtype2" with parts list of ... passed in 0.016s
+      | name | part  | quantity |
+      | B    | partB | 2        |
+      | C    | partC | 3        |
+    Given a set of specific bags ... passed in 0.008s
+      | name | kind     | quantity | complete |
+      | AB   | bagtype1 | 10       | X        |
+      | AB   | bagtype2 | 10       | X        |
+    Given a kit type "kittype1" with bags list of ... passed in 0.012s
+      | name | bagtype  | quantity |
+      | A    | bagtype1 | 1        |
+      | B    | bagtype2 | 2        |
+    When I request a partlist for "100" of "kittype1" ... passed in 0.007s
     Then the parts list should contain "partA" with quantity "90" ... passed in 0.000s
     And the parts list should contain "partB" with quantity "600" ... passed in 0.000s
     And the parts list should contain "partC" with quantity "600" ... passed in 0.000s
@@ -171,31 +194,181 @@ All part: [OrderedDict([('id', 78), ('name', 'partB'), ('description', 'descript
 --------------------------------------------------------------------------------
 
 Captured stdout:
-bagtype.data {'id': 44, 'kind': 'bagtype1'}
-[OrderedDict([('id', 81), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)]), OrderedDict([('id', 82), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 83), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
-OrderedDict([('id', 81), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)])
-OrderedDict([('id', 81), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)])
-OrderedDict([('id', 82), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)])
-bagtype.data {'id': 45, 'kind': 'bagtype2'}
-[OrderedDict([('id', 81), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)]), OrderedDict([('id', 82), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)]), OrderedDict([('id', 83), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])]
-OrderedDict([('id', 81), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)])
-OrderedDict([('id', 82), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)])
-OrderedDict([('id', 81), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10)])
-OrderedDict([('id', 82), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0)])
-OrderedDict([('id', 83), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0)])
-OrderedDict([('id', 44), ('kind', 'bagtype1')])
-OrderedDict([('id', 44), ('kind', 'bagtype1')])
-OrderedDict([('id', 45), ('kind', 'bagtype2')])
-kittype.data {'id': 25, 'kind': 'kittype1'}
-[OrderedDict([('id', 44), ('kind', 'bagtype1')]), OrderedDict([('id', 45), ('kind', 'bagtype2')])]
-OrderedDict([('id', 44), ('kind', 'bagtype1')])
-OrderedDict([('id', 44), ('kind', 'bagtype1')])
-OrderedDict([('id', 45), ('kind', 'bagtype2')])
-kittypes: [OrderedDict([('id', 25), ('kind', 'kittype1')])]
-OrderedDict([('id', 25), ('kind', 'kittype1')])
-kittype: OrderedDict([('id', 25), ('kind', 'kittype1')])
+All parts: [OrderedDict([('id', 8), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])]), OrderedDict([('id', 9), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 10), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+OrderedDict([('id', 8), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])])
+OrderedDict([('id', 8), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])])
+OrderedDict([('id', 8), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])])
+bagtype.data {'id': 5, 'kind': 'bagtype1', 'ingredients': []}
+[OrderedDict([('id', 8), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 7), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 8)]), OrderedDict([('id', 8), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 8)]), OrderedDict([('id', 9), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 8)])])]), OrderedDict([('id', 9), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 10), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+OrderedDict([('id', 8), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 7), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 8)]), OrderedDict([('id', 8), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 8)]), OrderedDict([('id', 9), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 8)])])])
+OrderedDict([('id', 8), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 7), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 8)]), OrderedDict([('id', 8), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 8)]), OrderedDict([('id', 9), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 8)])])])
+OrderedDict([('id', 9), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])])
+bagtype.data {'id': 6, 'kind': 'bagtype2', 'ingredients': []}
+[OrderedDict([('id', 8), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 7), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 8)]), OrderedDict([('id', 8), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 8)]), OrderedDict([('id', 9), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 8)])])]), OrderedDict([('id', 9), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 10), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+OrderedDict([('id', 8), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 7), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 8)]), OrderedDict([('id', 8), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 8)]), OrderedDict([('id', 9), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 8)])])])
+OrderedDict([('id', 9), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])])
+OrderedDict([('id', 8), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 7), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 8)]), OrderedDict([('id', 8), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 8)]), OrderedDict([('id', 9), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 8)])])])
+OrderedDict([('id', 9), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])])
+OrderedDict([('id', 10), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])
+OrderedDict([('id', 5), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 9), ('name', 'A'), ('quantity', 1), ('bagtype', 5), ('part', 8)]), OrderedDict([('id', 10), ('name', 'B'), ('quantity', 2), ('bagtype', 5), ('part', 9)])])])
+OrderedDict([('id', 5), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 9), ('name', 'A'), ('quantity', 1), ('bagtype', 5), ('part', 8)]), OrderedDict([('id', 10), ('name', 'B'), ('quantity', 2), ('bagtype', 5), ('part', 9)])])])
+OrderedDict([('id', 6), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 11), ('name', 'A'), ('quantity', 2), ('bagtype', 6), ('part', 9)]), OrderedDict([('id', 12), ('name', 'B'), ('quantity', 3), ('bagtype', 6), ('part', 10)])])])
+kittype.data {'id': 3, 'kind': 'kittype1'}
+[OrderedDict([('id', 5), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 9), ('name', 'A'), ('quantity', 1), ('bagtype', 5), ('part', 8)]), OrderedDict([('id', 10), ('name', 'B'), ('quantity', 2), ('bagtype', 5), ('part', 9)])])]), OrderedDict([('id', 6), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 11), ('name', 'A'), ('quantity', 2), ('bagtype', 6), ('part', 9)]), OrderedDict([('id', 12), ('name', 'B'), ('quantity', 3), ('bagtype', 6), ('part', 10)])])])]
+OrderedDict([('id', 5), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 9), ('name', 'A'), ('quantity', 1), ('bagtype', 5), ('part', 8)]), OrderedDict([('id', 10), ('name', 'B'), ('quantity', 2), ('bagtype', 5), ('part', 9)])])])
+OrderedDict([('id', 5), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 9), ('name', 'A'), ('quantity', 1), ('bagtype', 5), ('part', 8)]), OrderedDict([('id', 10), ('name', 'B'), ('quantity', 2), ('bagtype', 5), ('part', 9)])])])
+OrderedDict([('id', 6), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 11), ('name', 'A'), ('quantity', 2), ('bagtype', 6), ('part', 9)]), OrderedDict([('id', 12), ('name', 'B'), ('quantity', 3), ('bagtype', 6), ('part', 10)])])])
+kittypes: [OrderedDict([('id', 3), ('kind', 'kittype1')])]
+OrderedDict([('id', 3), ('kind', 'kittype1')])
+kittype: OrderedDict([('id', 3), ('kind', 'kittype1')])
 <Response status_code=200, "application/json">
-{'kittype': 25, 'parts_to_buy': {'partA': 90, 'partB': 600, 'partC': 600}}
+{'kittype': 3, 'parts_to_buy': {'partA': 90, 'partB': 600, 'partC': 600}}
+
+]]>
+</system-out></testcase><testcase classname="features.partspurchaser.Parts Purchaser" name="US16: As a parts purchaser, I want to see where a part has been bought previously and its part number, so that I can easily restock." status="passed" time="0.071215"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: US16: As a parts purchaser, I want to see where a part has been bought previously and its part number, so that I can easily restock.
+    Given a set of specific parts ... passed in 0.008s
+      | name  | description  | quantity |
+      | partA | descriptionA | 10       |
+      | partB | descriptionB | 0        |
+      | partC | descriptionC | 0        |
+    Given a set of specific purchases ... passed in 0.011s
+      | date       | shop    | shop_part_no | price | quantity | part  |
+      | 2020-11-01 | RS      | RS001        | 0.99  | 100      | partA |
+      | 2021-02-02 | CPC     | C002         | 0.09  | 101      | partA |
+      | 2022-03-13 | Farnell | F000003      | 0.009 | 1        | partA |
+    Given a bag type "bagtype1" with parts list of ... passed in 0.013s
+      | name | part  | quantity |
+      | A    | partA | 1        |
+      | B    | partB | 2        |
+    Given a bag type "bagtype2" with parts list of ... passed in 0.015s
+      | name | part  | quantity |
+      | B    | partB | 2        |
+      | C    | partC | 3        |
+    Given a set of specific bags ... passed in 0.007s
+      | name | kind     | quantity | complete |
+      | AB   | bagtype1 | 10       | X        |
+      | AB   | bagtype2 | 10       | X        |
+    Given a kit type "kittype1" with bags list of ... passed in 0.011s
+      | name | bagtype  | quantity |
+      | A    | bagtype1 | 1        |
+      | B    | bagtype2 | 2        |
+    When I read "part" with "name" "partA" ... passed in 0.006s
+    Then the first purchase should have "shop" equal to "RS" ... passed in 0.000s
+    And the first purchase should have "shop_part_no" equal to "RS001" ... passed in 0.000s
+    But the last purchase should have "shop" equal to "Farnell" ... passed in 0.000s
+    And the last purchase should have "shop_part_no" equal to "F000003" ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+All parts: [OrderedDict([('id', 11), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])]), OrderedDict([('id', 12), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 13), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+OrderedDict([('id', 11), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])])
+OrderedDict([('id', 11), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])])
+OrderedDict([('id', 11), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])])
+bagtype.data {'id': 7, 'kind': 'bagtype1', 'ingredients': []}
+[OrderedDict([('id', 11), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 10), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 11)]), OrderedDict([('id', 11), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 11)]), OrderedDict([('id', 12), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 11)])])]), OrderedDict([('id', 12), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 13), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+OrderedDict([('id', 11), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 10), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 11)]), OrderedDict([('id', 11), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 11)]), OrderedDict([('id', 12), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 11)])])])
+OrderedDict([('id', 11), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 10), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 11)]), OrderedDict([('id', 11), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 11)]), OrderedDict([('id', 12), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 11)])])])
+OrderedDict([('id', 12), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])])
+bagtype.data {'id': 8, 'kind': 'bagtype2', 'ingredients': []}
+[OrderedDict([('id', 11), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 10), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 11)]), OrderedDict([('id', 11), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 11)]), OrderedDict([('id', 12), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 11)])])]), OrderedDict([('id', 12), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 13), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+OrderedDict([('id', 11), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 10), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 11)]), OrderedDict([('id', 11), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 11)]), OrderedDict([('id', 12), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 11)])])])
+OrderedDict([('id', 12), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])])
+OrderedDict([('id', 11), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 10), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 11)]), OrderedDict([('id', 11), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 11)]), OrderedDict([('id', 12), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 11)])])])
+OrderedDict([('id', 12), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])])
+OrderedDict([('id', 13), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])
+OrderedDict([('id', 7), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 13), ('name', 'A'), ('quantity', 1), ('bagtype', 7), ('part', 11)]), OrderedDict([('id', 14), ('name', 'B'), ('quantity', 2), ('bagtype', 7), ('part', 12)])])])
+OrderedDict([('id', 7), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 13), ('name', 'A'), ('quantity', 1), ('bagtype', 7), ('part', 11)]), OrderedDict([('id', 14), ('name', 'B'), ('quantity', 2), ('bagtype', 7), ('part', 12)])])])
+OrderedDict([('id', 8), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 15), ('name', 'A'), ('quantity', 2), ('bagtype', 8), ('part', 12)]), OrderedDict([('id', 16), ('name', 'B'), ('quantity', 3), ('bagtype', 8), ('part', 13)])])])
+kittype.data {'id': 4, 'kind': 'kittype1'}
+[OrderedDict([('id', 7), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 13), ('name', 'A'), ('quantity', 1), ('bagtype', 7), ('part', 11)]), OrderedDict([('id', 14), ('name', 'B'), ('quantity', 2), ('bagtype', 7), ('part', 12)])])]), OrderedDict([('id', 8), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 15), ('name', 'A'), ('quantity', 2), ('bagtype', 8), ('part', 12)]), OrderedDict([('id', 16), ('name', 'B'), ('quantity', 3), ('bagtype', 8), ('part', 13)])])])]
+OrderedDict([('id', 7), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 13), ('name', 'A'), ('quantity', 1), ('bagtype', 7), ('part', 11)]), OrderedDict([('id', 14), ('name', 'B'), ('quantity', 2), ('bagtype', 7), ('part', 12)])])])
+OrderedDict([('id', 7), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 13), ('name', 'A'), ('quantity', 1), ('bagtype', 7), ('part', 11)]), OrderedDict([('id', 14), ('name', 'B'), ('quantity', 2), ('bagtype', 7), ('part', 12)])])])
+OrderedDict([('id', 8), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 15), ('name', 'A'), ('quantity', 2), ('bagtype', 8), ('part', 12)]), OrderedDict([('id', 16), ('name', 'B'), ('quantity', 3), ('bagtype', 8), ('part', 13)])])])
+OrderedDict([('id', 11), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 10), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 11)]), OrderedDict([('id', 11), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 11)]), OrderedDict([('id', 12), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 11)])])])
+parts::: {'id': 11, 'name': 'partA', 'description': 'descriptionA', 'quantity': 10, 'purchases': [OrderedDict([('id', 10), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 11)]), OrderedDict([('id', 11), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 11)]), OrderedDict([('id', 12), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 11)])]}
+purchases::: [OrderedDict([('id', 10), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 11)]), OrderedDict([('id', 11), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 11)]), OrderedDict([('id', 12), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 11)])]
+{'id': 11, 'name': 'partA', 'description': 'descriptionA', 'quantity': 10, 'purchases': [OrderedDict([('id', 10), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 11)]), OrderedDict([('id', 11), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 11)]), OrderedDict([('id', 12), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 11)])]}
+{'id': 11, 'name': 'partA', 'description': 'descriptionA', 'quantity': 10, 'purchases': [OrderedDict([('id', 10), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 11)]), OrderedDict([('id', 11), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 11)]), OrderedDict([('id', 12), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 11)])]}
+{'id': 11, 'name': 'partA', 'description': 'descriptionA', 'quantity': 10, 'purchases': [OrderedDict([('id', 10), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 11)]), OrderedDict([('id', 11), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 11)]), OrderedDict([('id', 12), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 11)])]}
+{'id': 11, 'name': 'partA', 'description': 'descriptionA', 'quantity': 10, 'purchases': [OrderedDict([('id', 10), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 11)]), OrderedDict([('id', 11), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 11)]), OrderedDict([('id', 12), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 11)])]}
+
+]]>
+</system-out></testcase><testcase classname="features.partspurchaser.Parts Purchaser" name="US17: As a parts purchaser, I want to see past prices paid for a part, so that I can see how a part price has changed over time." status="passed" time="0.095489"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: US17: As a parts purchaser, I want to see past prices paid for a part, so that I can see how a part price has changed over time.
+    Given a set of specific parts ... passed in 0.009s
+      | name  | description  | quantity |
+      | partA | descriptionA | 10       |
+      | partB | descriptionB | 0        |
+      | partC | descriptionC | 0        |
+    Given a set of specific purchases ... passed in 0.012s
+      | date       | shop    | shop_part_no | price | quantity | part  |
+      | 2020-11-01 | RS      | RS001        | 0.99  | 100      | partA |
+      | 2021-02-02 | CPC     | C002         | 0.09  | 101      | partA |
+      | 2022-03-13 | Farnell | F000003      | 0.009 | 1        | partA |
+    Given a bag type "bagtype1" with parts list of ... passed in 0.034s
+      | name | part  | quantity |
+      | A    | partA | 1        |
+      | B    | partB | 2        |
+    Given a bag type "bagtype2" with parts list of ... passed in 0.013s
+      | name | part  | quantity |
+      | B    | partB | 2        |
+      | C    | partC | 3        |
+    Given a set of specific bags ... passed in 0.008s
+      | name | kind     | quantity | complete |
+      | AB   | bagtype1 | 10       | X        |
+      | AB   | bagtype2 | 10       | X        |
+    Given a kit type "kittype1" with bags list of ... passed in 0.012s
+      | name | bagtype  | quantity |
+      | A    | bagtype1 | 1        |
+      | B    | bagtype2 | 2        |
+    When I read "part" with "name" "partA" ... passed in 0.008s
+    Then the first purchase should have "date" equal to "2020-11-01" ... passed in 0.000s
+    And the first purchase should have "price" equal to "0.99" ... passed in 0.000s
+    But the last purchase should have "date" equal to "2022-03-13" ... passed in 0.000s
+    And the last purchase should have "price" equal to "0.009" ... passed in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+All parts: [OrderedDict([('id', 14), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])]), OrderedDict([('id', 15), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 16), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+OrderedDict([('id', 14), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])])
+OrderedDict([('id', 14), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])])
+OrderedDict([('id', 14), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])])
+bagtype.data {'id': 9, 'kind': 'bagtype1', 'ingredients': []}
+[OrderedDict([('id', 14), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 13), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 14)]), OrderedDict([('id', 14), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 14)]), OrderedDict([('id', 15), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 14)])])]), OrderedDict([('id', 15), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 16), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+OrderedDict([('id', 14), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 13), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 14)]), OrderedDict([('id', 14), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 14)]), OrderedDict([('id', 15), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 14)])])])
+OrderedDict([('id', 14), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 13), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 14)]), OrderedDict([('id', 14), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 14)]), OrderedDict([('id', 15), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 14)])])])
+OrderedDict([('id', 15), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])])
+bagtype.data {'id': 10, 'kind': 'bagtype2', 'ingredients': []}
+[OrderedDict([('id', 14), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 13), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 14)]), OrderedDict([('id', 14), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 14)]), OrderedDict([('id', 15), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 14)])])]), OrderedDict([('id', 15), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 16), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+OrderedDict([('id', 14), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 13), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 14)]), OrderedDict([('id', 14), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 14)]), OrderedDict([('id', 15), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 14)])])])
+OrderedDict([('id', 15), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])])
+OrderedDict([('id', 14), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 13), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 14)]), OrderedDict([('id', 14), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 14)]), OrderedDict([('id', 15), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 14)])])])
+OrderedDict([('id', 15), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])])
+OrderedDict([('id', 16), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])
+OrderedDict([('id', 9), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 17), ('name', 'A'), ('quantity', 1), ('bagtype', 9), ('part', 14)]), OrderedDict([('id', 18), ('name', 'B'), ('quantity', 2), ('bagtype', 9), ('part', 15)])])])
+OrderedDict([('id', 9), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 17), ('name', 'A'), ('quantity', 1), ('bagtype', 9), ('part', 14)]), OrderedDict([('id', 18), ('name', 'B'), ('quantity', 2), ('bagtype', 9), ('part', 15)])])])
+OrderedDict([('id', 10), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 19), ('name', 'A'), ('quantity', 2), ('bagtype', 10), ('part', 15)]), OrderedDict([('id', 20), ('name', 'B'), ('quantity', 3), ('bagtype', 10), ('part', 16)])])])
+kittype.data {'id': 5, 'kind': 'kittype1'}
+[OrderedDict([('id', 9), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 17), ('name', 'A'), ('quantity', 1), ('bagtype', 9), ('part', 14)]), OrderedDict([('id', 18), ('name', 'B'), ('quantity', 2), ('bagtype', 9), ('part', 15)])])]), OrderedDict([('id', 10), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 19), ('name', 'A'), ('quantity', 2), ('bagtype', 10), ('part', 15)]), OrderedDict([('id', 20), ('name', 'B'), ('quantity', 3), ('bagtype', 10), ('part', 16)])])])]
+OrderedDict([('id', 9), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 17), ('name', 'A'), ('quantity', 1), ('bagtype', 9), ('part', 14)]), OrderedDict([('id', 18), ('name', 'B'), ('quantity', 2), ('bagtype', 9), ('part', 15)])])])
+OrderedDict([('id', 9), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 17), ('name', 'A'), ('quantity', 1), ('bagtype', 9), ('part', 14)]), OrderedDict([('id', 18), ('name', 'B'), ('quantity', 2), ('bagtype', 9), ('part', 15)])])])
+OrderedDict([('id', 10), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 19), ('name', 'A'), ('quantity', 2), ('bagtype', 10), ('part', 15)]), OrderedDict([('id', 20), ('name', 'B'), ('quantity', 3), ('bagtype', 10), ('part', 16)])])])
+OrderedDict([('id', 14), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [OrderedDict([('id', 13), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 14)]), OrderedDict([('id', 14), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 14)]), OrderedDict([('id', 15), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 14)])])])
+parts::: {'id': 14, 'name': 'partA', 'description': 'descriptionA', 'quantity': 10, 'purchases': [OrderedDict([('id', 13), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 14)]), OrderedDict([('id', 14), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 14)]), OrderedDict([('id', 15), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 14)])]}
+purchases::: [OrderedDict([('id', 13), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 14)]), OrderedDict([('id', 14), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 14)]), OrderedDict([('id', 15), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 14)])]
+{'id': 14, 'name': 'partA', 'description': 'descriptionA', 'quantity': 10, 'purchases': [OrderedDict([('id', 13), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 14)]), OrderedDict([('id', 14), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 14)]), OrderedDict([('id', 15), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 14)])]}
+{'id': 14, 'name': 'partA', 'description': 'descriptionA', 'quantity': 10, 'purchases': [OrderedDict([('id', 13), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 14)]), OrderedDict([('id', 14), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 14)]), OrderedDict([('id', 15), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 14)])]}
+{'id': 14, 'name': 'partA', 'description': 'descriptionA', 'quantity': 10, 'purchases': [OrderedDict([('id', 13), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 14)]), OrderedDict([('id', 14), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 14)]), OrderedDict([('id', 15), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 14)])]}
+{'id': 14, 'name': 'partA', 'description': 'descriptionA', 'quantity': 10, 'purchases': [OrderedDict([('id', 13), ('date', '2020-11-01'), ('shop', 'RS'), ('shop_part_no', 'RS001'), ('price', '0.99000'), ('quantity', 100), ('part', 14)]), OrderedDict([('id', 14), ('date', '2021-02-02'), ('shop', 'CPC'), ('shop_part_no', 'C002'), ('price', '0.09000'), ('quantity', 101), ('part', 14)]), OrderedDict([('id', 15), ('date', '2022-03-13'), ('shop', 'Farnell'), ('shop_part_no', 'F000003'), ('price', '0.00900'), ('quantity', 1), ('part', 14)])]}
 
 ]]>
 </system-out></testcase></testsuite>
