@@ -12,7 +12,7 @@ urlpatterns = [
     path("dividekit/", views.dividekit, name="dividekit"),
     path("potentialkits/<int:kittype>/", views.potentialkits, name="potentialkits"),
     path("potentialkits/", views.all_potentialkits, name="allpotentialkits"),
-    path("potentialbags/<int:bagtype>", views.potentialbags),
+    path("potentialbags/<int:bagtype>", views.potentialbags, name="potentialbags"),
     path("potentialbags/", views.all_potentialbags, name="allpotentialbags"),
     path(
         "partstobuyforkit/<int:kittype>/<int:quantity>",
