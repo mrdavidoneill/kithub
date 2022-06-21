@@ -19,7 +19,7 @@
 ## Should have
 
 - US14: As a kit packer, I want to see how many bags are possible, so that I do not get delayed by missing parts half-way through.
-- US15: As a kit packer, I want to see a list of parts that a bag needs, so that I fill the bag correctly.
+- US15: As a kit packer, I want to see a list of parts that a bag type needs, so that I fill the bag correctly.
 
 ## Could have
 
