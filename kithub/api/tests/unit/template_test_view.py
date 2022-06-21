@@ -7,7 +7,7 @@ ITEM_COUNT = 2
 
 
 class GetAllModelsTest(TestCase):
-    """Test module template for retrieving all report records"""
+    """Test module template for retrieving all records"""
 
     def insert_settings(self, **kwargs):
         """Insert all the required setting values"""
@@ -20,11 +20,7 @@ class GetAllModelsTest(TestCase):
         self.template_SetUp()
 
     def template_SetUp(self):
-        """Create client
-        Create authenticated user & attach their token to client
-        Create 2 items with user account
-        Create 1 item on another account
-        """
+        """Create client and items """
 
         # Create client
         self.client = APIClient()
@@ -54,7 +50,8 @@ class GetAllModelsTest(TestCase):
         Will test for: Expected number of results
                        Status code 200
         """
-        common.test_get_all(expected_number=self.expected_count, **self.test_settings)
+        common.test_get_all(
+            expected_number=self.expected_count, **self.test_settings)
 
 
 class GetASingleModelTest(TestCase):
@@ -71,7 +68,7 @@ class GetASingleModelTest(TestCase):
         self.template_SetUp()
 
     def template_SetUp(self):
-        """Create client"""
+        """Create client and 3 items"""
         # Create client
         self.client = APIClient()
 
@@ -91,9 +88,12 @@ class GetASingleModelTest(TestCase):
         """Test that correct item is returned
         Will return a status code 200"""
 
-        common.test_valid_get_single_item(item=self.itemB, **self.test_settings)
-        common.test_valid_get_single_item(item=self.itemA, **self.test_settings)
-        common.test_valid_get_single_item(item=self.itemC, **self.test_settings)
+        common.test_valid_get_single_item(
+            item=self.itemB, **self.test_settings)
+        common.test_valid_get_single_item(
+            item=self.itemA, **self.test_settings)
+        common.test_valid_get_single_item(
+            item=self.itemC, **self.test_settings)
 
     def test_get_invalid_item(self):
         """Test that an item is not returned
@@ -117,12 +117,7 @@ class CreateNewModelTest(TestCase):
         self.template_SetUp()
 
     def template_SetUp(self):
-        """Create client
-        Create authenticated user & attach their token to client
-        Create 1 dictionary with a valid Payload with items on user's account
-        Create 1 dictionary with a valid Payload with items on another account
-        Create 1 dictionary with a valid Payload with wrong non existing IDs
-        """
+        """Create client, valid payload and empty payload"""
         self.client = APIClient()
 
         self.valid_payload = self.payload_template()
@@ -136,7 +131,7 @@ class CreateNewModelTest(TestCase):
         }
 
     def test_create_valid_item(self):
-        """Test user can create item into same account with valid payload
+        """Test user can create item with valid payload
         Will create item in the DB
         Will test that status code 201 is returned
         Wll retrieve item by its pk
@@ -176,13 +171,7 @@ class UpdateSingleModelTest(TestCase):
         self.template_SetUp()
 
     def template_SetUp(self):
-        """Create client
-        Create authenticated user & attach their token to client
-        Create 1 dictionary with a valid Payload with items on user's account
-        Create 1 dictionary with a valid Payload with items on another account
-        Create 1 dictionary with a valid Payload with wrong non existing IDs
-        Create 1 dictionary with an valid Payload with empty IDs
-        """
+        """Create client, valid payload and empty payload"""
         self.client = APIClient()
 
         self.valid_payload = self.payload_template()
@@ -225,11 +214,7 @@ class DeleteSingleModelTest(TestCase):
         self.template_SetUp()
 
     def template_SetUp(self):
-        """Create client
-        Create authenticated user & attach their token to client
-        Create 2 items with user account
-        Create 1 item on another account
-        """
+        """Create client and items """
         # Create client & authenticate with user
         self.client = APIClient()
 
@@ -246,12 +231,12 @@ class DeleteSingleModelTest(TestCase):
         }
 
     def test_valid_delete_item(self):
-        """Test that user can delete existing item in the same account
+        """Test that user can delete existing item
         Wll delete existing item by its pk
         Will test that status code 204 is returned
         Will test that the number of items retrived has fallen by one
         Will test retrieving the item again
-            Will return status code 404
+        Will return status code 404
         """
 
         common.test_valid_delete(item=self.itemB, **self.test_settings)
