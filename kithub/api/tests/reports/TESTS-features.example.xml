@@ -1,20 +1,20 @@
-<testsuite name="features.example.Running tests" tests="2" errors="0" failures="0" skipped="2" time="0.0" timestamp="2022-06-21T11:15:46.009292" hostname="legion-linux"><testcase classname="features.example.Running tests" name="The Test" status="skipped" time="0"><skipped /><system-out>
+<testsuite name="features.example.Running tests" tests="2" errors="0" failures="0" skipped="0" time="0.000825" timestamp="2022-06-21T11:27:30.638149" hostname="legion-linux"><testcase classname="features.example.Running tests" name="The Test" status="passed" time="0.000482"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: The Test
-    Given this step exists ... skipped in 0.000s
-    When I run "python manage.py behave" ... skipped in 0.000s
-    Then I should see the behave tests run ... skipped in 0.000s
+    Given this step exists ... passed in 0.000s
+    When I run "python manage.py behave" ... passed in 0.000s
+    Then I should see the behave tests run ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="features.example.Running tests" name="Test django_ready" status="skipped" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="features.example.Running tests" name="Test django_ready" status="passed" time="0.000343"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Test django_ready
-    When I run "python manage.py behave" ... skipped in 0.000s
-    Then django_ready should be called ... skipped in 0.000s
+    When I run "python manage.py behave" ... passed in 0.000s
+    Then django_ready should be called ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------

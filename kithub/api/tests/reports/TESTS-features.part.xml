@@ -1,96 +1,131 @@
-<testsuite name="features.part.Create Part" tests="5" errors="0" failures="0" skipped="5" time="0.0" timestamp="2022-06-21T11:15:46.032385" hostname="legion-linux"><testcase classname="features.part.Create Part" name="Part create without quantity" status="skipped" time="0"><skipped /><system-out>
+<testsuite name="features.part.Create Part" tests="5" errors="0" failures="0" skipped="0" time="0.091672" timestamp="2022-06-21T11:27:42.069621" hostname="legion-linux"><testcase classname="features.part.Create Part" name="Part create without quantity" status="passed" time="0.016127"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Part create without quantity
-    Given a set of specific parts ... skipped in 0.000s
+    Given a set of specific parts ... passed in 0.009s
       | name  | description  | quantity |
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
       | partC | descriptionC | 0        |
-    And I read all "part" ... skipped in 0.000s
-    When I create a "part" called "partD" ... skipped in 0.000s
-    Then I should see the "name" is "partD" ... skipped in 0.000s
-    And I should see the "quantity" is number "0" ... skipped in 0.000s
+    And I read all "part" ... passed in 0.004s
+    When I create a "part" called "partD" ... passed in 0.003s
+    Then I should see the "name" is "partD" ... passed in 0.000s
+    And I should see the "quantity" is number "0" ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+{'id': 77, 'name': 'partD', 'description': 'A description of partD', 'quantity': 0, 'purchases': []}
+{'id': 77, 'name': 'partD', 'description': 'A description of partD', 'quantity': 0, 'purchases': []}
+
 ]]>
-</system-out></testcase><testcase classname="features.part.Create Part" name="Parts read" status="skipped" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="features.part.Create Part" name="Parts read" status="passed" time="0.016774"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Parts read
-    Given a set of specific parts ... skipped in 0.000s
+    Given a set of specific parts ... passed in 0.010s
       | name  | description  | quantity |
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
       | partC | descriptionC | 0        |
-    And I read all "part" ... skipped in 0.000s
-    When I read all "part" ... skipped in 0.000s
-    Then the first item should have "name" equal to "partA" ... skipped in 0.000s
-    And the first item should have "quantity" equal to number "10" ... skipped in 0.000s
-    But the last item should have "name" equal to "partC" ... skipped in 0.000s
-    And the last item should have "quantity" equal to number "0" ... skipped in 0.000s
+    And I read all "part" ... passed in 0.003s
+    When I read all "part" ... passed in 0.003s
+    Then the first item should have "name" equal to "partA" ... passed in 0.000s
+    And the first item should have "quantity" equal to number "10" ... passed in 0.000s
+    But the last item should have "name" equal to "partC" ... passed in 0.000s
+    And the last item should have "quantity" equal to number "0" ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+All part: [OrderedDict([('id', 78), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])]), OrderedDict([('id', 79), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 80), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+[OrderedDict([('id', 78), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])]), OrderedDict([('id', 79), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 80), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+[OrderedDict([('id', 78), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])]), OrderedDict([('id', 79), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 80), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+[OrderedDict([('id', 78), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])]), OrderedDict([('id', 79), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 80), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+[OrderedDict([('id', 78), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 10), ('purchases', [])]), OrderedDict([('id', 79), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 80), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+
 ]]>
-</system-out></testcase><testcase classname="features.part.Create Part" name="Single part read" status="skipped" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="features.part.Create Part" name="Single part read" status="passed" time="0.02269"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Single part read
-    Given a set of specific parts ... skipped in 0.000s
+    Given a set of specific parts ... passed in 0.013s
       | name  | description  | quantity |
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
       | partC | descriptionC | 0        |
-    And I read all "part" ... skipped in 0.000s
-    When I read the first "part" ... skipped in 0.000s
-    Then I should see the "name" is "partA" ... skipped in 0.000s
-    And I should see the "quantity" is number "10" ... skipped in 0.000s
+    And I read all "part" ... passed in 0.003s
+    When I read the first "part" ... passed in 0.006s
+    Then I should see the "name" is "partA" ... passed in 0.000s
+    And I should see the "quantity" is number "10" ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+{'id': 81, 'name': 'partA', 'description': 'descriptionA', 'quantity': 10, 'purchases': []}
+{'id': 81, 'name': 'partA', 'description': 'descriptionA', 'quantity': 10, 'purchases': []}
+
 ]]>
-</system-out></testcase><testcase classname="features.part.Create Part" name="Single part update" status="skipped" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="features.part.Create Part" name="Single part update" status="passed" time="0.017311"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Single part update
-    Given a set of specific parts ... skipped in 0.000s
+    Given a set of specific parts ... passed in 0.007s
       | name  | description  | quantity |
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
       | partC | descriptionC | 0        |
-    And I read all "part" ... skipped in 0.000s
-    When I update the first part as follows ... skipped in 0.000s
+    And I read all "part" ... passed in 0.003s
+    When I update the first part as follows ... passed in 0.003s
       | name  | description  | quantity |
       | partE | descriptionE | 9        |
-    Then I should see the "name" is "partE" ... skipped in 0.000s
-    And I should see the "quantity" is number "9" ... skipped in 0.000s
-    And I should see the "description" is "descriptionE" ... skipped in 0.000s
-    When I read all "part" ... skipped in 0.000s
-    Then the first item should have "name" equal to "partE" ... skipped in 0.000s
-    And the first item should have "quantity" equal to number "9" ... skipped in 0.000s
-    And the first item should have "description" equal to "descriptionE" ... skipped in 0.000s
+    Then I should see the "name" is "partE" ... passed in 0.000s
+    And I should see the "quantity" is number "9" ... passed in 0.000s
+    And I should see the "description" is "descriptionE" ... passed in 0.000s
+    When I read all "part" ... passed in 0.004s
+    Then the first item should have "name" equal to "partE" ... passed in 0.000s
+    And the first item should have "quantity" equal to number "9" ... passed in 0.000s
+    And the first item should have "description" equal to "descriptionE" ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+{'id': 84, 'name': 'partE', 'description': 'descriptionE', 'quantity': 9, 'purchases': []}
+{'id': 84, 'name': 'partE', 'description': 'descriptionE', 'quantity': 9, 'purchases': []}
+{'id': 84, 'name': 'partE', 'description': 'descriptionE', 'quantity': 9, 'purchases': []}
+All part: [OrderedDict([('id', 84), ('name', 'partE'), ('description', 'descriptionE'), ('quantity', 9), ('purchases', [])]), OrderedDict([('id', 85), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 86), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+[OrderedDict([('id', 84), ('name', 'partE'), ('description', 'descriptionE'), ('quantity', 9), ('purchases', [])]), OrderedDict([('id', 85), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 86), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+[OrderedDict([('id', 84), ('name', 'partE'), ('description', 'descriptionE'), ('quantity', 9), ('purchases', [])]), OrderedDict([('id', 85), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 86), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+[OrderedDict([('id', 84), ('name', 'partE'), ('description', 'descriptionE'), ('quantity', 9), ('purchases', [])]), OrderedDict([('id', 85), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 86), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+
 ]]>
-</system-out></testcase><testcase classname="features.part.Create Part" name="Single part delete" status="skipped" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="features.part.Create Part" name="Single part delete" status="passed" time="0.018771"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Single part delete
-    Given a set of specific parts ... skipped in 0.000s
+    Given a set of specific parts ... passed in 0.007s
       | name  | description  | quantity |
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
       | partC | descriptionC | 0        |
-    And I read all "part" ... skipped in 0.000s
-    When I delete the first "part" ... skipped in 0.000s
-    Then the status code should be "204" ... skipped in 0.000s
-    When I read all "part" ... skipped in 0.000s
-    Then the first item should have "name" equal to "partB" ... skipped in 0.000s
+    And I read all "part" ... passed in 0.003s
+    When I delete the first "part" ... passed in 0.006s
+    Then the status code should be "204" ... passed in 0.000s
+    When I read all "part" ... passed in 0.002s
+    Then the first item should have "name" equal to "partB" ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+<Response status_code=204>
+None
+All part: [OrderedDict([('id', 88), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 89), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+[OrderedDict([('id', 88), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 0), ('purchases', [])]), OrderedDict([('id', 89), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 0), ('purchases', [])])]
+
 ]]>
 </system-out></testcase></testsuite>

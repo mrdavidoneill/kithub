@@ -1,238 +1,476 @@
-<testsuite name="features.kitseller.Kit seller" tests="5" errors="0" failures="0" skipped="5" time="0.0" timestamp="2022-06-21T11:15:46.029272" hostname="legion-linux"><testcase classname="features.kitseller.Kit seller" name="US4: As a kit seller, I want to see a kits inventory, so that I know how many kits I can currently supply to clients." status="skipped" time="0"><skipped /><system-out>
+<testsuite name="features.kitseller.Kit seller" tests="5" errors="0" failures="0" skipped="0" time="0.553238" timestamp="2022-06-21T11:27:39.465321" hostname="legion-linux"><testcase classname="features.kitseller.Kit seller" name="US4: As a kit seller, I want to see a kits inventory, so that I know how many kits I can currently supply to clients." status="passed" time="0.098545"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: US4: As a kit seller, I want to see a kits inventory, so that I know how many kits I can currently supply to clients.
-    Given a set of specific parts ... skipped in 0.000s
+    Given a set of specific parts ... passed in 0.008s
       | name  | description  | quantity |
       | partA | descriptionA | 12       |
       | partB | descriptionB | 8        |
       | partC | descriptionC | 5        |
-    Given a bag type "bagtype1" with parts list of ... skipped in 0.000s
+    Given a bag type "bagtype1" with parts list of ... passed in 0.012s
       | name | part  | quantity |
       | A    | partA | 1        |
       | B    | partB | 2        |
-    Given a bag type "bagtype2" with parts list of ... skipped in 0.000s
+    Given a bag type "bagtype2" with parts list of ... passed in 0.017s
       | name | part  | quantity |
       | A    | partB | 2        |
       | B    | partC | 3        |
-    Given a bag type "bagtype3" with parts list of ... skipped in 0.000s
+    Given a bag type "bagtype3" with parts list of ... passed in 0.010s
       | name | part  | quantity |
       | A    | partC | 1        |
-    Given a set of specific bags ... skipped in 0.000s
+    Given a set of specific bags ... passed in 0.008s
       | name | kind     | quantity | complete |
       | AB   | bagtype1 | 10       | X        |
       | AB   | bagtype2 | 10       | X        |
-    Given a kit type "kittype1" with bags list of ... skipped in 0.000s
+    Given a kit type "kittype1" with bags list of ... passed in 0.012s
       | name | bagtype  | quantity |
       | A    | bagtype1 | 1        |
       | B    | bagtype2 | 1        |
-    Given a kit type "kittype2" with bags list of ... skipped in 0.000s
+    Given a kit type "kittype2" with bags list of ... passed in 0.023s
       | name | bagtype  | quantity |
       | A    | bagtype1 | 1        |
       | B    | bagtype2 | 2        |
       | C    | bagtype3 | 3        |
-    Given a set of specific kits ... skipped in 0.000s
+    Given a set of specific kits ... passed in 0.006s
       | name | kind     | quantity | complete |
       | A    | kittype1 | 10       |          |
       | ABC  | kittype2 | 11       | X        |
-    When I read all "kit" ... skipped in 0.000s
-    Then the first item should have "name" equal to "A" ... skipped in 0.000s
-    And the first item should have "quantity" equal to number "10" ... skipped in 0.000s
-    But the last item should have "name" equal to "ABC" ... skipped in 0.000s
-    And the last item should have "quantity" equal to number "11" ... skipped in 0.000s
+    When I read all "kit" ... passed in 0.002s
+    Then the first item should have "name" equal to "A" ... passed in 0.000s
+    And the first item should have "quantity" equal to number "10" ... passed in 0.000s
+    But the last item should have "name" equal to "ABC" ... passed in 0.000s
+    And the last item should have "quantity" equal to number "11" ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+bagtype.data {'id': 37, 'kind': 'bagtype1', 'ingredients': []}
+[OrderedDict([('id', 59), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])]), OrderedDict([('id', 60), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])]), OrderedDict([('id', 61), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])]
+OrderedDict([('id', 59), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 59), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 60), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])])
+bagtype.data {'id': 38, 'kind': 'bagtype2', 'ingredients': []}
+[OrderedDict([('id', 59), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])]), OrderedDict([('id', 60), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])]), OrderedDict([('id', 61), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])]
+OrderedDict([('id', 59), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 60), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])])
+OrderedDict([('id', 59), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 60), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])])
+OrderedDict([('id', 61), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])
+bagtype.data {'id': 39, 'kind': 'bagtype3', 'ingredients': []}
+[OrderedDict([('id', 59), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])]), OrderedDict([('id', 60), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])]), OrderedDict([('id', 61), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])]
+OrderedDict([('id', 59), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 60), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])])
+OrderedDict([('id', 61), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])
+OrderedDict([('id', 37), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 88), ('name', 'A'), ('quantity', 1), ('bagtype', 37), ('part', 59)]), OrderedDict([('id', 89), ('name', 'B'), ('quantity', 2), ('bagtype', 37), ('part', 60)])])])
+OrderedDict([('id', 37), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 88), ('name', 'A'), ('quantity', 1), ('bagtype', 37), ('part', 59)]), OrderedDict([('id', 89), ('name', 'B'), ('quantity', 2), ('bagtype', 37), ('part', 60)])])])
+OrderedDict([('id', 38), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 90), ('name', 'A'), ('quantity', 2), ('bagtype', 38), ('part', 60)]), OrderedDict([('id', 91), ('name', 'B'), ('quantity', 3), ('bagtype', 38), ('part', 61)])])])
+kittype.data {'id': 20, 'kind': 'kittype1'}
+[OrderedDict([('id', 37), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 88), ('name', 'A'), ('quantity', 1), ('bagtype', 37), ('part', 59)]), OrderedDict([('id', 89), ('name', 'B'), ('quantity', 2), ('bagtype', 37), ('part', 60)])])]), OrderedDict([('id', 38), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 90), ('name', 'A'), ('quantity', 2), ('bagtype', 38), ('part', 60)]), OrderedDict([('id', 91), ('name', 'B'), ('quantity', 3), ('bagtype', 38), ('part', 61)])])]), OrderedDict([('id', 39), ('kind', 'bagtype3'), ('ingredients', [OrderedDict([('id', 92), ('name', 'A'), ('quantity', 1), ('bagtype', 39), ('part', 61)])])])]
+OrderedDict([('id', 37), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 88), ('name', 'A'), ('quantity', 1), ('bagtype', 37), ('part', 59)]), OrderedDict([('id', 89), ('name', 'B'), ('quantity', 2), ('bagtype', 37), ('part', 60)])])])
+OrderedDict([('id', 37), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 88), ('name', 'A'), ('quantity', 1), ('bagtype', 37), ('part', 59)]), OrderedDict([('id', 89), ('name', 'B'), ('quantity', 2), ('bagtype', 37), ('part', 60)])])])
+OrderedDict([('id', 38), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 90), ('name', 'A'), ('quantity', 2), ('bagtype', 38), ('part', 60)]), OrderedDict([('id', 91), ('name', 'B'), ('quantity', 3), ('bagtype', 38), ('part', 61)])])])
+kittype.data {'id': 21, 'kind': 'kittype2'}
+[OrderedDict([('id', 37), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 88), ('name', 'A'), ('quantity', 1), ('bagtype', 37), ('part', 59)]), OrderedDict([('id', 89), ('name', 'B'), ('quantity', 2), ('bagtype', 37), ('part', 60)])])]), OrderedDict([('id', 38), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 90), ('name', 'A'), ('quantity', 2), ('bagtype', 38), ('part', 60)]), OrderedDict([('id', 91), ('name', 'B'), ('quantity', 3), ('bagtype', 38), ('part', 61)])])]), OrderedDict([('id', 39), ('kind', 'bagtype3'), ('ingredients', [OrderedDict([('id', 92), ('name', 'A'), ('quantity', 1), ('bagtype', 39), ('part', 61)])])])]
+OrderedDict([('id', 37), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 88), ('name', 'A'), ('quantity', 1), ('bagtype', 37), ('part', 59)]), OrderedDict([('id', 89), ('name', 'B'), ('quantity', 2), ('bagtype', 37), ('part', 60)])])])
+OrderedDict([('id', 37), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 88), ('name', 'A'), ('quantity', 1), ('bagtype', 37), ('part', 59)]), OrderedDict([('id', 89), ('name', 'B'), ('quantity', 2), ('bagtype', 37), ('part', 60)])])])
+OrderedDict([('id', 38), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 90), ('name', 'A'), ('quantity', 2), ('bagtype', 38), ('part', 60)]), OrderedDict([('id', 91), ('name', 'B'), ('quantity', 3), ('bagtype', 38), ('part', 61)])])])
+OrderedDict([('id', 37), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 88), ('name', 'A'), ('quantity', 1), ('bagtype', 37), ('part', 59)]), OrderedDict([('id', 89), ('name', 'B'), ('quantity', 2), ('bagtype', 37), ('part', 60)])])])
+OrderedDict([('id', 38), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 90), ('name', 'A'), ('quantity', 2), ('bagtype', 38), ('part', 60)]), OrderedDict([('id', 91), ('name', 'B'), ('quantity', 3), ('bagtype', 38), ('part', 61)])])])
+OrderedDict([('id', 39), ('kind', 'bagtype3'), ('ingredients', [OrderedDict([('id', 92), ('name', 'A'), ('quantity', 1), ('bagtype', 39), ('part', 61)])])])
+All kitypes: [OrderedDict([('id', 20), ('kind', 'kittype1')]), OrderedDict([('id', 21), ('kind', 'kittype2')])]
+OrderedDict([('id', 20), ('kind', 'kittype1')])
+OrderedDict([('id', 20), ('kind', 'kittype1')])
+OrderedDict([('id', 21), ('kind', 'kittype2')])
+All kit: [OrderedDict([('id', 27), ('name', 'A'), ('quantity', 10), ('complete', False), ('kind', 20)]), OrderedDict([('id', 28), ('name', 'ABC'), ('quantity', 11), ('complete', True), ('kind', 21)])]
+[OrderedDict([('id', 27), ('name', 'A'), ('quantity', 10), ('complete', False), ('kind', 20)]), OrderedDict([('id', 28), ('name', 'ABC'), ('quantity', 11), ('complete', True), ('kind', 21)])]
+[OrderedDict([('id', 27), ('name', 'A'), ('quantity', 10), ('complete', False), ('kind', 20)]), OrderedDict([('id', 28), ('name', 'ABC'), ('quantity', 11), ('complete', True), ('kind', 21)])]
+[OrderedDict([('id', 27), ('name', 'A'), ('quantity', 10), ('complete', False), ('kind', 20)]), OrderedDict([('id', 28), ('name', 'ABC'), ('quantity', 11), ('complete', True), ('kind', 21)])]
+[OrderedDict([('id', 27), ('name', 'A'), ('quantity', 10), ('complete', False), ('kind', 20)]), OrderedDict([('id', 28), ('name', 'ABC'), ('quantity', 11), ('complete', True), ('kind', 21)])]
+
 ]]>
-</system-out></testcase><testcase classname="features.kitseller.Kit seller" name="US5: As a kit seller, I want to update the kits inventory, so that I can prepare and sell kits." status="skipped" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="features.kitseller.Kit seller" name="US5: As a kit seller, I want to update the kits inventory, so that I can prepare and sell kits." status="passed" time="0.114818"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: US5: As a kit seller, I want to update the kits inventory, so that I can prepare and sell kits.
-    Given a set of specific parts ... skipped in 0.000s
+    Given a set of specific parts ... passed in 0.009s
       | name  | description  | quantity |
       | partA | descriptionA | 12       |
       | partB | descriptionB | 8        |
       | partC | descriptionC | 5        |
-    Given a bag type "bagtype1" with parts list of ... skipped in 0.000s
+    Given a bag type "bagtype1" with parts list of ... passed in 0.013s
       | name | part  | quantity |
       | A    | partA | 1        |
       | B    | partB | 2        |
-    Given a bag type "bagtype2" with parts list of ... skipped in 0.000s
+    Given a bag type "bagtype2" with parts list of ... passed in 0.012s
       | name | part  | quantity |
       | A    | partB | 2        |
       | B    | partC | 3        |
-    Given a bag type "bagtype3" with parts list of ... skipped in 0.000s
+    Given a bag type "bagtype3" with parts list of ... passed in 0.009s
       | name | part  | quantity |
       | A    | partC | 1        |
-    Given a set of specific bags ... skipped in 0.000s
+    Given a set of specific bags ... passed in 0.008s
       | name | kind     | quantity | complete |
       | AB   | bagtype1 | 10       | X        |
       | AB   | bagtype2 | 10       | X        |
-    Given a kit type "kittype1" with bags list of ... skipped in 0.000s
+    Given a kit type "kittype1" with bags list of ... passed in 0.015s
       | name | bagtype  | quantity |
       | A    | bagtype1 | 1        |
       | B    | bagtype2 | 1        |
-    Given a kit type "kittype2" with bags list of ... skipped in 0.000s
+    Given a kit type "kittype2" with bags list of ... passed in 0.016s
       | name | bagtype  | quantity |
       | A    | bagtype1 | 1        |
       | B    | bagtype2 | 2        |
       | C    | bagtype3 | 3        |
-    Given a set of specific kits ... skipped in 0.000s
+    Given a set of specific kits ... passed in 0.006s
       | name | kind     | quantity | complete |
       | A    | kittype1 | 10       |          |
       | ABC  | kittype2 | 11       | X        |
-    When I read all "kit" ... skipped in 0.000s
-    When I update the first kit as follows ... skipped in 0.000s
+    When I read all "kit" ... passed in 0.002s
+    When I update the first kit as follows ... passed in 0.006s
       | name | kind     | quantity | complete |
       | AB   | kittype1 | 20       | X        |
-    And I read all "kit" ... skipped in 0.000s
-    Then the first item should have "name" equal to "AB" ... skipped in 0.000s
-    And the first item should have "quantity" equal to number "20" ... skipped in 0.000s
-    When I create "10" "kit" of "kittype2" "kittype" with name "AB" ... skipped in 0.000s
-    And I read all "kit" ... skipped in 0.000s
-    Then the last item should have "name" equal to "AB" ... skipped in 0.000s
-    And the last item should have "quantity" equal to number "10" ... skipped in 0.000s
-    When I read all "kit" ... skipped in 0.000s
-    When I delete the first "kit" ... skipped in 0.000s
-    And I read all "kit" ... skipped in 0.000s
-    Then the first item should have "name" equal to "ABC" ... skipped in 0.000s
+    And I read all "kit" ... passed in 0.002s
+    Then the first item should have "name" equal to "AB" ... passed in 0.000s
+    And the first item should have "quantity" equal to number "20" ... passed in 0.000s
+    When I create "10" "kit" of "kittype2" "kittype" with name "AB" ... passed in 0.005s
+    And I read all "kit" ... passed in 0.002s
+    Then the last item should have "name" equal to "AB" ... passed in 0.000s
+    And the last item should have "quantity" equal to number "10" ... passed in 0.000s
+    When I read all "kit" ... passed in 0.002s
+    When I delete the first "kit" ... passed in 0.004s
+    And I read all "kit" ... passed in 0.002s
+    Then the first item should have "name" equal to "ABC" ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+bagtype.data {'id': 40, 'kind': 'bagtype1', 'ingredients': []}
+[OrderedDict([('id', 62), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])]), OrderedDict([('id', 63), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])]), OrderedDict([('id', 64), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])]
+OrderedDict([('id', 62), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 62), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 63), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])])
+bagtype.data {'id': 41, 'kind': 'bagtype2', 'ingredients': []}
+[OrderedDict([('id', 62), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])]), OrderedDict([('id', 63), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])]), OrderedDict([('id', 64), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])]
+OrderedDict([('id', 62), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 63), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])])
+OrderedDict([('id', 62), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 63), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])])
+OrderedDict([('id', 64), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])
+bagtype.data {'id': 42, 'kind': 'bagtype3', 'ingredients': []}
+[OrderedDict([('id', 62), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])]), OrderedDict([('id', 63), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])]), OrderedDict([('id', 64), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])]
+OrderedDict([('id', 62), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 63), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])])
+OrderedDict([('id', 64), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])
+OrderedDict([('id', 40), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 93), ('name', 'A'), ('quantity', 1), ('bagtype', 40), ('part', 62)]), OrderedDict([('id', 94), ('name', 'B'), ('quantity', 2), ('bagtype', 40), ('part', 63)])])])
+OrderedDict([('id', 40), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 93), ('name', 'A'), ('quantity', 1), ('bagtype', 40), ('part', 62)]), OrderedDict([('id', 94), ('name', 'B'), ('quantity', 2), ('bagtype', 40), ('part', 63)])])])
+OrderedDict([('id', 41), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 95), ('name', 'A'), ('quantity', 2), ('bagtype', 41), ('part', 63)]), OrderedDict([('id', 96), ('name', 'B'), ('quantity', 3), ('bagtype', 41), ('part', 64)])])])
+kittype.data {'id': 22, 'kind': 'kittype1'}
+[OrderedDict([('id', 40), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 93), ('name', 'A'), ('quantity', 1), ('bagtype', 40), ('part', 62)]), OrderedDict([('id', 94), ('name', 'B'), ('quantity', 2), ('bagtype', 40), ('part', 63)])])]), OrderedDict([('id', 41), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 95), ('name', 'A'), ('quantity', 2), ('bagtype', 41), ('part', 63)]), OrderedDict([('id', 96), ('name', 'B'), ('quantity', 3), ('bagtype', 41), ('part', 64)])])]), OrderedDict([('id', 42), ('kind', 'bagtype3'), ('ingredients', [OrderedDict([('id', 97), ('name', 'A'), ('quantity', 1), ('bagtype', 42), ('part', 64)])])])]
+OrderedDict([('id', 40), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 93), ('name', 'A'), ('quantity', 1), ('bagtype', 40), ('part', 62)]), OrderedDict([('id', 94), ('name', 'B'), ('quantity', 2), ('bagtype', 40), ('part', 63)])])])
+OrderedDict([('id', 40), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 93), ('name', 'A'), ('quantity', 1), ('bagtype', 40), ('part', 62)]), OrderedDict([('id', 94), ('name', 'B'), ('quantity', 2), ('bagtype', 40), ('part', 63)])])])
+OrderedDict([('id', 41), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 95), ('name', 'A'), ('quantity', 2), ('bagtype', 41), ('part', 63)]), OrderedDict([('id', 96), ('name', 'B'), ('quantity', 3), ('bagtype', 41), ('part', 64)])])])
+kittype.data {'id': 23, 'kind': 'kittype2'}
+[OrderedDict([('id', 40), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 93), ('name', 'A'), ('quantity', 1), ('bagtype', 40), ('part', 62)]), OrderedDict([('id', 94), ('name', 'B'), ('quantity', 2), ('bagtype', 40), ('part', 63)])])]), OrderedDict([('id', 41), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 95), ('name', 'A'), ('quantity', 2), ('bagtype', 41), ('part', 63)]), OrderedDict([('id', 96), ('name', 'B'), ('quantity', 3), ('bagtype', 41), ('part', 64)])])]), OrderedDict([('id', 42), ('kind', 'bagtype3'), ('ingredients', [OrderedDict([('id', 97), ('name', 'A'), ('quantity', 1), ('bagtype', 42), ('part', 64)])])])]
+OrderedDict([('id', 40), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 93), ('name', 'A'), ('quantity', 1), ('bagtype', 40), ('part', 62)]), OrderedDict([('id', 94), ('name', 'B'), ('quantity', 2), ('bagtype', 40), ('part', 63)])])])
+OrderedDict([('id', 40), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 93), ('name', 'A'), ('quantity', 1), ('bagtype', 40), ('part', 62)]), OrderedDict([('id', 94), ('name', 'B'), ('quantity', 2), ('bagtype', 40), ('part', 63)])])])
+OrderedDict([('id', 41), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 95), ('name', 'A'), ('quantity', 2), ('bagtype', 41), ('part', 63)]), OrderedDict([('id', 96), ('name', 'B'), ('quantity', 3), ('bagtype', 41), ('part', 64)])])])
+OrderedDict([('id', 40), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 93), ('name', 'A'), ('quantity', 1), ('bagtype', 40), ('part', 62)]), OrderedDict([('id', 94), ('name', 'B'), ('quantity', 2), ('bagtype', 40), ('part', 63)])])])
+OrderedDict([('id', 41), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 95), ('name', 'A'), ('quantity', 2), ('bagtype', 41), ('part', 63)]), OrderedDict([('id', 96), ('name', 'B'), ('quantity', 3), ('bagtype', 41), ('part', 64)])])])
+OrderedDict([('id', 42), ('kind', 'bagtype3'), ('ingredients', [OrderedDict([('id', 97), ('name', 'A'), ('quantity', 1), ('bagtype', 42), ('part', 64)])])])
+All kitypes: [OrderedDict([('id', 22), ('kind', 'kittype1')]), OrderedDict([('id', 23), ('kind', 'kittype2')])]
+OrderedDict([('id', 22), ('kind', 'kittype1')])
+OrderedDict([('id', 22), ('kind', 'kittype1')])
+OrderedDict([('id', 23), ('kind', 'kittype2')])
+All kit: [OrderedDict([('id', 29), ('name', 'A'), ('quantity', 10), ('complete', False), ('kind', 22)]), OrderedDict([('id', 30), ('name', 'ABC'), ('quantity', 11), ('complete', True), ('kind', 23)])]
+OrderedDict([('id', 22), ('kind', 'kittype1')])
+All kit: [OrderedDict([('id', 29), ('name', 'AB'), ('quantity', 20), ('complete', True), ('kind', 22)]), OrderedDict([('id', 30), ('name', 'ABC'), ('quantity', 11), ('complete', True), ('kind', 23)])]
+[OrderedDict([('id', 29), ('name', 'AB'), ('quantity', 20), ('complete', True), ('kind', 22)]), OrderedDict([('id', 30), ('name', 'ABC'), ('quantity', 11), ('complete', True), ('kind', 23)])]
+[OrderedDict([('id', 29), ('name', 'AB'), ('quantity', 20), ('complete', True), ('kind', 22)]), OrderedDict([('id', 30), ('name', 'ABC'), ('quantity', 11), ('complete', True), ('kind', 23)])]
+OrderedDict([('id', 22), ('kind', 'kittype1')])
+OrderedDict([('id', 23), ('kind', 'kittype2')])
+All kit: [OrderedDict([('id', 29), ('name', 'AB'), ('quantity', 20), ('complete', True), ('kind', 22)]), OrderedDict([('id', 30), ('name', 'ABC'), ('quantity', 11), ('complete', True), ('kind', 23)]), OrderedDict([('id', 31), ('name', 'AB'), ('quantity', 10), ('complete', False), ('kind', 23)])]
+[OrderedDict([('id', 29), ('name', 'AB'), ('quantity', 20), ('complete', True), ('kind', 22)]), OrderedDict([('id', 30), ('name', 'ABC'), ('quantity', 11), ('complete', True), ('kind', 23)]), OrderedDict([('id', 31), ('name', 'AB'), ('quantity', 10), ('complete', False), ('kind', 23)])]
+[OrderedDict([('id', 29), ('name', 'AB'), ('quantity', 20), ('complete', True), ('kind', 22)]), OrderedDict([('id', 30), ('name', 'ABC'), ('quantity', 11), ('complete', True), ('kind', 23)]), OrderedDict([('id', 31), ('name', 'AB'), ('quantity', 10), ('complete', False), ('kind', 23)])]
+All kit: [OrderedDict([('id', 29), ('name', 'AB'), ('quantity', 20), ('complete', True), ('kind', 22)]), OrderedDict([('id', 30), ('name', 'ABC'), ('quantity', 11), ('complete', True), ('kind', 23)]), OrderedDict([('id', 31), ('name', 'AB'), ('quantity', 10), ('complete', False), ('kind', 23)])]
+<Response status_code=204>
+None
+All kit: [OrderedDict([('id', 30), ('name', 'ABC'), ('quantity', 11), ('complete', True), ('kind', 23)]), OrderedDict([('id', 31), ('name', 'AB'), ('quantity', 10), ('complete', False), ('kind', 23)])]
+[OrderedDict([('id', 30), ('name', 'ABC'), ('quantity', 11), ('complete', True), ('kind', 23)]), OrderedDict([('id', 31), ('name', 'AB'), ('quantity', 10), ('complete', False), ('kind', 23)])]
+
 ]]>
-</system-out></testcase><testcase classname="features.kitseller.Kit seller" name="US6: As a kit seller, I want to see how many kits are possible with the currently stocked parts, so that I know how many kits I could potentially sell to clients." status="skipped" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="features.kitseller.Kit seller" name="US6: As a kit seller, I want to see how many kits are possible with the currently stocked parts, so that I know how many kits I could potentially sell to clients." status="passed" time="0.106853"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: US6: As a kit seller, I want to see how many kits are possible with the currently stocked parts, so that I know how many kits I could potentially sell to clients.
-    Given a set of specific parts ... skipped in 0.000s
+    Given a set of specific parts ... passed in 0.008s
       | name  | description  | quantity |
       | partA | descriptionA | 12       |
       | partB | descriptionB | 8        |
       | partC | descriptionC | 5        |
-    Given a bag type "bagtype1" with parts list of ... skipped in 0.000s
+    Given a bag type "bagtype1" with parts list of ... passed in 0.014s
       | name | part  | quantity |
       | A    | partA | 1        |
       | B    | partB | 2        |
-    Given a bag type "bagtype2" with parts list of ... skipped in 0.000s
+    Given a bag type "bagtype2" with parts list of ... passed in 0.019s
       | name | part  | quantity |
       | A    | partB | 2        |
       | B    | partC | 3        |
-    Given a bag type "bagtype3" with parts list of ... skipped in 0.000s
+    Given a bag type "bagtype3" with parts list of ... passed in 0.013s
       | name | part  | quantity |
       | A    | partC | 1        |
-    Given a set of specific bags ... skipped in 0.000s
+    Given a set of specific bags ... passed in 0.008s
       | name | kind     | quantity | complete |
       | AB   | bagtype1 | 10       | X        |
       | AB   | bagtype2 | 10       | X        |
-    Given a kit type "kittype1" with bags list of ... skipped in 0.000s
+    Given a kit type "kittype1" with bags list of ... passed in 0.013s
       | name | bagtype  | quantity |
       | A    | bagtype1 | 1        |
       | B    | bagtype2 | 1        |
-    Given a kit type "kittype2" with bags list of ... skipped in 0.000s
+    Given a kit type "kittype2" with bags list of ... passed in 0.018s
       | name | bagtype  | quantity |
       | A    | bagtype1 | 1        |
       | B    | bagtype2 | 2        |
       | C    | bagtype3 | 3        |
-    Given a set of specific kits ... skipped in 0.000s
+    Given a set of specific kits ... passed in 0.007s
       | name | kind     | quantity | complete |
       | A    | kittype1 | 10       |          |
       | ABC  | kittype2 | 11       | X        |
-    When I request potential kits of "kittype1" ... skipped in 0.000s
-    Then I should see the "potential_kits" is number "10" ... skipped in 0.000s
+    When I request potential kits of "kittype1" ... passed in 0.007s
+    Then I should see the "potential_kits" is number "10" ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+bagtype.data {'id': 43, 'kind': 'bagtype1', 'ingredients': []}
+[OrderedDict([('id', 65), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])]), OrderedDict([('id', 66), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])]), OrderedDict([('id', 67), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])]
+OrderedDict([('id', 65), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 65), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 66), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])])
+bagtype.data {'id': 44, 'kind': 'bagtype2', 'ingredients': []}
+[OrderedDict([('id', 65), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])]), OrderedDict([('id', 66), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])]), OrderedDict([('id', 67), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])]
+OrderedDict([('id', 65), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 66), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])])
+OrderedDict([('id', 65), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 66), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])])
+OrderedDict([('id', 67), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])
+bagtype.data {'id': 45, 'kind': 'bagtype3', 'ingredients': []}
+[OrderedDict([('id', 65), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])]), OrderedDict([('id', 66), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])]), OrderedDict([('id', 67), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])]
+OrderedDict([('id', 65), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 66), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])])
+OrderedDict([('id', 67), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])
+OrderedDict([('id', 43), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 98), ('name', 'A'), ('quantity', 1), ('bagtype', 43), ('part', 65)]), OrderedDict([('id', 99), ('name', 'B'), ('quantity', 2), ('bagtype', 43), ('part', 66)])])])
+OrderedDict([('id', 43), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 98), ('name', 'A'), ('quantity', 1), ('bagtype', 43), ('part', 65)]), OrderedDict([('id', 99), ('name', 'B'), ('quantity', 2), ('bagtype', 43), ('part', 66)])])])
+OrderedDict([('id', 44), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 100), ('name', 'A'), ('quantity', 2), ('bagtype', 44), ('part', 66)]), OrderedDict([('id', 101), ('name', 'B'), ('quantity', 3), ('bagtype', 44), ('part', 67)])])])
+kittype.data {'id': 24, 'kind': 'kittype1'}
+[OrderedDict([('id', 43), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 98), ('name', 'A'), ('quantity', 1), ('bagtype', 43), ('part', 65)]), OrderedDict([('id', 99), ('name', 'B'), ('quantity', 2), ('bagtype', 43), ('part', 66)])])]), OrderedDict([('id', 44), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 100), ('name', 'A'), ('quantity', 2), ('bagtype', 44), ('part', 66)]), OrderedDict([('id', 101), ('name', 'B'), ('quantity', 3), ('bagtype', 44), ('part', 67)])])]), OrderedDict([('id', 45), ('kind', 'bagtype3'), ('ingredients', [OrderedDict([('id', 102), ('name', 'A'), ('quantity', 1), ('bagtype', 45), ('part', 67)])])])]
+OrderedDict([('id', 43), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 98), ('name', 'A'), ('quantity', 1), ('bagtype', 43), ('part', 65)]), OrderedDict([('id', 99), ('name', 'B'), ('quantity', 2), ('bagtype', 43), ('part', 66)])])])
+OrderedDict([('id', 43), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 98), ('name', 'A'), ('quantity', 1), ('bagtype', 43), ('part', 65)]), OrderedDict([('id', 99), ('name', 'B'), ('quantity', 2), ('bagtype', 43), ('part', 66)])])])
+OrderedDict([('id', 44), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 100), ('name', 'A'), ('quantity', 2), ('bagtype', 44), ('part', 66)]), OrderedDict([('id', 101), ('name', 'B'), ('quantity', 3), ('bagtype', 44), ('part', 67)])])])
+kittype.data {'id': 25, 'kind': 'kittype2'}
+[OrderedDict([('id', 43), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 98), ('name', 'A'), ('quantity', 1), ('bagtype', 43), ('part', 65)]), OrderedDict([('id', 99), ('name', 'B'), ('quantity', 2), ('bagtype', 43), ('part', 66)])])]), OrderedDict([('id', 44), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 100), ('name', 'A'), ('quantity', 2), ('bagtype', 44), ('part', 66)]), OrderedDict([('id', 101), ('name', 'B'), ('quantity', 3), ('bagtype', 44), ('part', 67)])])]), OrderedDict([('id', 45), ('kind', 'bagtype3'), ('ingredients', [OrderedDict([('id', 102), ('name', 'A'), ('quantity', 1), ('bagtype', 45), ('part', 67)])])])]
+OrderedDict([('id', 43), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 98), ('name', 'A'), ('quantity', 1), ('bagtype', 43), ('part', 65)]), OrderedDict([('id', 99), ('name', 'B'), ('quantity', 2), ('bagtype', 43), ('part', 66)])])])
+OrderedDict([('id', 43), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 98), ('name', 'A'), ('quantity', 1), ('bagtype', 43), ('part', 65)]), OrderedDict([('id', 99), ('name', 'B'), ('quantity', 2), ('bagtype', 43), ('part', 66)])])])
+OrderedDict([('id', 44), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 100), ('name', 'A'), ('quantity', 2), ('bagtype', 44), ('part', 66)]), OrderedDict([('id', 101), ('name', 'B'), ('quantity', 3), ('bagtype', 44), ('part', 67)])])])
+OrderedDict([('id', 43), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 98), ('name', 'A'), ('quantity', 1), ('bagtype', 43), ('part', 65)]), OrderedDict([('id', 99), ('name', 'B'), ('quantity', 2), ('bagtype', 43), ('part', 66)])])])
+OrderedDict([('id', 44), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 100), ('name', 'A'), ('quantity', 2), ('bagtype', 44), ('part', 66)]), OrderedDict([('id', 101), ('name', 'B'), ('quantity', 3), ('bagtype', 44), ('part', 67)])])])
+OrderedDict([('id', 45), ('kind', 'bagtype3'), ('ingredients', [OrderedDict([('id', 102), ('name', 'A'), ('quantity', 1), ('bagtype', 45), ('part', 67)])])])
+All kitypes: [OrderedDict([('id', 24), ('kind', 'kittype1')]), OrderedDict([('id', 25), ('kind', 'kittype2')])]
+OrderedDict([('id', 24), ('kind', 'kittype1')])
+OrderedDict([('id', 24), ('kind', 'kittype1')])
+OrderedDict([('id', 25), ('kind', 'kittype2')])
+kittypes: [OrderedDict([('id', 24), ('kind', 'kittype1')]), OrderedDict([('id', 25), ('kind', 'kittype2')])]
+OrderedDict([('id', 24), ('kind', 'kittype1')])
+kittype: OrderedDict([('id', 24), ('kind', 'kittype1')])
+<Response status_code=200, "application/json">
+{'kittype': 24, 'potential_kits': 10, 'potential_kits_by_bag': {'bagtype1': 10, 'bagtype2': 10}}
+{'kittype': 24, 'potential_kits': 10, 'potential_kits_by_bag': {'bagtype1': 10, 'bagtype2': 10}}
+
 ]]>
-</system-out></testcase><testcase classname="features.kitseller.Kit seller" name="US7: As a kit seller, I want to add a kit, so that I can manage new kits that I start selling." status="skipped" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="features.kitseller.Kit seller" name="US7: As a kit seller, I want to add a kit, so that I can manage new kits that I start selling." status="passed" time="0.122301"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: US7: As a kit seller, I want to add a kit, so that I can manage new kits that I start selling.
-    Given a set of specific parts ... skipped in 0.000s
+    Given a set of specific parts ... passed in 0.008s
       | name  | description  | quantity |
       | partA | descriptionA | 12       |
       | partB | descriptionB | 8        |
       | partC | descriptionC | 5        |
-    Given a bag type "bagtype1" with parts list of ... skipped in 0.000s
+    Given a bag type "bagtype1" with parts list of ... passed in 0.014s
       | name | part  | quantity |
       | A    | partA | 1        |
       | B    | partB | 2        |
-    Given a bag type "bagtype2" with parts list of ... skipped in 0.000s
+    Given a bag type "bagtype2" with parts list of ... passed in 0.015s
       | name | part  | quantity |
       | A    | partB | 2        |
       | B    | partC | 3        |
-    Given a bag type "bagtype3" with parts list of ... skipped in 0.000s
+    Given a bag type "bagtype3" with parts list of ... passed in 0.011s
       | name | part  | quantity |
       | A    | partC | 1        |
-    Given a set of specific bags ... skipped in 0.000s
+    Given a set of specific bags ... passed in 0.010s
       | name | kind     | quantity | complete |
       | AB   | bagtype1 | 10       | X        |
       | AB   | bagtype2 | 10       | X        |
-    Given a kit type "kittype1" with bags list of ... skipped in 0.000s
+    Given a kit type "kittype1" with bags list of ... passed in 0.015s
       | name | bagtype  | quantity |
       | A    | bagtype1 | 1        |
       | B    | bagtype2 | 1        |
-    Given a kit type "kittype2" with bags list of ... skipped in 0.000s
+    Given a kit type "kittype2" with bags list of ... passed in 0.023s
       | name | bagtype  | quantity |
       | A    | bagtype1 | 1        |
       | B    | bagtype2 | 2        |
       | C    | bagtype3 | 3        |
-    Given a set of specific kits ... skipped in 0.000s
+    Given a set of specific kits ... passed in 0.009s
       | name | kind     | quantity | complete |
       | A    | kittype1 | 10       |          |
       | ABC  | kittype2 | 11       | X        |
-    When I create a kit type "kittype4" with bags list of ... skipped in 0.000s
+    When I create a kit type "kittype4" with bags list of ... passed in 0.016s
       | name | bagtype  | quantity |
       | A    | bagtype1 | 1        |
       | B    | bagtype2 | 1        |
-    And I read all "kittype" ... skipped in 0.000s
-    Then the last item should have "kind" equal to "kittype4" ... skipped in 0.000s
+    And I read all "kittype" ... passed in 0.002s
+    Then the last item should have "kind" equal to "kittype4" ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+bagtype.data {'id': 46, 'kind': 'bagtype1', 'ingredients': []}
+[OrderedDict([('id', 68), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])]), OrderedDict([('id', 69), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])]), OrderedDict([('id', 70), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])]
+OrderedDict([('id', 68), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 68), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 69), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])])
+bagtype.data {'id': 47, 'kind': 'bagtype2', 'ingredients': []}
+[OrderedDict([('id', 68), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])]), OrderedDict([('id', 69), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])]), OrderedDict([('id', 70), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])]
+OrderedDict([('id', 68), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 69), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])])
+OrderedDict([('id', 68), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 69), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])])
+OrderedDict([('id', 70), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])
+bagtype.data {'id': 48, 'kind': 'bagtype3', 'ingredients': []}
+[OrderedDict([('id', 68), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])]), OrderedDict([('id', 69), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])]), OrderedDict([('id', 70), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])]
+OrderedDict([('id', 68), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 69), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])])
+OrderedDict([('id', 70), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])
+OrderedDict([('id', 46), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 103), ('name', 'A'), ('quantity', 1), ('bagtype', 46), ('part', 68)]), OrderedDict([('id', 104), ('name', 'B'), ('quantity', 2), ('bagtype', 46), ('part', 69)])])])
+OrderedDict([('id', 46), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 103), ('name', 'A'), ('quantity', 1), ('bagtype', 46), ('part', 68)]), OrderedDict([('id', 104), ('name', 'B'), ('quantity', 2), ('bagtype', 46), ('part', 69)])])])
+OrderedDict([('id', 47), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 105), ('name', 'A'), ('quantity', 2), ('bagtype', 47), ('part', 69)]), OrderedDict([('id', 106), ('name', 'B'), ('quantity', 3), ('bagtype', 47), ('part', 70)])])])
+kittype.data {'id': 26, 'kind': 'kittype1'}
+[OrderedDict([('id', 46), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 103), ('name', 'A'), ('quantity', 1), ('bagtype', 46), ('part', 68)]), OrderedDict([('id', 104), ('name', 'B'), ('quantity', 2), ('bagtype', 46), ('part', 69)])])]), OrderedDict([('id', 47), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 105), ('name', 'A'), ('quantity', 2), ('bagtype', 47), ('part', 69)]), OrderedDict([('id', 106), ('name', 'B'), ('quantity', 3), ('bagtype', 47), ('part', 70)])])]), OrderedDict([('id', 48), ('kind', 'bagtype3'), ('ingredients', [OrderedDict([('id', 107), ('name', 'A'), ('quantity', 1), ('bagtype', 48), ('part', 70)])])])]
+OrderedDict([('id', 46), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 103), ('name', 'A'), ('quantity', 1), ('bagtype', 46), ('part', 68)]), OrderedDict([('id', 104), ('name', 'B'), ('quantity', 2), ('bagtype', 46), ('part', 69)])])])
+OrderedDict([('id', 46), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 103), ('name', 'A'), ('quantity', 1), ('bagtype', 46), ('part', 68)]), OrderedDict([('id', 104), ('name', 'B'), ('quantity', 2), ('bagtype', 46), ('part', 69)])])])
+OrderedDict([('id', 47), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 105), ('name', 'A'), ('quantity', 2), ('bagtype', 47), ('part', 69)]), OrderedDict([('id', 106), ('name', 'B'), ('quantity', 3), ('bagtype', 47), ('part', 70)])])])
+kittype.data {'id': 27, 'kind': 'kittype2'}
+[OrderedDict([('id', 46), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 103), ('name', 'A'), ('quantity', 1), ('bagtype', 46), ('part', 68)]), OrderedDict([('id', 104), ('name', 'B'), ('quantity', 2), ('bagtype', 46), ('part', 69)])])]), OrderedDict([('id', 47), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 105), ('name', 'A'), ('quantity', 2), ('bagtype', 47), ('part', 69)]), OrderedDict([('id', 106), ('name', 'B'), ('quantity', 3), ('bagtype', 47), ('part', 70)])])]), OrderedDict([('id', 48), ('kind', 'bagtype3'), ('ingredients', [OrderedDict([('id', 107), ('name', 'A'), ('quantity', 1), ('bagtype', 48), ('part', 70)])])])]
+OrderedDict([('id', 46), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 103), ('name', 'A'), ('quantity', 1), ('bagtype', 46), ('part', 68)]), OrderedDict([('id', 104), ('name', 'B'), ('quantity', 2), ('bagtype', 46), ('part', 69)])])])
+OrderedDict([('id', 46), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 103), ('name', 'A'), ('quantity', 1), ('bagtype', 46), ('part', 68)]), OrderedDict([('id', 104), ('name', 'B'), ('quantity', 2), ('bagtype', 46), ('part', 69)])])])
+OrderedDict([('id', 47), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 105), ('name', 'A'), ('quantity', 2), ('bagtype', 47), ('part', 69)]), OrderedDict([('id', 106), ('name', 'B'), ('quantity', 3), ('bagtype', 47), ('part', 70)])])])
+OrderedDict([('id', 46), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 103), ('name', 'A'), ('quantity', 1), ('bagtype', 46), ('part', 68)]), OrderedDict([('id', 104), ('name', 'B'), ('quantity', 2), ('bagtype', 46), ('part', 69)])])])
+OrderedDict([('id', 47), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 105), ('name', 'A'), ('quantity', 2), ('bagtype', 47), ('part', 69)]), OrderedDict([('id', 106), ('name', 'B'), ('quantity', 3), ('bagtype', 47), ('part', 70)])])])
+OrderedDict([('id', 48), ('kind', 'bagtype3'), ('ingredients', [OrderedDict([('id', 107), ('name', 'A'), ('quantity', 1), ('bagtype', 48), ('part', 70)])])])
+All kitypes: [OrderedDict([('id', 26), ('kind', 'kittype1')]), OrderedDict([('id', 27), ('kind', 'kittype2')])]
+OrderedDict([('id', 26), ('kind', 'kittype1')])
+OrderedDict([('id', 26), ('kind', 'kittype1')])
+OrderedDict([('id', 27), ('kind', 'kittype2')])
+kittype.data {'id': 28, 'kind': 'kittype4'}
+[OrderedDict([('id', 46), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 103), ('name', 'A'), ('quantity', 1), ('bagtype', 46), ('part', 68)]), OrderedDict([('id', 104), ('name', 'B'), ('quantity', 2), ('bagtype', 46), ('part', 69)])])]), OrderedDict([('id', 47), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 105), ('name', 'A'), ('quantity', 2), ('bagtype', 47), ('part', 69)]), OrderedDict([('id', 106), ('name', 'B'), ('quantity', 3), ('bagtype', 47), ('part', 70)])])]), OrderedDict([('id', 48), ('kind', 'bagtype3'), ('ingredients', [OrderedDict([('id', 107), ('name', 'A'), ('quantity', 1), ('bagtype', 48), ('part', 70)])])])]
+OrderedDict([('id', 46), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 103), ('name', 'A'), ('quantity', 1), ('bagtype', 46), ('part', 68)]), OrderedDict([('id', 104), ('name', 'B'), ('quantity', 2), ('bagtype', 46), ('part', 69)])])])
+OrderedDict([('id', 46), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 103), ('name', 'A'), ('quantity', 1), ('bagtype', 46), ('part', 68)]), OrderedDict([('id', 104), ('name', 'B'), ('quantity', 2), ('bagtype', 46), ('part', 69)])])])
+OrderedDict([('id', 47), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 105), ('name', 'A'), ('quantity', 2), ('bagtype', 47), ('part', 69)]), OrderedDict([('id', 106), ('name', 'B'), ('quantity', 3), ('bagtype', 47), ('part', 70)])])])
+All kittype: [OrderedDict([('id', 26), ('kind', 'kittype1')]), OrderedDict([('id', 27), ('kind', 'kittype2')]), OrderedDict([('id', 28), ('kind', 'kittype4')])]
+[OrderedDict([('id', 26), ('kind', 'kittype1')]), OrderedDict([('id', 27), ('kind', 'kittype2')]), OrderedDict([('id', 28), ('kind', 'kittype4')])]
+
 ]]>
-</system-out></testcase><testcase classname="features.kitseller.Kit seller" name="US8: As a kit seller, I want to remove a kit, so that I can manage old kits that I no longer sell." status="skipped" time="0"><skipped /><system-out>
+</system-out></testcase><testcase classname="features.kitseller.Kit seller" name="US8: As a kit seller, I want to remove a kit, so that I can manage old kits that I no longer sell." status="passed" time="0.110721"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: US8: As a kit seller, I want to remove a kit, so that I can manage old kits that I no longer sell.
-    Given a set of specific parts ... skipped in 0.000s
+    Given a set of specific parts ... passed in 0.028s
       | name  | description  | quantity |
       | partA | descriptionA | 12       |
       | partB | descriptionB | 8        |
       | partC | descriptionC | 5        |
-    Given a bag type "bagtype1" with parts list of ... skipped in 0.000s
+    Given a bag type "bagtype1" with parts list of ... passed in 0.011s
       | name | part  | quantity |
       | A    | partA | 1        |
       | B    | partB | 2        |
-    Given a bag type "bagtype2" with parts list of ... skipped in 0.000s
+    Given a bag type "bagtype2" with parts list of ... passed in 0.012s
       | name | part  | quantity |
       | A    | partB | 2        |
       | B    | partC | 3        |
-    Given a bag type "bagtype3" with parts list of ... skipped in 0.000s
+    Given a bag type "bagtype3" with parts list of ... passed in 0.009s
       | name | part  | quantity |
       | A    | partC | 1        |
-    Given a set of specific bags ... skipped in 0.000s
+    Given a set of specific bags ... passed in 0.008s
       | name | kind     | quantity | complete |
       | AB   | bagtype1 | 10       | X        |
       | AB   | bagtype2 | 10       | X        |
-    Given a kit type "kittype1" with bags list of ... skipped in 0.000s
+    Given a kit type "kittype1" with bags list of ... passed in 0.012s
       | name | bagtype  | quantity |
       | A    | bagtype1 | 1        |
       | B    | bagtype2 | 1        |
-    Given a kit type "kittype2" with bags list of ... skipped in 0.000s
+    Given a kit type "kittype2" with bags list of ... passed in 0.015s
       | name | bagtype  | quantity |
       | A    | bagtype1 | 1        |
       | B    | bagtype2 | 2        |
       | C    | bagtype3 | 3        |
-    Given a set of specific kits ... skipped in 0.000s
+    Given a set of specific kits ... passed in 0.006s
       | name | kind     | quantity | complete |
       | A    | kittype1 | 10       |          |
       | ABC  | kittype2 | 11       | X        |
-    When I read all "kittype" ... skipped in 0.000s
-    When I delete the first "kittype" ... skipped in 0.000s
-    And I read all "kittype" ... skipped in 0.000s
-    Then the first item should have "kind" equal to "kittype2" ... skipped in 0.000s
+    When I read all "kittype" ... passed in 0.002s
+    When I delete the first "kittype" ... passed in 0.004s
+    And I read all "kittype" ... passed in 0.002s
+    Then the first item should have "kind" equal to "kittype2" ... passed in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+bagtype.data {'id': 49, 'kind': 'bagtype1', 'ingredients': []}
+[OrderedDict([('id', 71), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])]), OrderedDict([('id', 72), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])]), OrderedDict([('id', 73), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])]
+OrderedDict([('id', 71), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 71), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 72), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])])
+bagtype.data {'id': 50, 'kind': 'bagtype2', 'ingredients': []}
+[OrderedDict([('id', 71), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])]), OrderedDict([('id', 72), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])]), OrderedDict([('id', 73), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])]
+OrderedDict([('id', 71), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 72), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])])
+OrderedDict([('id', 71), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 72), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])])
+OrderedDict([('id', 73), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])
+bagtype.data {'id': 51, 'kind': 'bagtype3', 'ingredients': []}
+[OrderedDict([('id', 71), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])]), OrderedDict([('id', 72), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])]), OrderedDict([('id', 73), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])]
+OrderedDict([('id', 71), ('name', 'partA'), ('description', 'descriptionA'), ('quantity', 12), ('purchases', [])])
+OrderedDict([('id', 72), ('name', 'partB'), ('description', 'descriptionB'), ('quantity', 8), ('purchases', [])])
+OrderedDict([('id', 73), ('name', 'partC'), ('description', 'descriptionC'), ('quantity', 5), ('purchases', [])])
+OrderedDict([('id', 49), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 108), ('name', 'A'), ('quantity', 1), ('bagtype', 49), ('part', 71)]), OrderedDict([('id', 109), ('name', 'B'), ('quantity', 2), ('bagtype', 49), ('part', 72)])])])
+OrderedDict([('id', 49), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 108), ('name', 'A'), ('quantity', 1), ('bagtype', 49), ('part', 71)]), OrderedDict([('id', 109), ('name', 'B'), ('quantity', 2), ('bagtype', 49), ('part', 72)])])])
+OrderedDict([('id', 50), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 110), ('name', 'A'), ('quantity', 2), ('bagtype', 50), ('part', 72)]), OrderedDict([('id', 111), ('name', 'B'), ('quantity', 3), ('bagtype', 50), ('part', 73)])])])
+kittype.data {'id': 29, 'kind': 'kittype1'}
+[OrderedDict([('id', 49), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 108), ('name', 'A'), ('quantity', 1), ('bagtype', 49), ('part', 71)]), OrderedDict([('id', 109), ('name', 'B'), ('quantity', 2), ('bagtype', 49), ('part', 72)])])]), OrderedDict([('id', 50), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 110), ('name', 'A'), ('quantity', 2), ('bagtype', 50), ('part', 72)]), OrderedDict([('id', 111), ('name', 'B'), ('quantity', 3), ('bagtype', 50), ('part', 73)])])]), OrderedDict([('id', 51), ('kind', 'bagtype3'), ('ingredients', [OrderedDict([('id', 112), ('name', 'A'), ('quantity', 1), ('bagtype', 51), ('part', 73)])])])]
+OrderedDict([('id', 49), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 108), ('name', 'A'), ('quantity', 1), ('bagtype', 49), ('part', 71)]), OrderedDict([('id', 109), ('name', 'B'), ('quantity', 2), ('bagtype', 49), ('part', 72)])])])
+OrderedDict([('id', 49), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 108), ('name', 'A'), ('quantity', 1), ('bagtype', 49), ('part', 71)]), OrderedDict([('id', 109), ('name', 'B'), ('quantity', 2), ('bagtype', 49), ('part', 72)])])])
+OrderedDict([('id', 50), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 110), ('name', 'A'), ('quantity', 2), ('bagtype', 50), ('part', 72)]), OrderedDict([('id', 111), ('name', 'B'), ('quantity', 3), ('bagtype', 50), ('part', 73)])])])
+kittype.data {'id': 30, 'kind': 'kittype2'}
+[OrderedDict([('id', 49), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 108), ('name', 'A'), ('quantity', 1), ('bagtype', 49), ('part', 71)]), OrderedDict([('id', 109), ('name', 'B'), ('quantity', 2), ('bagtype', 49), ('part', 72)])])]), OrderedDict([('id', 50), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 110), ('name', 'A'), ('quantity', 2), ('bagtype', 50), ('part', 72)]), OrderedDict([('id', 111), ('name', 'B'), ('quantity', 3), ('bagtype', 50), ('part', 73)])])]), OrderedDict([('id', 51), ('kind', 'bagtype3'), ('ingredients', [OrderedDict([('id', 112), ('name', 'A'), ('quantity', 1), ('bagtype', 51), ('part', 73)])])])]
+OrderedDict([('id', 49), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 108), ('name', 'A'), ('quantity', 1), ('bagtype', 49), ('part', 71)]), OrderedDict([('id', 109), ('name', 'B'), ('quantity', 2), ('bagtype', 49), ('part', 72)])])])
+OrderedDict([('id', 49), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 108), ('name', 'A'), ('quantity', 1), ('bagtype', 49), ('part', 71)]), OrderedDict([('id', 109), ('name', 'B'), ('quantity', 2), ('bagtype', 49), ('part', 72)])])])
+OrderedDict([('id', 50), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 110), ('name', 'A'), ('quantity', 2), ('bagtype', 50), ('part', 72)]), OrderedDict([('id', 111), ('name', 'B'), ('quantity', 3), ('bagtype', 50), ('part', 73)])])])
+OrderedDict([('id', 49), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id', 108), ('name', 'A'), ('quantity', 1), ('bagtype', 49), ('part', 71)]), OrderedDict([('id', 109), ('name', 'B'), ('quantity', 2), ('bagtype', 49), ('part', 72)])])])
+OrderedDict([('id', 50), ('kind', 'bagtype2'), ('ingredients', [OrderedDict([('id', 110), ('name', 'A'), ('quantity', 2), ('bagtype', 50), ('part', 72)]), OrderedDict([('id', 111), ('name', 'B'), ('quantity', 3), ('bagtype', 50), ('part', 73)])])])
+OrderedDict([('id', 51), ('kind', 'bagtype3'), ('ingredients', [OrderedDict([('id', 112), ('name', 'A'), ('quantity', 1), ('bagtype', 51), ('part', 73)])])])
+All kitypes: [OrderedDict([('id', 29), ('kind', 'kittype1')]), OrderedDict([('id', 30), ('kind', 'kittype2')])]
+OrderedDict([('id', 29), ('kind', 'kittype1')])
+OrderedDict([('id', 29), ('kind', 'kittype1')])
+OrderedDict([('id', 30), ('kind', 'kittype2')])
+All kittype: [OrderedDict([('id', 29), ('kind', 'kittype1')]), OrderedDict([('id', 30), ('kind', 'kittype2')])]
+<Response status_code=204>
+None
+All kittype: [OrderedDict([('id', 30), ('kind', 'kittype2')])]
+[OrderedDict([('id', 30), ('kind', 'kittype2')])]
+
 ]]>
 </system-out></testcase></testsuite>
