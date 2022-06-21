@@ -41,16 +41,18 @@ class BagSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class BagIngredientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BagIngredient
+        fields = "__all__"
+
+
 class BagTypeSerializer(serializers.ModelSerializer):
+    ingredients = BagIngredientSerializer(many=True, read_only=True)
+
     class Meta:
         model = BagType
-        fields = "__all__"
-
-
-class PartSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Part
-        fields = "__all__"
+        fields = ["id", "kind", "ingredients"]
 
 
 class PurchaseSerializer(serializers.ModelSerializer):
@@ -59,10 +61,12 @@ class PurchaseSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class BagIngredientSerializer(serializers.ModelSerializer):
+class PartSerializer(serializers.ModelSerializer):
+    purchases = PurchaseSerializer(many=True, read_only=True)
+
     class Meta:
-        model = BagIngredient
-        fields = "__all__"
+        model = Part
+        fields = ["id", "name", "description", "quantity", "purchases"]
 
 
 class KitIngredientSerializer(serializers.ModelSerializer):
