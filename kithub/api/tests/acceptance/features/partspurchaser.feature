@@ -8,6 +8,12 @@ Background:
             | partA     | descriptionA  | 10       |
             | partB     | descriptionB  | 0        |
             | partC     | descriptionC  | 0        |   
+        Given a set of specific purchases
+            | date      | shop   | shop_part_no | price | quantity | part  |
+            | 2020-11-01| RS     | RS001        | 0.99  | 100      | partA |
+            | 2021-02-02| CPC    | C002         | 0.09  | 101      | partA |
+            | 2022-03-13| Farnell| F000003      | 0.009 | 1        | partA |
+             
         Given a bag type "bagtype1" with parts list of
             | name  | part      | quantity |
             | A     | partA     | 1        |
@@ -49,11 +55,22 @@ Background:
         And I read all "part"
         Then the first item should have "name" equal to "partB"   
 
-
     Scenario: US3: As a parts purchaser, I want to see which parts to buy to do a specified number of kits, so that I do not understock nor overstock.
         When I request a partlist for "100" of "kittype1"
         Then the parts list should contain "partA" with quantity "90"
         And the parts list should contain "partB" with quantity "600"
         And the parts list should contain "partC" with quantity "600"
 
-    
+    Scenario: US16: As a parts purchaser, I want to see where a part has been bought previously and its part number, so that I can easily restock.
+        When I read "part" with "name" "partA"
+        Then the first purchase should have "shop" equal to "RS"
+        And the first purchase should have "shop_part_no" equal to "RS001"   
+        But the last purchase should have "shop" equal to "Farnell"
+        And the last purchase should have "shop_part_no" equal to "F000003"    
+
+    Scenario: US17: As a parts purchaser, I want to see past prices paid for a part, so that I can see how a part price has changed over time.
+        When I read "part" with "name" "partA"
+        Then the first purchase should have "date" equal to "2020-11-01"
+        And the first purchase should have "price" equal to "0.99"   
+        But the last purchase should have "date" equal to "2022-03-13"
+        And the last purchase should have "price" equal to "0.009"          
