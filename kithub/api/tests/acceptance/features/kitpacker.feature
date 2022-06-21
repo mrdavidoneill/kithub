@@ -1,4 +1,3 @@
-@now
 @acceptance
 Feature: Kit packer
     Acceptance tests for kit packer
@@ -73,3 +72,32 @@ Background:
         Then "bagtype2" "bagtype" should need to buy "12" "partB" 
         And "bagtype2" "bagtype" should need to buy "29" "partC" 
 
+    Scenario: US12: As a kit packer, I want to divide bags, so that when I find I am low on parts to complete all the bags, I can complete some, keeping track of everything along the way.
+        When I read all "bag"
+        And I divide off "2" of the first bag  
+        Then the first item should have "quantity" equal to number "3"         
+        And the last item should have "quantity" equal to number "2"
+        When I read all "bag"
+        Then the first item should have "name" equal to "AB" 
+        And the first item should have "quantity" equal to number "3"         
+        And the last item should have "quantity" equal to number "2"                 
+
+    Scenario: US13: As a kit packer, I want to divide kits, so that when I find I am low on bags to complete all the kits, I can complete some, keeping track of everything along the way.
+        When I read all "kit"
+        And I divide off "4" of the first kit  
+        Then the first item should have "quantity" equal to number "6"         
+        And the last item should have "quantity" equal to number "4"
+        When I read all "kit"
+        Then the first item should have "name" equal to "A" 
+        And the first item should have "quantity" equal to number "6"         
+        And the last item should have "quantity" equal to number "4"                 
+
+    Scenario: US14: As a kit packer, I want to see how many bags are possible, so that I do not get delayed by missing parts half-way through.
+        When I request potential bags of "bagtype1"
+        Then I should see the "potential_bags" is number "1"
+
+    Scenario: US15: As a kit packer, I want to see a list of parts that a bag needs, so that I fill the bag correctly.
+        When I request the ingredients of bagtype "bagtype1"
+        Then I should see "A" is "1" of part "partA"
+        Then I should see "B" is "2" of part "partB"
+        Then I should see "C" is "1" of part "partC"
