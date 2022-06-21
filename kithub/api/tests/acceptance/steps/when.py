@@ -70,6 +70,17 @@ def read_first_model(context, model):
     )
 
 
+@when('I read "{model}" with "{key}" "{value}"')
+def read_model_by_key_value(context, model, value, key):
+    items = context.test.client.get(reverse(f"{model}-list")).data
+    item = get_item_by_key(items, value, key)
+    context.response = context.test.client.get(
+        reverse(f"{model}-detail", args=(item["id"],))
+    )
+    print(f"parts::: {context.response.data}")
+    print(f"purchases::: {context.response.data['purchases']}")
+
+
 @when('I read all "{model}"')
 def read_models(context, model):
     context.response = context.test.client.get(reverse(f"{model}-list"))
@@ -194,6 +205,20 @@ def request_potential_kits(context, kittype):
     print(context.response.data)
 
 
+@when('I request potential bags of "{bagtype}"')
+def request_potential_bags(context, bagtype):
+    bagtypes = context.test.client.get(reverse("bagtype-list")).data
+    print(f"bagtypes: {bagtypes}")
+    bagtype = get_item_by_key(bagtypes, bagtype, "kind")
+    print(f"bagtype: {bagtype}")
+    context.response = context.test.client.get(
+        reverse("potentialbags", args=(bagtype["id"],))
+    )
+
+    print(context.response)
+    print(context.response.data)
+
+
 @when("I request unfinished bags")
 def request_unfinished_bags(context):
     print("HELLO")
@@ -224,3 +249,39 @@ def create_specific_kittype(context, name):
                 "bagtype": get_item_by_key(bagtypes, row["bagtype"], key="kind")["id"],
             },
         )
+
+
+@when('I divide off "{quantity:Number}" of the first bag')
+def divide_bag(context, quantity):
+    bags = context.test.client.get(reverse("bag-list")).data
+    data = {"bag": bags[0]["id"], "quantity": quantity}
+    context.response = context.test.client.put(
+        reverse("dividebag"),
+        data=json.dumps(data, cls=DjangoJSONEncoder),
+        content_type="application/json",
+    )
+
+
+@when('I divide off "{quantity:Number}" of the first kit')
+def divide_kit(context, quantity):
+    kits = context.test.client.get(reverse("kit-list")).data
+    data = {"kit": kits[0]["id"], "quantity": quantity}
+    context.response = context.test.client.put(
+        reverse("dividekit"),
+        data=json.dumps(data, cls=DjangoJSONEncoder),
+        content_type="application/json",
+    )
+
+
+@when('I request the ingredients of bagtype "{bagtype}"')
+def request_bag_ingredients(context, bagtype):
+    bagtypes = context.test.client.get(reverse("bagtype-list")).data
+    print(f"bagtypes: {bagtypes}")
+    bagtype = get_item_by_key(bagtypes, bagtype, "kind")
+    print(f"bagtype: {bagtype}")
+    context.response = context.test.client.get(
+        reverse("bagtype-detail", args=(bagtype["id"],))
+    )
+
+    print(context.response)
+    print(context.response.data)
