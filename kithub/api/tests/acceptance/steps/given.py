@@ -115,6 +115,26 @@ def create_specific_kittype(context, name):
         )
 
 
+@given("a set of specific purchases")
+def create_set_of_purchases(context):
+    parts = context.test.client.get(reverse("part-list")).data
+
+    print(f"All parts: {parts}")
+
+    for row in context.table:
+        context.response = context.test.client.post(
+            reverse("purchase-list"),
+            {
+                "date": row["date"],
+                "shop": row["shop"],
+                "shop_part_no": row["shop_part_no"],
+                "price": row["price"],
+                "quantity": int(row["quantity"]),
+                "part": get_item_by_key(parts, row["part"], "name")["id"],
+            },
+        )
+
+
 @given('I read all "{model}"')
 def read_models(context, model):
     context.response = context.test.client.get(reverse(f"{model}-list"))
