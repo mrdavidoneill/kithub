@@ -154,7 +154,6 @@ class GetAllPotentialKits(TestCase):
             )
 
     def test_dividekit_kit0_quantity_1(self):
-        PART_ID = 0
         quantity = 1
         original_quantity = self.kits[0].quantity
         response = self.client.put(
@@ -164,7 +163,8 @@ class GetAllPotentialKits(TestCase):
         self.assertNotEqual(response.data[0]["id"], response.data[1]["id"])
         self.assertEqual(response.data[0]["name"], response.data[1]["name"])
         self.assertEqual(response.data[0]["kind"], response.data[1]["kind"])
-        self.assertEqual(response.data[0]["quantity"], original_quantity - quantity)
+        self.assertEqual(response.data[0]["quantity"],
+                         original_quantity - quantity)
         self.assertEqual(response.data[1]["quantity"], quantity)
 
         # Test models in DB
