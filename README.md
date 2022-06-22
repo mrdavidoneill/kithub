@@ -7,7 +7,7 @@
 - US3: As a parts purchaser, I want to see which parts to buy to do a specified number of kits, so that I do not understock nor overstock.
 - US4: As a kit seller, I want to see a kits inventory, so that I know how many kits I can currently supply to clients.
 - US5: As a kit seller, I want to update the kits inventory, so that I can prepare and sell kits.
-- US6: As a kit seller, I want to see how many kits are possible with the currently stocked parts, so that I know how many kits I could potentially sell to clients.
+- US6: As a kit seller, I want to see how many kits are possible with the currently prepared bags, so that I know how many kits I could potentially sell to clients.
 - US7: As a kit seller, I want to add a kit, so that I can manage new kits that I start selling.
 - US8: As a kit seller, I want to remove a kit, so that I can manage old kits that I no longer sell.
 - US9: As a kit packer, I want to see a bag inventory, so that I know how many bags are currently ready.

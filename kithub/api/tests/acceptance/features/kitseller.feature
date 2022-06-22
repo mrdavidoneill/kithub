@@ -62,7 +62,7 @@ Background:
         And I read all "kit"
         Then the first item should have "name" equal to "ABC"   
 
-    Scenario: US6: As a kit seller, I want to see how many kits are possible with the currently stocked parts, so that I know how many kits I could potentially sell to clients.
+    Scenario: US6: As a kit seller, I want to see how many kits are possible with the currently prepared bags, so that I know how many kits I could potentially sell to clients.
         When I request potential kits of "kittype1"
         Then I should see the "potential_kits" is number "10"
 
