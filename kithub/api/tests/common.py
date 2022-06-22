@@ -1,4 +1,5 @@
-import json, string
+import json
+import string
 import decimal
 from datetime import date, datetime, timedelta
 from random import choice, randint, shuffle
@@ -44,7 +45,8 @@ def comparePayloadToRepsonseData(test_instance, payload, response):
 
                 # Compare to object
                 else:
-                    test_instance.assertEqual(param_value, response[param_key]["id"])
+                    test_instance.assertEqual(
+                        param_value, response[param_key]["id"])
 
             # If key is dict representation of a model
             else:
@@ -56,7 +58,8 @@ def comparePayloadToRepsonseData(test_instance, payload, response):
         # If key is a date
         elif type(param_value) is date:
             test_instance.assertEqual(
-                param_value, datetime.strptime(response[param_key], "%Y-%m-%d").date()
+                param_value, datetime.strptime(
+                    response[param_key], "%Y-%m-%d").date()
             )
         # If key is a list
         elif type(param_value) is list:
@@ -66,7 +69,8 @@ def comparePayloadToRepsonseData(test_instance, payload, response):
                 )
         # If key is a Decimal
         elif type(param_value) is decimal.Decimal:
-            test_instance.assertEqual(param_value, decimal.Decimal(response[param_key]))
+            test_instance.assertEqual(
+                param_value, decimal.Decimal(response[param_key]))
         # Compare directly for everything else
         else:
             test_instance.assertEqual(param_value, response[param_key])
@@ -108,7 +112,7 @@ def random_name():
     Name is based on contents contained,
     eg. ABCDEFGH or A C EFG
     """
-    completed = string.ascii_letters[26 : randint(34, 41)]
+    completed = string.ascii_letters[26: randint(34, 41)]
     uncompleted = ""
     for letter in completed:
         uncompleted += choice((letter, " "))
@@ -177,6 +181,8 @@ def create_bag(kind=None):
 
 def create_bagingredient(name=None, bagtype=None, part=None, quantity=None):
     """Return a random bag of passed kind, or newly created kind"""
+    if not name:
+        name = random_kind()[:4]
     if not bagtype:
         bagtype = create_bagtype()
     if not part:
@@ -184,7 +190,7 @@ def create_bagingredient(name=None, bagtype=None, part=None, quantity=None):
     if not quantity:
         quantity = random_quantity()
     kwargs = {
-        "name": random_kind()[:4],
+        "name": name,
         "bagtype": bagtype,
         "part": part,
         "quantity": quantity,
@@ -582,7 +588,8 @@ def test_valid_delete(
     print(f"TEST VALID DELETE: {item}")
     # Test can get item
     get_all_response_before = client.get(reverse(route_list))
-    get_item_response_before = client.get(reverse(route, kwargs={"pk": item.pk}))
+    get_item_response_before = client.get(
+        reverse(route, kwargs={"pk": item.pk}))
 
     print(f"GET ALL BEFORE DELETE: {len(get_all_response_before.data)} items")
     print(f"GET ITEM BEFORE DELETE: {get_item_response_before.data}")
@@ -591,7 +598,8 @@ def test_valid_delete(
     response = client.delete(reverse(route, kwargs={"pk": item.pk}))
 
     # Test cannot get item
-    get_item_response_after = client.get(reverse(route, kwargs={"pk": item.pk}))
+    get_item_response_after = client.get(
+        reverse(route, kwargs={"pk": item.pk}))
     get_all_response_after = client.get(reverse(route_list))
 
     print(f"GET ALL AFTER DELETE: {len(get_all_response_after.data)} items")
@@ -602,8 +610,10 @@ def test_valid_delete(
         len(get_all_response_after.data) + 1,
     )
     instance.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-    instance.assertEqual(get_item_response_before.status_code, status.HTTP_200_OK)
-    instance.assertEqual(get_item_response_after.status_code, status.HTTP_404_NOT_FOUND)
+    instance.assertEqual(
+        get_item_response_before.status_code, status.HTTP_200_OK)
+    instance.assertEqual(get_item_response_after.status_code,
+                         status.HTTP_404_NOT_FOUND)
 
 
 def test_invalid_id_delete(
