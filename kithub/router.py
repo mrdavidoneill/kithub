@@ -1,6 +1,7 @@
 from kithub.api.views import *
 from rest_framework import routers
 
+# Automatic API CRUD routing (UC1 - UC24)
 router = routers.DefaultRouter()
 router.register("kit", KitViewSet)
 router.register("kittype", KitTypeViewSet)
