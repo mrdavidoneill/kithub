@@ -2,7 +2,6 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework import permissions
-from kithub.api.serializers import UserSerializer, GroupSerializer
 from .serializers import *
 
 
@@ -147,8 +146,7 @@ def parts_to_buy_for_bagtype(bagtype, quantity):
     # Iterate through each needed part
     for part in parts_needed:
         required_quantity = (
-            BagIngredient.objects.filter(
-                bagtype=bagtype, part=part).first().quantity
+            BagIngredient.objects.filter(bagtype=bagtype, part=part).first().quantity
             * quantity
         )
         # Calculate how short the stocked quantity is (pos if short, neg if OK)
@@ -206,8 +204,7 @@ def parts_to_buy_for_kittype(kittype, quantity):
 
             # If already needing to buy stock, increment amount
             if part.name in parts_to_buy:
-                parts_to_buy[part.name] += num_of_bags_needed * \
-                    required_quantity
+                parts_to_buy[part.name] += num_of_bags_needed * required_quantity
             # If not enough parts to fulfil request
             else:
                 parts_to_buy[part.name] = quantity_to_buy
