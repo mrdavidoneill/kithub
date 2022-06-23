@@ -1,23 +1,23 @@
-<testsuite name="features.bag.Bag" tests="5" errors="0" failures="0" skipped="0" time="0.195057" timestamp="2022-06-23T10:51:02.069345" hostname="legion-linux"><testcase classname="features.bag.Bag" name="Bag create with 100 quantity" status="passed" time="0.043363"><system-out>
+<testsuite name="features.bag.Bag" tests="5" errors="0" failures="0" skipped="0" time="0.212324" timestamp="2022-06-23T10:54:48.673842" hostname="legion-linux"><testcase classname="features.bag.Bag" name="Bag create with 100 quantity" status="passed" time="0.06377"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Bag create with 100 quantity
-    Given a set of specific parts ... passed in 0.013s
+    Given a set of specific parts ... passed in 0.022s
       | name  | description  | quantity |
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
       | partC | descriptionC | 0        |
-    Given a bag type "bagtype1" with parts list of ... passed in 0.016s
+    Given a bag type "bagtype1" with parts list of ... passed in 0.020s
       | name | part  | quantity |
       | A    | partA | 1        |
       | B    | partB | 2        |
       | C    | partC | 3        |
-    Given a set of specific bags ... passed in 0.009s
+    Given a set of specific bags ... passed in 0.014s
       | name | kind     | quantity | complete |
       | A    | bagtype1 | 1        |          |
       | B    | bagtype1 | 2        |          |
       | C    | bagtype1 | 3        |          |
-    When I create "100" "bag" of "bagtype1" "bagtype" ... passed in 0.005s
+    When I create "100" "bag" of "bagtype1" "bagtype" ... passed in 0.008s
     Then I should see the "quantity" is number "100" ... passed in 0.000s
 
 @scenario.end
@@ -39,7 +39,7 @@ OrderedDict([('id', 1), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id
 {'id': 4, 'name': '', 'quantity': 100, 'complete': False, 'kind': 1}
 
 ]]>
-</system-out></testcase><testcase classname="features.bag.Bag" name="Bags read" status="passed" time="0.034199"><system-out>
+</system-out></testcase><testcase classname="features.bag.Bag" name="Bags read" status="passed" time="0.033151"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Bags read
@@ -48,7 +48,7 @@ OrderedDict([('id', 1), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id
       | partA | descriptionA | 10       |
       | partB | descriptionB | 0        |
       | partC | descriptionC | 0        |
-    Given a bag type "bagtype1" with parts list of ... passed in 0.016s
+    Given a bag type "bagtype1" with parts list of ... passed in 0.015s
       | name | part  | quantity |
       | A    | partA | 1        |
       | B    | partB | 2        |
@@ -86,7 +86,7 @@ All bag: [OrderedDict([('id', 5), ('name', 'A'), ('quantity', 1), ('complete', F
 [OrderedDict([('id', 5), ('name', 'A'), ('quantity', 1), ('complete', False), ('kind', 2)]), OrderedDict([('id', 6), ('name', 'B'), ('quantity', 2), ('complete', False), ('kind', 2)]), OrderedDict([('id', 7), ('name', 'C'), ('quantity', 3), ('complete', False), ('kind', 2)])]
 
 ]]>
-</system-out></testcase><testcase classname="features.bag.Bag" name="Single bag read" status="passed" time="0.035908"><system-out>
+</system-out></testcase><testcase classname="features.bag.Bag" name="Single bag read" status="passed" time="0.035306"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Single bag read
@@ -100,7 +100,7 @@ All bag: [OrderedDict([('id', 5), ('name', 'A'), ('quantity', 1), ('complete', F
       | A    | partA | 1        |
       | B    | partB | 2        |
       | C    | partC | 3        |
-    Given a set of specific bags ... passed in 0.010s
+    Given a set of specific bags ... passed in 0.009s
       | name | kind     | quantity | complete |
       | A    | bagtype1 | 1        |          |
       | B    | bagtype1 | 2        |          |
@@ -128,7 +128,7 @@ OrderedDict([('id', 3), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id
 {'id': 8, 'name': 'A', 'quantity': 1, 'complete': False, 'kind': 3}
 
 ]]>
-</system-out></testcase><testcase classname="features.bag.Bag" name="Single part update" status="passed" time="0.041628"><system-out>
+</system-out></testcase><testcase classname="features.bag.Bag" name="Single part update" status="passed" time="0.041291"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Single part update
@@ -142,12 +142,12 @@ OrderedDict([('id', 3), ('kind', 'bagtype1'), ('ingredients', [OrderedDict([('id
       | A    | partA | 1        |
       | B    | partB | 2        |
       | C    | partC | 3        |
-    Given a set of specific bags ... passed in 0.010s
+    Given a set of specific bags ... passed in 0.009s
       | name | kind     | quantity | complete |
       | A    | bagtype1 | 1        |          |
       | B    | bagtype1 | 2        |          |
       | C    | bagtype1 | 3        |          |
-    When I update the first bag as follows ... passed in 0.006s
+    When I update the first bag as follows ... passed in 0.007s
       | name | kind     | quantity | complete |
       | AB   | bagtype1 | 10       | X        |
     Then I should see the "name" is "AB" ... passed in 0.000s
@@ -179,7 +179,7 @@ All bag: [OrderedDict([('id', 11), ('name', 'AB'), ('quantity', 10), ('complete'
 [OrderedDict([('id', 11), ('name', 'AB'), ('quantity', 10), ('complete', True), ('kind', 4)]), OrderedDict([('id', 12), ('name', 'B'), ('quantity', 2), ('complete', False), ('kind', 4)]), OrderedDict([('id', 13), ('name', 'C'), ('quantity', 3), ('complete', False), ('kind', 4)])]
 
 ]]>
-</system-out></testcase><testcase classname="features.bag.Bag" name="Single bag delete" status="passed" time="0.039959"><system-out>
+</system-out></testcase><testcase classname="features.bag.Bag" name="Single bag delete" status="passed" time="0.038807"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Single bag delete
@@ -200,7 +200,7 @@ All bag: [OrderedDict([('id', 11), ('name', 'AB'), ('quantity', 10), ('complete'
       | C    | bagtype1 | 3        |          |
     When I delete the first "bag" ... passed in 0.004s
     Then the status code should be "204" ... passed in 0.000s
-    When I read all "bag" ... passed in 0.002s
+    When I read all "bag" ... passed in 0.001s
     Then the first item should have "name" equal to "B" ... passed in 0.000s
 
 @scenario.end
