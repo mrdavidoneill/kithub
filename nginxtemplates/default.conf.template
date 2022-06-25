@@ -1,0 +1,23 @@
+upstream api {
+    server api:8000;
+}
+
+## For api.${NGINX_HOST} domain HTTP
+server {
+    listen 80;
+    listen [::]:80; 	
+    server_name api.${NGINX_HOST};
+
+    location /static/ {
+        alias /usr/src/app/api/static/;
+    }
+
+    location / {
+        proxy_pass http://api;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_set_header Host $http_host;  
+    }
+
+
+}

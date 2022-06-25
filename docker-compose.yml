@@ -1,0 +1,41 @@
+version: "3.9"
+services:
+  db:
+    image: mariadb:10.4
+    expose:
+      - 3306
+    env_file:
+      - .env
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+
+  api:
+    build: .
+    command: gunicorn kithub.wsgi:application --bind 0.0.0.0:8000
+    restart: unless-stopped
+    expose:
+      - 8000
+    volumes:
+      - static_data:/usr/src/app/api/static
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx
+    restart: unless-stopped
+    # env_file:
+    #   - ./nginx-certbot.env
+    environment:
+      - NGINX_HOST=localhost
+    ports:
+      - 80:80
+    volumes:
+      - static_data:/usr/src/app/api/static
+      - ./nginxtemplates:/etc/nginx/templates
+    depends_on:
+      - api
+
+volumes:
+  db_data: {}
+  static_data: {}
