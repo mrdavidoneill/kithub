@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "behave_django",
     "kithub",
+    "drf_yasg",
+
 ]
 
 MIDDLEWARE = [
