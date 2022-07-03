@@ -24,10 +24,8 @@ services:
   nginx:
     image: nginx
     restart: unless-stopped
-    # env_file:
-    #   - ./nginx-certbot.env
-    environment:
-      - NGINX_HOST=localhost
+    env_file:
+      - ./.env
     ports:
       - 80:80
     volumes:
