@@ -13,11 +13,18 @@ server {
     }
 
     location / {
+        # Send request to api container
         proxy_pass http://api;
+        # Send useful request information to Django server
+        proxy_set_header Host $host;  
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto https;
-        proxy_set_header Host $http_host;  
+        proxy_set_header X-Forwarded-Proto $scheme;
+
     }
+}
 
-
+# Any other requests return a 404 Not Found page
+server {
+    listen 80 default_server;
+    return 404;
 }
