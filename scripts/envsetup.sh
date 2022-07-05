@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install virtualenv
-python3 -m pip install --user virtualenv
+python3 -m pip install
 
 # Get an unique venv folder to using *inside* workspace
 VENV=".venv-$BUILD_NUMBER"
