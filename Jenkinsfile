@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+      docker {
+        image 'python:3.8.10-slim-buster'
+      }
+    }
     stages {
          stage('Setup Python Virtual Environment'){
             steps {
