@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Install virtualenv
-python3 -m pip install
+python3 -m pip install virtualenv
 
 # Get an unique venv folder to using *inside* workspace
 VENV=".venv-$BUILD_NUMBER"
