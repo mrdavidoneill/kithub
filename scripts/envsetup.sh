@@ -4,7 +4,7 @@ if [ -d "env" ]
 then
     echo "Python virtual environment exists." 
 else
-    pip3 --version
+    python3 --version
     python3 -m pip3 install --user virtualenv
     python3 -m virtualenv env
 fi
