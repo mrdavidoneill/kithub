@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Install virtualenv
 python3 -m pip install
