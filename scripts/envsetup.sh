@@ -1,17 +1,16 @@
+#/bin/bash
+set -euox pipefail
+
+# Get an unique venv folder to using *inside* workspace
+VENV=".venv-$BUILD_NUMBER"
+
+# Initialize new venv
+virtualenv "$VENV"
+
+# Update pip
+PS1="${PS1:-}" source "$VENV/bin/activate"
+
 #!/bin/sh
-
-if [ -d "env" ] 
-then
-    echo "Python virtual environment exists." 
-else
-    python3 --version
-    python3 -m pip3 install --user virtualenv
-    python3 -m virtualenv env
-fi
-
-source env/bin/activate
-
-
 pip install -r requirements.txt
 
 if [ -d "logs" ] 
