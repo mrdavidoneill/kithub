@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # Get an unique venv folder to using *inside* workspace
 VENV=".venv-$BUILD_NUMBER"
