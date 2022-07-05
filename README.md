@@ -1,3 +1,23 @@
+# DB backup
+
+## To backup
+
+```bash
+docker-compose stop db
+docker run --rm --volumes-from tm470_db_1 -v ~/backup:/backup ubuntu bash -c "cd /var/lib/mysql && tar cvf /backup/kithub.tar ."
+```
+
+## To restore
+
+```bash
+docker volume create db_data_20220407_1630
+docker run --rm -v db_data_20220407_1630:/recover -v ~/backup:/backup ubuntu bash -c "cd /recover && tar xvf /backup/kithub.tar"
+
+# Change docker-compose volume to db_data_20220407_1630
+docker-compose start db
+
+```
+
 # User stories
 
 ## Must have
