@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Install virtualenv
 python3 -m pip install --user virtualenv
 
 # Get an unique venv folder to using *inside* workspace
