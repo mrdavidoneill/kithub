@@ -1,5 +1,4 @@
 #/bin/bash
-set -euox pipefail
 
 # Get an unique venv folder to using *inside* workspace
 VENV=".venv-$BUILD_NUMBER"
