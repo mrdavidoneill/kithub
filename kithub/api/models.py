@@ -223,6 +223,18 @@ def create_kittypes(num=2):
         kittype = KitType.objects.create(kind=f"KITTYPE{i + 1}")
 
 
+def create_kits(kind, quantity=100, complete=False, name=None):
+
+    ingredients = KitIngredient.objects.filter(kittype=kind)
+
+    kind = KitType.objects.get(pk=kind)
+
+    if name is None:
+        name = " " * len(ingredients)
+
+    Kit.objects.create(kind=kind, quantity=quantity, complete=complete, name=name)
+
+
 def delete_parts():
     print(f"Deleting parts:", end="")
     response = Part.objects.all().delete()
@@ -280,15 +292,3 @@ def delete_everything():
     delete_kittypes()
     delete_bags()
     delete_kits()
-
-
-def create_kits(kind, quantity=100, complete=False, name=None):
-
-    ingredients = KitIngredient.objects.filter(kittype=kind)
-
-    kind = KitType.objects.get(pk=kind)
-
-    if name is None:
-        name = " " * len(ingredients)
-
-    Kit.objects.create(kind=kind, quantity=quantity, complete=complete, name=name)
