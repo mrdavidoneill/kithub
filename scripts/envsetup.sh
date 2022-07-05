@@ -1,14 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
-# Install virtualenv
-python3 -m pip install virtualenv
-
 # Get an unique venv folder to using *inside* workspace
 VENV=".venv-$BUILD_NUMBER"
 
 # Initialize new venv
-python3 -m virtualenv "$VENV"
+python3 -m venv "$VENV"
 
 # Update pip
 PS1="${PS1:-}" source "$VENV/bin/activate"
