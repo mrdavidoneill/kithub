@@ -62,7 +62,7 @@ pipeline {
         stage('Deploy Image') {
             steps {
                 script {
-                    docker.withRegistry( '192.168.2.65:5000' ) {
+                    docker.withRegistry( 'http://192.168.2.65:5000' ) {
                         dockerImage.push(tag)
                         dockerImage.push('latest')
                     }
