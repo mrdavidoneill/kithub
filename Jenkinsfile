@@ -34,13 +34,13 @@ pipeline {
                 }
             }
         }
-        // stage('Unit test') {
-        //     steps {
-        //         sh '''
-        //             docker-compose -f docker-compose-unittest.yml up --build --abort-on-container-exit
+        stage('Unit test') {
+            steps {
+                sh '''
+                    docker-compose -f docker-compose-unittest.yml up --abort-on-container-exit
 
-        //             '''
-        //     }
-        // }
+                    '''
+            }
+        }
     }
 }
