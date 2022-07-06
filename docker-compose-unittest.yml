@@ -9,7 +9,7 @@ services:
     restart: unless-stopped
 
   api:
-    build: .
+    build: 192.168.2.65:5000/kithub-api:test
     command: >
       sh -c "python manage.py migrate &&
              python manage.py test kithub.api.tests.unit"
