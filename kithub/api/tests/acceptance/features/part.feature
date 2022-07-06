@@ -21,7 +21,7 @@ Feature: Create Part
         Then I should see the "name" is "partD"
         And I should see the "quantity" is number "3"
 
-    Scenario: UC1 Part create with quantity
+    Scenario: UC1 Part create with quantity and description
         When I create a "part" called "partD" with quantity "3" and description "partD description"
         Then I should see the "name" is "partD"
         And I should see the "quantity" is number "3"
