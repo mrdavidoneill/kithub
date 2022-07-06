@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  db:
+    image: mariadb:10.4
+    expose:
+      - 3306
+    env_file:
+      - .env
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: unless-stopped
+
+  api:
+    build: .
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/usr/src/app/api
+    depends_on:
+      - db
+
+volumes:
+  db_data: {}
