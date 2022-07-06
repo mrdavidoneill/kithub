@@ -20,6 +20,7 @@ pipeline {
         NGINX_HOST = 'localhost'
         registry = '192.168.2.65:5000/kithub'
         dockerImage = ''
+        tag = '1.0.0'
     }
     stages {
         stage('Setup .env') {
@@ -56,6 +57,16 @@ pipeline {
                     docker-compose -f docker-compose-acceptancetest.yml up --abort-on-container-exit
 
                     '''
+            }
+        }
+        stage('Deploy Image') {
+            steps {
+                script {
+                    docker.withRegistry( '192.168.2.65:5000' ) {
+                        dockerImage.push(tag)
+                        dockerImage.push('latest')
+                    }
+                }
             }
         }
     }
