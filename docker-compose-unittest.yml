@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  db_unittest:
+  db:
     image: 192.168.2.65:5000/mariadb:10.4
     expose:
       - 3306
@@ -8,7 +8,7 @@ services:
       - .env
     restart: unless-stopped
 
-  api_unittest:
+  api:
     image: 192.168.2.65:5000/kithub-api:test
     command: >
       sh -c "python manage.py migrate &&
@@ -16,4 +16,4 @@ services:
     ports:
       - 8000:8000
     depends_on:
-      - db_unittest
+      - db
