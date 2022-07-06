@@ -1,5 +1,5 @@
 # The first instruction is what image we want to base our container on
-FROM 192.168.2.65:5000/python:3.8.10-slim-buster
+FROM python:3.8.10-slim-buster
 
 # set work directory
 ENV HOME=/usr/src/app/api
