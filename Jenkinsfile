@@ -50,5 +50,13 @@ pipeline {
                     '''
             }
         }
+        stage('Acceptance test') {
+            steps {
+                sh '''
+                    docker-compose -f docker-compose-acceptancetest.yml up --abort-on-container-exit
+
+                    '''
+            }
+        }
     }
 }
