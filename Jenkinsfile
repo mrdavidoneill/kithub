@@ -18,7 +18,7 @@ pipeline {
         MARIADB_USER = credentials('MARIADB_USER')
         MARIADB_PASSWORD = credentials('MARIADB_PASSWORD')
         NGINX_HOST = 'localhost'
-        registry = '192.168.2.65:5000'
+        registry = '192.168.2.65:5000/kithub'
         dockerImage = ''
     }
     stages {
@@ -30,7 +30,7 @@ pipeline {
         stage('Build API docker image') {
             steps {
                 script {
-                    dockerImage = docker.build registry + 'kithub:test'
+                    dockerImage = docker.build registry + ':test'
                 }
             }
         }
