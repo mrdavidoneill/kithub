@@ -30,7 +30,7 @@ pipeline {
         stage('Build API docker image') {
             steps {
                 script {
-                    dockerImage = docker.build registry + ':test'
+                    dockerImage = docker.build registry + '-api:test'
                 }
             }
         }
