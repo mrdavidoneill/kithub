@@ -34,13 +34,24 @@ pipeline {
                 }
             }
         }
-        stage('Unit test') {
-            steps {
-                sh '''
-                    docker-compose -f docker-compose-unittest.yml up --abort-on-container-exit
+        stage('Test') {
+            parallel {
+                stage('Unit test') {
+                    steps {
+                        sh '''
+                            docker-compose -f docker-compose-unittest.yml up --abort-on-container-exit
 
-                    '''
+                            '''
+                    }
+                }
+                stage('System test') {
+                    steps {
+                        sh '''
+                            docker-compose -f docker-compose-systemtest.yml up --abort-on-container-exit
+
+                            '''
+                    }
+                }
             }
         }
     }
-}
