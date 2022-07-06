@@ -6,6 +6,42 @@ from django.core.serializers.json import DjangoJSONEncoder
 from utils import JSON_CONTENT, get_bagtype_by_kind, get_item_by_key
 
 
+@when(
+    'I create a "{model}" called "{name}" with quantity "{quantity:Number}" and description "{description}"'
+)
+def create_model_with_quantity_and_description(
+    context, model, name, quantity, description
+):
+
+    if model == "part":
+
+        payload = {
+            "name": name,
+            "description": f"A description of {name}",
+            "quantity": quantity,
+        }
+    else:
+        payload = {"kind": name, "quantity": quantity}
+
+    context.response = context.test.client.post(reverse(f"{model}-list"), payload)
+
+
+@when('I create a "{model}" called "{name}" with quantity "{quantity:Number}"')
+def create_model_with_quantity(context, model, name, quantity):
+
+    if model == "part":
+
+        payload = {
+            "name": name,
+            "description": f"A description of {name}",
+            "quantity": quantity,
+        }
+    else:
+        payload = {"kind": name, "quantity": quantity}
+
+    context.response = context.test.client.post(reverse(f"{model}-list"), payload)
+
+
 @when('I create a "{model}" called "{name}"')
 def create_model(context, model, name):
 
