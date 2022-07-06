@@ -22,13 +22,9 @@ pipeline {
         dockerImage = ''
     }
     stages {
-        stage('Setup .env') {
-            steps {
-                sh 'env > .env'
-            }
-        }
         stage('Build API docker image') {
             steps {
+                sh 'env > .env'
                 script {
                     dockerImage = docker.build registry + '-api:test'
                 }
@@ -37,7 +33,11 @@ pipeline {
         stage('Test') {
             parallel {
                 stage('Unit test') {
+                    environment {
+                        DB_HOST = 'db_unittest'
+                    }
                     steps {
+                        sh 'env > .env'
                         sh '''
                             docker-compose -f docker-compose-unittest.yml up --abort-on-container-exit
 
@@ -45,7 +45,11 @@ pipeline {
                     }
                 }
                 stage('System test') {
+                    environment {
+                        DB_HOST = 'db_systemtest'
+                    }
                     steps {
+                        sh 'env > .env'
                         sh '''
                             docker-compose -f docker-compose-systemtest.yml up --abort-on-container-exit
 
