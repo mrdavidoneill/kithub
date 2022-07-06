@@ -11,7 +11,7 @@ services:
 
   api:
     image: 192.168.2.65:5000/kithub-api:test
-    kithub_systemtest_api
+    container_name: kithub_systemtest_api
     command: >
       sh -c "python manage.py migrate &&
              python manage.py behave --tags=system"
