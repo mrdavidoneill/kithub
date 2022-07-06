@@ -1,17 +1,15 @@
 version: "3.9"
 services:
-  db:
+  db_systemtest:
     image: 192.168.2.65:5000/mariadb:10.4
-    container_name: kithub_systemtest_db
     expose:
       - 3306
     env_file:
       - .env
     restart: unless-stopped
 
-  api:
+  api_systemtest:
     image: 192.168.2.65:5000/kithub-api:test
-    container_name: kithub_systemtest_api
     command: >
       sh -c "python manage.py migrate &&
              python manage.py behave --tags=system"
