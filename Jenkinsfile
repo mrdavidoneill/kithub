@@ -30,16 +30,6 @@ pipeline {
             }
         }
 
-        // Note: qemu is responsible for building images that are not supported by host
-        stage('Register QEMU emulators') {
-            steps {
-                sh '''
-                    docker run --rm --privileged docker/binfmt:820fdd95a9972a5308930a2bdfb8573dd4447ad3
-                    cat /proc/sys/fs/binfmt_misc/qemu-aarch64
-                    '''
-            }
-        }
-
         // Create a buildx builder container to do the multi-architectural builds
         stage('Create Buildx Builder') {
             steps {
@@ -58,7 +48,7 @@ pipeline {
         stage('Build test image') {
             steps {
                 sh """
-                    docker buildx build . --platform linux/amd64,linux/arm64 --push -t $DOCKER_REGISTRY/$SERVICE:test
+                    docker build -t $DOCKER_REGISTRY/$SERVICE:test
                     """
             }
         }
