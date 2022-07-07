@@ -35,8 +35,8 @@ pipeline {
             steps {
                 sh """
                     ## Create buildx builder
-                    docker buildx create --name $BUILDER_NAME
-                    docker buildx use $BUILDER_NAME
+                    docker context create $BUILDER_NAME
+                    docker buildx create --name $BUILDER_NAME --use $BUILDER_NAME
                     docker buildx inspect --bootstrap
 
                     ## Sanity check step
