@@ -19,6 +19,7 @@ pipeline {
         MARIADB_PASSWORD = credentials('MARIADB_PASSWORD')
         NGINX_HOST = 'localhost'
         BUILDER_NAME = 'builder'
+        CONTEXT = 'context'
         DOCKER_REGISTRY = '192.168.2.65:5000'
         SERVICE = 'kithub'
         TAG = '1.0.0'
@@ -35,8 +36,8 @@ pipeline {
             steps {
                 sh """
                     ## Create buildx builder
-                    docker context create $BUILDER_NAME
-                    docker buildx create --name $BUILDER_NAME --use $BUILDER_NAME
+                    docker buildx create $CONTEXT
+                    docker buildx create --name $BUILDER_NAME --use $CONTEXT
                     docker buildx inspect --bootstrap
 
                     ## Sanity check step
