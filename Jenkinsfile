@@ -33,7 +33,7 @@ pipeline {
         stage('Build test image') {
             steps {
                 sh """
-                    docker build -t $DOCKER_REGISTRY/$SERVICE:test
+                    docker buildx build . -t $DOCKER_REGISTRY/$SERVICE:test
                     """
             }
         }
