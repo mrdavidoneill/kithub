@@ -21,7 +21,7 @@ pipeline {
         BUILDER_NAME = 'builder'
         DOCKER_REGISTRY = '192.168.2.65:5000'
         SERVICE = 'kithub'
-        $TAG = '1.0.0'
+        TAG = '1.0.0'
     }
     stages {
         stage('Setup .env') {
