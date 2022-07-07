@@ -30,6 +30,14 @@ pipeline {
             }
         }
 
+        stage('Build test image') {
+            steps {
+                sh """
+                    docker build -t $DOCKER_REGISTRY/$SERVICE:test
+                    """
+            }
+        }
+
         // Create a buildx builder container to do the multi-architectural builds
         stage('Create Buildx Builder') {
             steps {
@@ -45,13 +53,6 @@ pipeline {
             }
         }
 
-        stage('Build test image') {
-            steps {
-                sh """
-                    docker build -t $DOCKER_REGISTRY/$SERVICE:test
-                    """
-            }
-        }
         stage('Unit test') {
             steps {
                 sh '''
