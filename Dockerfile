@@ -1,5 +1,5 @@
 # The first instruction is what image we want to base our container on
-FROM --platform=$TARGETPLATFORM python:3.8.10-slim-buster
+FROM --platform=$TARGETPLATFORM 192.168.2.65:5000/python:3.8.10-slim-buster
 
 # Print build platform
 RUN echo "Building for: $TARGETPLATFORM"
