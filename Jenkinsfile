@@ -1,7 +1,7 @@
 import groovy.text.SimpleTemplateEngine
 
 pipeline {
-    agent any
+    agent agent1
 
     environment {
         DEVELOPMENT = true
