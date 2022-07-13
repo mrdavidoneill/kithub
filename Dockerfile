@@ -1,8 +1,10 @@
 # Get targetplatform argument
 ARG TARGETPLATFORM
-RUN echo "Building for: $TARGETPLATFORM"
 # The first instruction is what image we want to base our container on
 FROM --platform=$TARGETPLATFORM python:3.8.10-slim-buster
+
+# Print build platform
+RUN echo "Building for: $TARGETPLATFORM"
 
 # set work directory
 ENV HOME=/usr/src/app/api
