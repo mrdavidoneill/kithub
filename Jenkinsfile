@@ -18,8 +18,6 @@ pipeline {
         MARIADB_USER = credentials('MARIADB_USER')
         MARIADB_PASSWORD = credentials('MARIADB_PASSWORD')
         NGINX_HOST = 'localhost'
-        BUILDER_NAME = 'builder'
-        CONTEXT = 'context'
         DOCKER_REGISTRY = '192.168.2.65:5000'
         SERVICE = 'kithub'
         TAG = '1.0.0'
@@ -28,21 +26,6 @@ pipeline {
         stage('Setup .env') {
             steps {
                 sh 'env > .env'
-            }
-        }
-
-        // Create a buildx builder container to do the multi-architectural builds
-        stage('Create Buildx Builder') {
-            steps {
-                sh """
-                    ## Create buildx builder
-                    docker buildx create $CONTEXT
-                    docker buildx create --name $BUILDER_NAME --use $CONTEXT
-                    docker buildx inspect --bootstrap
-
-                    ## Sanity check step
-                    docker buildx ls
-                    """
             }
         }
 
@@ -82,20 +65,7 @@ pipeline {
         stage('Deploy image') {
             steps {
                 sh """
-                    docker buildx build . --platform linux/amd64,linux/arm64 --push -t $DOCKER_REGISTRY/$SERVICE:$TAG -t $DOCKER_REGISTRY/$SERVICE:latest
-                    """
-            }
-        }
-
-        // Need to clean up
-        stage('Destroy buildx builder') {
-            steps {
-                sh """
-                    docker buildx use default
-                    docker buildx rm $BUILDER_NAME
-
-                    ## Sanity check step
-                    docker buildx ls
+                    docker buildx build . --platform linux/arm64 --push -t $DOCKER_REGISTRY/$SERVICE:$TAG -t $DOCKER_REGISTRY/$SERVICE:latest
                     """
             }
         }
