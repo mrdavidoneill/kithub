@@ -19,7 +19,7 @@ pipeline {
         MARIADB_PASSWORD = credentials('MARIADB_PASSWORD')
         NGINX_HOST = 'localhost'
         DOCKER_REGISTRY = '192.168.2.65:5000'
-        SERVICE = 'kithub'
+        SERVICE = 'kithub-api'
         TAG = '1.0.0'
     }
     stages {
