@@ -32,7 +32,7 @@ pipeline {
         stage('Build test image') {
             steps {
                 sh """
-                    docker buildx build . -t $DOCKER_REGISTRY/$SERVICE:test
+                    docker buildx build . --platform=linux/amd64 -t $DOCKER_REGISTRY/$SERVICE:test
                     """
             }
         }
