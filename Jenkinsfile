@@ -1,7 +1,7 @@
 import groovy.text.SimpleTemplateEngine
 
 pipeline {
-    agent { label 'agent1' }
+    agent any
 
     environment {
         DEVELOPMENT = true
@@ -32,7 +32,7 @@ pipeline {
         stage('Build test image') {
             steps {
                 sh """
-                    docker buildx build . --platform=linux/amd64 -t $DOCKER_REGISTRY/$SERVICE:test
+                    docker buildx build . -t $DOCKER_REGISTRY/$SERVICE:test
                     """
             }
         }
@@ -65,7 +65,7 @@ pipeline {
         stage('Deploy image') {
             steps {
                 sh """
-                    docker buildx build . --platform linux/arm64 --push -t $DOCKER_REGISTRY/$SERVICE:$TAG -t $DOCKER_REGISTRY/$SERVICE:latest
+                    docker buildx build . --push -t $DOCKER_REGISTRY/$SERVICE:$TAG -t $DOCKER_REGISTRY/$SERVICE:latest
                     """
             }
         }
