@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Abort on any error (including if wait-for-it fails).
 set -e
