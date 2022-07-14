@@ -65,7 +65,7 @@ pipeline {
         stage('Deploy image') {
             steps {
                 sh """
-                    docker buildx build . --push -t $DOCKER_REGISTRY/$SERVICE:$TAG -t $DOCKER_REGISTRY/$SERVICE:latest
+                    docker buildx build --platform=linux/arm64 . --push -t $DOCKER_REGISTRY/$SERVICE:$TAG -t $DOCKER_REGISTRY/$SERVICE:latest
                     """
             }
         }
