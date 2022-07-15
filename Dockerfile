@@ -1,5 +1,5 @@
 # The first instruction is what image we want to base our container on
-FROM python:3.8.10-slim-buster
+FROM python:3.9-slim-buster
 
 # Print build platform
 RUN echo "Building for: $TARGETPLATFORM"
@@ -18,8 +18,6 @@ COPY . .
 
 # install dependencies
 RUN pip install --upgrade pip
-RUN pip install --upgrade setuptools
-RUN pip install -U pip setuptools wheel ruamel.yaml.clib==0.2.6
 RUN pip install -r requirements.txt
 
 RUN chmod +x ./scripts/wait-for-it.sh ./scripts/docker-entrypoint.sh
