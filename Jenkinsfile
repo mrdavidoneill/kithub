@@ -18,7 +18,7 @@ pipeline {
         MARIADB_USER = credentials('MARIADB_USER')
         MARIADB_PASSWORD = credentials('MARIADB_PASSWORD')
         NGINX_HOST = 'localhost'
-        DOCKER_REGISTRY = '192.168.2.65:5000'
+        DOCKER_REGISTRY = 'mrdavidoneill'
         SERVICE = 'kithub-api'
         TAG = '1.0.0'
     }
@@ -63,7 +63,14 @@ pipeline {
         // }
 
         stage('Deploy image') {
+            environment {
+                DOCKER_USERNAME = credentials('DOCKER_USERNAME')
+                DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
+            }
             steps {
+                sh """
+                    docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
+                    """
                 sh """
                     docker buildx build --platform=linux/arm64 . --push -t $DOCKER_REGISTRY/$SERVICE:$TAG -t $DOCKER_REGISTRY/$SERVICE:latest
                     """
