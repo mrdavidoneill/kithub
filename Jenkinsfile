@@ -37,30 +37,30 @@ pipeline {
             }
         }
 
-        stage('Unit test') {
-            steps {
-                sh '''
-                    docker-compose -f docker-compose-unittest.yml up --abort-on-container-exit
+        // stage('Unit test') {
+        //     steps {
+        //         sh '''
+        //             docker-compose -f docker-compose-unittest.yml up --abort-on-container-exit
 
-                    '''
-            }
-        }
-        stage('System test') {
-            steps {
-                sh '''
-                    docker-compose -f docker-compose-systemtest.yml up --abort-on-container-exit
+        //             '''
+        //     }
+        // }
+        // stage('System test') {
+        //     steps {
+        //         sh '''
+        //             docker-compose -f docker-compose-systemtest.yml up --abort-on-container-exit
 
-                    '''
-            }
-        }
-        stage('Acceptance test') {
-            steps {
-                sh '''
-                    docker-compose -f docker-compose-acceptancetest.yml up --abort-on-container-exit
+        //             '''
+        //     }
+        // }
+        // stage('Acceptance test') {
+        //     steps {
+        //         sh '''
+        //             docker-compose -f docker-compose-acceptancetest.yml up --abort-on-container-exit
 
-                    '''
-            }
-        }
+        //             '''
+        //     }
+        // }
 
         stage('Deploy image') {
             steps {
