@@ -68,7 +68,7 @@ pipeline {
             }
             steps {
                 sh """
-                    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                    echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                     """
                 sh """
                     docker buildx build --platform=linux/arm64 . --push -t $DOCKER_REGISTRY/$SERVICE:$TAG -t $DOCKER_REGISTRY/$SERVICE:latest
