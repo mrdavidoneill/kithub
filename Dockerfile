@@ -18,6 +18,7 @@ COPY . .
 
 # install dependencies
 RUN pip install --upgrade pip
+RUN pip install --upgrade setuptools
 RUN pip install -r requirements.txt
 
 RUN chmod +x ./scripts/wait-for-it.sh ./scripts/docker-entrypoint.sh
