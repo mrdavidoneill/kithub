@@ -64,12 +64,11 @@ pipeline {
 
         stage('Deploy image') {
             environment {
-                DOCKER_USERNAME = credentials('DOCKER_USERNAME')
-                DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
+                DOCKERHUB_CREDENTIALS = credentials('Docker')
             }
             steps {
                 sh """
-                    docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
+                    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                     """
                 sh """
                     docker buildx build --platform=linux/arm64 . --push -t $DOCKER_REGISTRY/$SERVICE:$TAG -t $DOCKER_REGISTRY/$SERVICE:latest
