@@ -19,6 +19,7 @@ COPY . .
 # install dependencies
 RUN pip install --upgrade pip
 RUN pip install --upgrade setuptools
+RUN pip install -U pip setuptools wheel ruamel.yaml.clib==0.2.6
 RUN pip install -r requirements.txt
 
 RUN chmod +x ./scripts/wait-for-it.sh ./scripts/docker-entrypoint.sh
