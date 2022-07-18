@@ -1,0 +1,48 @@
+# IMPORTANT:
+# Before running, complete the following 2 steps
+# Copy the backup you want to restore into restore_dir
+# Change docker-compose volume to volume_prefix_backup_name and external: true
+# @TODO Make ansible fetch file from backups & copy the file over to api_servers
+---
+- hosts: api_servers
+  gather_facts: no
+  vars:
+    project_dir: ~/kithub
+    restore_dir: restore
+    db_container: kithub_db_1
+    backup_name: 20220716T105522
+    volume_prefix: db_data
+
+  tasks:
+    - name: Make sure restore dir exists
+      file:
+        path: "{{ project_dir }}/{{ restore_dir }}"
+        state: directory
+
+    - name: Create new volume
+      community.docker.docker_volume:
+        name: "{{ volume_prefix }}_{{ backup_name }}"
+
+    - name: Start new volume with backup data
+      community.docker.docker_container:
+        name: db_restore
+        image: ubuntu
+        command: bash -c "cd /recover && tar xvf /backup/{{ backup_name }}.tar"
+        state: started
+        detach: no
+        cleanup: yes
+        volumes:
+          - "{{ project_dir }}/backup:/backup"
+          - "{{ volume_prefix }}_{{ backup_name }}:/recover"
+      register: output
+
+    - ansible.builtin.debug:
+        var: output
+
+    - name: Restart docker-compose db
+      docker_compose:
+        project_src: "{{ project_dir }}"
+        build: no
+        restarted: yes
+        services:
+          - db
