@@ -83,7 +83,7 @@ pipeline {
                 NGINX_HOST = 'raspberrypi'
             }
             steps {
-                sh 'env > .env'
+                sh 'env > production.env'
             }
         }
 
