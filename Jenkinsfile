@@ -82,7 +82,7 @@ pipeline {
             }
             steps {
                 sh 'echo $ANSIBLE_VAULT_PASSWORD > ./ansible/password-file'
-                sh './script/deploy.sh'
+                sh './scripts/deploy.sh'
             }
         }
     }
