@@ -1,3 +1,6 @@
+# Password file for ansible vault
+password-file
+
 *.env
 
 # Byte-compiled / optimized / DLL files
