@@ -29,13 +29,13 @@ pipeline {
             }
         }
 
-        stage('Build test image') {
-            steps {
-                sh """
-                    docker buildx build . -t $DOCKER_REGISTRY/$SERVICE:test
-                    """
-            }
-        }
+        // stage('Build test image') {
+        //     steps {
+        //         sh """
+        //             docker buildx build . -t $DOCKER_REGISTRY/$SERVICE:test
+        //             """
+        //     }
+        // }
 
         // stage('Unit test') {
         //     steps {
