@@ -11,9 +11,11 @@ services:
     restart: always
 
   api:
-    image: 192.168.2.65:5000/kithub-api:latest
+    image: mrdavidoneill/kithub-api:latest
     command: gunicorn kithub.wsgi:application --bind 0.0.0.0:8000
     restart: unless-stopped
+    env_file:
+      - .env
     expose:
       - 8000
     volumes:
@@ -35,5 +37,6 @@ services:
       - api
 
 volumes:
-  db_data: {}
+  db_data:
+    external: false
   static_data: {}
