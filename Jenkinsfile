@@ -81,8 +81,7 @@ pipeline {
                 ansible_vault_password = credentials('ANSIBLE_VAULT_PASSWORD')
             }
             steps {
-                sh 'echo $ANSIBLE_VAULT_PASSWORD > ./ansible/password-file'
-                sh './scripts/deploy.sh'
+                ansiblePlaybook(credentialsId: 'ANSIBLE_VAULT_PASSWORD_FILE', inventory: 'ansible/hosts', playbook: '/ansible/api.yml')
             }
         }
     }
