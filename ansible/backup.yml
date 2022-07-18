@@ -1,0 +1,66 @@
+---
+- hosts: api_servers
+  gather_facts: yes
+  vars:
+    project_dir: ~/kithub
+    db_container: kithub_db_1
+    volume_prefix: db_data
+    datetime: "{{ ansible_date_time.iso8601_basic_short }}"
+
+  tasks:
+    - name: Stop the db container
+      community.docker.docker_container:
+        name: "{{ db_container }}"
+        state: stopped
+
+    - name: Store time date
+      set_fact: datetime="{{ datetime }}"
+
+    - name: Back up DB data
+      community.docker.docker_container:
+        name: db_backup
+        image: ubuntu
+        command: bash -c "cd /var/lib/mysql && tar cvf /backup/{{ hostvars['raspberrypi']['datetime'] }}.tar ."
+        state: started
+        detach: no
+        cleanup: yes
+        volumes_from:
+          - "{{ db_container }}"
+        volumes:
+          - "{{ project_dir }}/backup:/backup"
+      register: output
+
+    - ansible.builtin.debug:
+        var: output
+
+    - name: Start the db container
+      community.docker.docker_container:
+        name: "{{ db_container }}"
+        state: started
+
+    - name: Fetch backup file
+      ansible.builtin.fetch:
+        src: "{{ project_dir }}/backup/{{ datetime }}.tar"
+        dest: "{{ project_dir }}/tempbackup/{{ datetime }}.tar"
+        flat: yes
+
+- hosts: backup_servers
+  gather_facts: no
+  vars:
+    project_dir: ~/kithub
+
+  tasks:
+    - name: Make sure backup dir exists
+      file:
+        path: "{{ project_dir }}/backup"
+        state: directory
+
+    - name: Copy file to backup server
+      ansible.builtin.copy:
+        src: "{{ project_dir }}/tempbackup/{{ hostvars['raspberrypi']['datetime'] }}.tar"
+        dest: "{{ project_dir }}/backup/{{ hostvars['raspberrypi']['datetime'] }}.tar"
+
+    - name: Remove temp backup
+      ansible.builtin.file:
+        path: "{{ project_dir }}/tempbackup/{{ hostvars['raspberrypi']['datetime'] }}.tar"
+        state: absent
