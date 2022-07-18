@@ -62,7 +62,7 @@ pipeline {
         //     }
         // }
 
-        stage('Deploy image') {
+        stage('Push image') {
             environment {
                 DOCKER_USERNAME = credentials('DOCKER_USERNAME')
                 DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
@@ -73,6 +73,16 @@ pipeline {
                 sh """
                     docker buildx build --platform=linux/arm64 . --push -t $DOCKER_REGISTRY/$SERVICE:$TAG -t $DOCKER_REGISTRY/$SERVICE:latest
                     """
+            }
+        }
+
+        stage('Deploy API') {
+            environment {
+                ansible_vault_password = credentials('ANSIBLE_VAULT_PASSWORD')
+            }
+            steps {
+                sh 'echo $ANSIBLE_VAULT_PASSWORD > ./ansible/password-file'
+                sh './script/deploy.sh'
             }
         }
     }
