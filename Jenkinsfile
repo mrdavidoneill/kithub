@@ -62,19 +62,19 @@ pipeline {
         //     }
         // }
 
-        stage('Push image') {
-            environment {
-                DOCKER_USERNAME = credentials('DOCKER_USERNAME')
-                DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
-            }
-            steps {
-                sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
+        // stage('Push image') {
+        //     environment {
+        //         DOCKER_USERNAME = credentials('DOCKER_USERNAME')
+        //         DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
+        //     }
+        //     steps {
+        //         sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
 
-                sh """
-                    docker buildx build --platform=linux/arm64 . --push -t $DOCKER_REGISTRY/$SERVICE:$TAG -t $DOCKER_REGISTRY/$SERVICE:latest
-                    """
-            }
-        }
+        //         sh """
+        //             docker buildx build --platform=linux/arm64 . --push -t $DOCKER_REGISTRY/$SERVICE:$TAG -t $DOCKER_REGISTRY/$SERVICE:latest
+        //             """
+        //     }
+        // }
 
         stage('Deploy API') {
             environment {
