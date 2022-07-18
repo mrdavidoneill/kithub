@@ -23,7 +23,7 @@ pipeline {
         TAG = '1.0.0'
     }
     stages {
-        stage('Setup .env') {
+        stage('Setup test .env') {
             steps {
                 sh 'env > .env'
             }
@@ -76,12 +76,24 @@ pipeline {
         //     }
         // }
 
+        stage('Setup production .env') {
+            environment {
+                // DEVELOPMENT = false
+                ALLOWED_HOSTS = 'api.raspberrypi'
+                NGINX_HOST = 'raspberrypi'
+            }
+            steps {
+                sh 'env > .env'
+            }
+        }
+
         stage('Deploy API') {
             environment {
                 ansible_vault_password = credentials('ANSIBLE_VAULT_PASSWORD')
             }
             steps {
-                ansiblePlaybook(vaultCredentialsId: 'ANSIBLE_VAULT_PASSWORD_FILE', inventory: 'ansible/hosts', playbook: 'ansible/api.yml')
+                ansiblePlaybook(vaultCredentialsId: 'ANSIBLE_VAULT_PASSWORD_FILE', inventory: 'ansible/hosts',
+                playbook: 'ansible/api.yml', disableHostKeyChecking: true)
             }
         }
     }
