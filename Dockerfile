@@ -1,24 +1,24 @@
-# The first instruction is what image we want to base our container on
+# Base image
 FROM python:3.8.10
 
-# Print build platform
-RUN echo "Building for: $TARGETPLATFORM"
-
-# set work directory
+# Set work directory
 ENV HOME=/usr/src/app/api
 WORKDIR $HOME
-RUN mkdir $APP_HOME/staticfiles
 
-# set environment variables
+# Create directory for static files
+RUN mkdir $HOME/staticfiles
+
+# Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# copy project
+# Copy project
 COPY . .
 
-# install dependencies
+# Install dependencies
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
+# Run starting script
 RUN chmod +x ./scripts/wait-for-it.sh ./scripts/docker-entrypoint.sh
 CMD ["./scripts/docker-entrypoint.sh"]
