@@ -1,3 +1,10 @@
+# Kithub
+
+An inventory manager built using Django Rest Framework
+
+![Kithub screenshot](https://mrdavidoneill.com/images/kithub001.png)
+![Kithub screenshot](https://mrdavidoneill.com/images/kithub002.png)
+
 # DB backup
 
 ## To backup
