@@ -29,52 +29,52 @@ pipeline {
             }
         }
 
-        // stage('Build test image') {
-        //     steps {
-        //         sh """
-        //             docker buildx build . -t $DOCKER_REGISTRY/$SERVICE:test
-        //             """
-        //     }
-        // }
+        stage('Build test image') {
+            steps {
+                sh """
+                    docker buildx build . -t $DOCKER_REGISTRY/$SERVICE:test
+                    """
+            }
+        }
 
-        // stage('Unit test') {
-        //     steps {
-        //         sh '''
-        //             docker-compose -f docker-compose-unittest.yml up --abort-on-container-exit
+        stage('Unit test') {
+            steps {
+                sh '''
+                    docker-compose -f docker-compose-unittest.yml up --abort-on-container-exit
 
-        //             '''
-        //     }
-        // }
-        // stage('System test') {
-        //     steps {
-        //         sh '''
-        //             docker-compose -f docker-compose-systemtest.yml up --abort-on-container-exit
+                    '''
+            }
+        }
+        stage('System test') {
+            steps {
+                sh '''
+                    docker-compose -f docker-compose-systemtest.yml up --abort-on-container-exit
 
-        //             '''
-        //     }
-        // }
-        // stage('Acceptance test') {
-        //     steps {
-        //         sh '''
-        //             docker-compose -f docker-compose-acceptancetest.yml up --abort-on-container-exit
+                    '''
+            }
+        }
+        stage('Acceptance test') {
+            steps {
+                sh '''
+                    docker-compose -f docker-compose-acceptancetest.yml up --abort-on-container-exit
 
-        //             '''
-        //     }
-        // }
+                    '''
+            }
+        }
 
-        // stage('Push image') {
-        //     environment {
-        //         DOCKER_USERNAME = credentials('DOCKER_USERNAME')
-        //         DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
-        //     }
-        //     steps {
-        //         sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
+        stage('Push image') {
+            environment {
+                DOCKER_USERNAME = credentials('DOCKER_USERNAME')
+                DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
+            }
+            steps {
+                sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
 
-        //         sh """
-        //             docker buildx build --platform=linux/arm64 . --push -t $DOCKER_REGISTRY/$SERVICE:$TAG -t $DOCKER_REGISTRY/$SERVICE:latest
-        //             """
-        //     }
-        // }
+                sh """
+                    docker buildx build --platform=linux/arm64 . --push -t $DOCKER_REGISTRY/$SERVICE:$TAG -t $DOCKER_REGISTRY/$SERVICE:latest
+                    """
+            }
+        }
 
         stage('Setup production .env') {
             environment {
