@@ -78,7 +78,7 @@ pipeline {
 
         stage('Setup production .env') {
             environment {
-                // DEVELOPMENT = false
+                DEVELOPMENT = false
                 ALLOWED_HOSTS = 'api.raspberrypi'
                 NGINX_HOST = 'raspberrypi'
             }
