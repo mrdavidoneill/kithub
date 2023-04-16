@@ -7,6 +7,7 @@ pipeline {
         DEVELOPMENT = true
         SECRET_KEY = credentials('SECRET_KEY')
         ALLOWED_HOSTS = credentials('ALLOWED_HOSTS')
+        CORS_ALLOWED_ORIGINS = 'http://localhost:3000'
         DB_ENGINE = 'django.db.backends.mysql'
         DB_HOST = 'db'
         DB_PORT = 3306
